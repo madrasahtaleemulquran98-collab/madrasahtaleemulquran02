@@ -82,6 +82,24 @@
     </style>
 </head>
 <body>
+    <canvas id="qrcode"></canvas>
+<button id="downloadBtn">Download QR Code</button>
+<script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
+<script>
+  // Generate QR code on canvas
+  QRCode.toCanvas(document.getElementById('qrcode'), 'hello world', function (error) {
+    if (error) console.error(error)
+  });
+
+  // Download function
+  document.getElementById('downloadBtn').onclick = function(){
+    const canvas = document.getElementById('qrcode');
+    const link = document.createElement('a');
+    link.download = "qrcode.png";
+    link.href = canvas.toDataURL();
+    link.click();
+  }
+</script>
 
 <!-- Navigation -->
 <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
