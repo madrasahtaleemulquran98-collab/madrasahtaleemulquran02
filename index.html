@@ -751,7 +751,7 @@
       <input
         id="qr-content"
         type="text"
-        placeholder="QR code ပြသချင်တဲ့ link (သို့) စာသားရေးပါ"
+        placeholder="QR code madrasah taleemul quran"
         <!DOCTYPE html>
 <html>
   <body>
@@ -759,27 +759,4 @@
     <img src="https://api.qrserver.com/v1/create-qr-code/?data=https://madrasahtaleemulquran98-collab.github.io/madrasahtaleemulquran02&size=200x200" alt="GitHub Pages QR code"/>
   </body>
 </html>
-        onkeydown="if (event.key === 'Enter') generateQR();"
-      >
-      <button onclick="generateQR()">Generate</button>
-      <div id="qrcode"></div>
-    </div>
-    <div class="credit">
-      © 2026. Powered by QRCode.js & GitHub Pages
-    </div>
-    <script>
-      // Function to generate QR code
-      function generateQR() {
-        var content = document.getElementById('qr-content').value;
-        document.getElementById('qrcode').innerHTML = "";
-        new QRCode(document.getElementById("qrcode"), {
-          text: content,
-          width: 210,
-          height: 210
-        });
-      }
-      // Initial load
-      window.onload = generateQR;
-    </script>
-  </body>
-</html>
+        
