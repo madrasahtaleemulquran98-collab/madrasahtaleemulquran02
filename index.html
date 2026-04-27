@@ -42,7 +42,7 @@
             pointer-events: none;
             z-index: -1;
         }
-        /* Scrolling border (top, bottom, left, right) */
+        /* Scrolling border - all 4 sides */
         .border-wrapper {
             position: relative;
             background: rgba(255, 254, 247, 0.96);
@@ -146,7 +146,6 @@
             margin-top: 2rem;
         }
         .qr-card { background: white; border-radius: 20px; padding: 1rem; }
-        /* Wider number inputs for 3-digit marks */
         .table input.mark-input { width: 85px; text-align: center; }
         .table input.grade-input { width: 70px; text-align: center; }
         @media (max-width: 768px) {
@@ -332,7 +331,7 @@
         while(studentData.length < ROWS) studentData.push({ studentName:"", fatherName:"", marks: new Array(subjects.length).fill(""), customGrade: "" });
         let html = `<div class="table-responsive"><table class="table table-bordered align-middle" id="resultTable"><thead class="table-success"><tr><th>စဉ်</th><th>ကျောင်းသားအမည်</th><th>ဖခင်အမည်</th>`;
         subjects.forEach(s=>html+=`<th>${s}</th>`);
-        html+=`<th>စုစုပေါင်း</th><th>အဆင့်</th></table></thead><tbody>`;
+        html+=`<th>စုစုပေါင်း</th><th>အဆင့်</th></tr></thead><tbody>`;
         for(let i=0;i<ROWS;i++){
             let stu = studentData[i];
             let marks = stu.marks;
