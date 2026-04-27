@@ -133,8 +133,9 @@
         .card-header { background: #2c5f2d; color: white; }
         .list-group-item { background: rgba(255,255,250,0.9); border-left: 4px solid #d4af37; }
         .table th { background: #2c5f2d; color: white; }
-        /* Make father name column wider */
-        .table th:nth-child(3), .table td:nth-child(3) { min-width: 180px; }
+        /* Make student name column wider */
+        .table th:nth-child(2), .table td:nth-child(2) { min-width: 180px; }
+        /* Father name column stays as is (already decent) */
         .table input.mark-input { width: 85px; text-align: center; }
         .rank-cell { font-weight: bold; text-align: center; }
         @media (max-width: 768px) {
@@ -143,9 +144,49 @@
             .strip-v { width: 26px; font-size: 0.7rem; }
             .main-content { padding: 1rem; }
             .table input.mark-input { width: 65px; }
-            .table th:nth-child(3), .table td:nth-child(3) { min-width: 120px; }
+            .table th:nth-child(2), .table td:nth-child(2) { min-width: 130px; }
         }
-        @media print { .no-print, .border-frame { display: none; } body::before, body::after { display: none; } }
+        /* Print styles: only the result table section will be printed */
+        @media print {
+            .no-print, .border-frame, .navbar, .hero, #subjects, #enroll, #contact, footer, .admin-bar, .qr-card, .btn, .modal, .border-wrapper > .border-frame {
+                display: none !important;
+            }
+            .border-wrapper {
+                background: white;
+                box-shadow: none;
+                padding: 0;
+                margin: 0;
+            }
+            .main-content {
+                padding: 0;
+            }
+            .section-card {
+                background: white;
+                border: none;
+                box-shadow: none;
+                padding: 0;
+                margin: 0;
+            }
+            #results {
+                margin: 0;
+                padding: 0;
+            }
+            .table {
+                width: 100%;
+                border-collapse: collapse;
+            }
+            .table th, .table td {
+                border: 1px solid #000 !important;
+            }
+            body {
+                background: white;
+                padding: 0;
+                margin: 0;
+            }
+            body::before, body::after {
+                display: none;
+            }
+        }
     </style>
 </head>
 <body>
@@ -175,7 +216,7 @@
             </div>
         </nav>
 
-        <section id="home" class="hero mt-3">
+        <section id="home" class="hero mt-3 no-print">
             <div class="arabic-hero">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
             <h1 class="mt-2">မင်္ဂလာပါ 🙏 ကြိုဆိုပါတယ်</h1>
             <p class="lead"><strong>Madrasah Taleemul Quran</strong> မှ ကုရ်အာန်နှင့် အစ္စလာမ့်ပညာရပ်များ သင်ယူရန် နွေးထွေးစွာ ဖိတ်ခေါ်ပါတယ်။</p>
@@ -183,7 +224,7 @@
             <a href="#enroll" class="btn btn-primary btn-lg mt-2"><i class="fas fa-pen-alt me-2"></i>ယခုကျောင်းအပ်ရန်</a>
         </section>
 
-        <section id="subjects" class="section-card">
+        <section id="subjects" class="section-card no-print">
             <h3 class="text-center mb-3" style="color:#1e4620;"><i class="fas fa-chalkboard-user me-2"></i> အတန်းအလိုက် ဘာသာရပ်များ</h3>
             <div class="row justify-content-center">
                 <div class="col-md-6">
@@ -194,7 +235,7 @@
             <div id="subjectsList" class="mt-4"><div class="alert alert-info text-center">အတန်းတစ်ခုခုကို ရွေးပါ။</div></div>
         </section>
 
-        <section id="enroll" class="section-card">
+        <section id="enroll" class="section-card no-print">
             <h3 class="text-center mb-4" style="color:#1e4620;"><i class="fas fa-file-signature"></i> ကျောင်းအပ်ရန် လျှောက်လွှာ</h3>
             <div class="form-card">
                 <form id="enrollForm">
@@ -221,12 +262,17 @@
             <h3 class="text-center mb-4" style="color:#1e4620;"><i class="fas fa-trophy"></i> စာမေးပွဲရလဒ်ကြေငြာစာ</h3>
             <div class="admin-bar no-print d-flex flex-wrap justify-content-between gap-3 mb-3">
                 <div style="max-width:280px;"><label class="fw-bold">အတန်းရွေးပါ</label><select id="resultClassSelect" class="form-select"><option value="">-- ရွေးပါ --</option></select></div>
-                <div><span id="loginStatus" class="badge bg-secondary me-2">🔒 Admin မဝင်ရသေး</span><button id="loginBtn" class="btn btn-success btn-sm"><i class="fas fa-lock-open"></i> Login</button><button id="logoutBtn" class="btn btn-danger btn-sm ms-1" style="display:none;"><i class="fas fa-sign-out-alt"></i> Logout</button><button id="printBtn" class="btn btn-success btn-sm ms-1"><i class="fas fa-print"></i> Print</button></div>
+                <div>
+                    <span id="loginStatus" class="badge bg-secondary me-2">🔒 Admin မဝင်ရသေး</span>
+                    <button id="loginBtn" class="btn btn-success btn-sm"><i class="fas fa-lock-open"></i> Login</button>
+                    <button id="logoutBtn" class="btn btn-danger btn-sm ms-1" style="display:none;"><i class="fas fa-sign-out-alt"></i> Logout</button>
+                    <button id="printResultBtn" class="btn btn-primary btn-sm ms-1"><i class="fas fa-print"></i> Print ရလဒ်</button>
+                </div>
             </div>
             <div id="resultTableContainer" class="table-responsive"><div class="alert alert-info text-center">အတန်းတစ်ခုခုကို ရွေးပါ။</div></div>
         </section>
 
-        <section id="contact" class="section-card">
+        <section id="contact" class="section-card no-print">
             <h3 class="text-center mb-4" style="color:#1e4620;"><i class="fas fa-address-card"></i> ဆက်သွယ်ရန်</h3>
             <div class="row g-4">
                 <div class="col-md-7">
@@ -311,7 +357,6 @@
     function saveAllData() { localStorage.setItem("examResultsData", JSON.stringify(currentData)); }
     function saveCurrentClassData(classId, data) { currentData[classId].studentData = data; saveAllData(); }
     function computeRanks(studentData) {
-        // Compute total marks for each student
         let withTotals = studentData.map((stu, idx) => {
             let total = 0;
             for(let m of stu.marks) {
@@ -320,7 +365,6 @@
             }
             return { idx, total };
         });
-        // Sort by total descending
         withTotals.sort((a,b) => b.total - a.total);
         let ranks = new Array(studentData.length).fill(null);
         let currentRank = 1;
@@ -341,12 +385,11 @@
         const subjects = subjectsByClass[classId];
         let studentData = currentData[classId]?.studentData || [];
         while(studentData.length < ROWS) studentData.push({ studentName:"", fatherName:"", marks: new Array(subjects.length).fill("") });
-        // Compute ranks based on totals
         let ranks = computeRanks(studentData);
         
         let html = `<div class="table-responsive"><table class="table table-bordered align-middle" id="resultTable"><thead class="table-success"><tr><th>စဉ်</th><th>ကျောင်းသားအမည်</th><th>ဖခင်အမည်</th>`;
         subjects.forEach(s=>html+=`<th>${s}</th>`);
-        html+=`<th>စုစုပေါင်း</th><th>အဆင့်</th></tr></thead><tbody>`;
+        html+=`<th>စုစုပေါင်း</th><th>အဆင့်</th><tr></thead><tbody>`;
         for(let i=0;i<ROWS;i++){
             let stu = studentData[i];
             let marks = stu.marks;
@@ -359,11 +402,11 @@
                 <td><input type="text" class="form-control form-control-sm student-name" value="${escapeHtml(stu.studentName)}" ${disabledAttr}></td>
                 <td><input type="text" class="form-control form-control-sm father-name" value="${escapeHtml(stu.fatherName)}" ${disabledAttr}></td>`;
             for(let s=0;s<subjects.length;s++){ let val=marks[s]!==undefined?marks[s]:""; html+=`<td><input type="number" class="form-control form-control-sm mark-input" value="${val}" min="0" max="100" step="1" ${disabledAttr}></td>`; }
-            html+=`<td class="fw-bold text-center">${total.toFixed(2)}</td>`;
-            html+=`<td class="rank-cell fw-bold text-center">${rank}</td>`;
-            html+=`</tr>`;
+            html+=`<td class="fw-bold text-center">${total.toFixed(2)}</td>
+                   <td class="rank-cell fw-bold text-center">${rank}</td>
+               </tr>`;
         }
-        html+=`</tbody></table></div>`;
+        html+=`</tbody><table></div>`;
         container.innerHTML = html;
         if(isAdmin) attachEvents(classId);
     }
@@ -424,7 +467,14 @@
     document.getElementById("loginBtn").addEventListener("click", showLogin);
     document.getElementById("logoutBtn").addEventListener("click", function(){ sessionStorage.removeItem("adminLoggedIn"); isAdmin=false; checkLoginStatus(); });
     document.getElementById("confirmLoginBtn").addEventListener("click", function(){ let email=document.getElementById("loginEmail").value.trim(); let pwd=document.getElementById("loginPassword").value; if(email==="madrasahtaleemulquran98@gmail.com" && pwd==="admin123"){ sessionStorage.setItem("adminLoggedIn","true"); isAdmin=true; if(loginModalObj)loginModalObj.hide(); checkLoginStatus(); document.getElementById("loginError").innerHTML=""; } else { document.getElementById("loginError").innerHTML="❌ Email သို့မဟုတ် Password မမှန်ပါ"; } });
-    document.getElementById("printBtn").addEventListener("click", ()=> window.print());
+    
+    // Print only the result section
+    document.getElementById("printResultBtn").addEventListener("click", function() {
+        const originalTitle = document.title;
+        document.title = "စာမေးပွဲရလဒ် - " + (classNames[currentClass] || "အတန်း");
+        window.print();
+        document.title = originalTitle;
+    });
 
     // QR
     let currentUrl = window.location.href;
