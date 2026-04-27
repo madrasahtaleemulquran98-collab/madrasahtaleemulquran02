@@ -18,7 +18,6 @@
             overflow-x: hidden;
             padding: 18px;
         }
-        /* Mosque pattern background */
         body::before {
             content: "";
             position: fixed;
@@ -43,7 +42,7 @@
             pointer-events: none;
             z-index: -1;
         }
-        /* Scrolling border - all 4 sides */
+        /* Scrolling border */
         .border-wrapper {
             position: relative;
             background: rgba(255, 254, 247, 0.96);
@@ -133,7 +132,6 @@
         .card-header { background: #2c5f2d; color: white; }
         .list-group-item { background: rgba(255,255,250,0.9); border-left: 4px solid #d4af37; }
         .table th { background: #2c5f2d; color: white; }
-        /* Make student name column very wide, father column removed */
         .table th:nth-child(2), .table td:nth-child(2) { min-width: 260px; width: 35%; }
         .table input.mark-input { width: 85px; text-align: center; }
         .rank-cell { font-weight: bold; text-align: center; }
@@ -145,45 +143,76 @@
             .table input.mark-input { width: 65px; }
             .table th:nth-child(2), .table td:nth-child(2) { min-width: 150px; }
         }
-        /* Print styles: only result table visible */
+        /* ========== IMPROVED PRINT STYLES ========== */
         @media print {
+            /* Hide everything except the result table */
             .no-print, .border-frame, .navbar, .hero, #subjects, #enroll, #contact, footer, .admin-bar, .qr-card, .btn, .modal, .border-wrapper > .border-frame {
                 display: none !important;
             }
+            body, .border-wrapper, .main-content, .section-card, #results {
+                background: white !important;
+                padding: 0 !important;
+                margin: 0 !important;
+                box-shadow: none !important;
+                border: none !important;
+                backdrop-filter: none !important;
+            }
             .border-wrapper {
-                background: white;
-                box-shadow: none;
-                padding: 0;
-                margin: 0;
+                display: block !important;
+                width: 100% !important;
+                overflow: visible !important;
             }
             .main-content {
-                padding: 0;
-            }
-            .section-card {
-                background: white;
-                border: none;
-                box-shadow: none;
-                padding: 0;
-                margin: 0;
+                width: 100% !important;
+                padding: 0 !important;
             }
             #results {
-                margin: 0;
-                padding: 0;
+                width: 100% !important;
+                padding: 0.2in !important;
+                margin: 0 !important;
+            }
+            .table-responsive {
+                overflow: visible !important;
+                width: 100% !important;
             }
             .table {
-                width: 100%;
-                border-collapse: collapse;
+                width: 100% !important;
+                font-size: 11pt !important;
+                border-collapse: collapse !important;
+                table-layout: auto !important;
             }
             .table th, .table td {
                 border: 1px solid #000 !important;
+                padding: 6px 4px !important;
+                word-break: break-word !important;
+            }
+            .table input {
+                border: none !important;
+                background: transparent !important;
+                padding: 0 !important;
+                font-size: 11pt !important;
+                width: auto !important;
+                min-width: 40px !important;
+            }
+            .mark-input {
+                text-align: center !important;
+                width: 60px !important;
+            }
+            .student-name {
+                width: 100% !important;
+                min-width: 180px !important;
             }
             body {
-                background: white;
-                padding: 0;
-                margin: 0;
+                margin: 0 !important;
+                padding: 0 !important;
             }
             body::before, body::after {
-                display: none;
+                display: none !important;
+            }
+            /* Ensure table doesn't get cut off */
+            @page {
+                size: auto;
+                margin: 0.5in;
             }
         }
     </style>
@@ -324,7 +353,7 @@
     const EMAILJS_SERVICE = "service_32ki7nu";
     const EMAILJS_TEMPLATE = "template_dye00bf";
 
-    // Data
+    // Data (subjects and class names)
     const subjectsByClass = {
         1: ["ယစ္စရ်နလ် ကုရ်အာန်", "စူရဟ်အလွတ်ကျက်ခြင်း", "မစ္စနူးန် ဒိုအာ", "ဟဒီးဆ်တော်", "ကုရ်အာနီ ဒိုအာ", "ဂုဏ်တော်များ", "ကလိမဟ်", "အလ်မုဖရ်ရဒါးသ်"],
         2: ["ယစ္စရ်နလ် ကုရ်အာန်", "ဂုဏ်တော်", "စူရဟ်အလွတ်ကျက်မှတ်ခြင်း", "ကလိမဟ်", "ဟဒီးဆ်တော်", "အူရ်ဒူ ကာအေဒဟ်", "မစ္စနှုးန် ဒိုအာ", "အလ်မွဖ်ဖရ်ရဒါးသ်", "ကုရ်အာနီ ဒိုအာ"],
@@ -347,7 +376,7 @@
             for(let c=1; c<=8; c++) {
                 let subsLen = subjectsByClass[c].length;
                 let studentData = [];
-                for(let i=0;i<ROWS;i++) studentData.push({ studentName: "", marks: new Array(subsLen).fill("") }); // fatherName removed
+                for(let i=0;i<ROWS;i++) studentData.push({ studentName: "", marks: new Array(subsLen).fill("") });
                 currentData[c] = { studentData };
             }
             saveAllData();
@@ -464,7 +493,7 @@
     document.getElementById("logoutBtn").addEventListener("click", function(){ sessionStorage.removeItem("adminLoggedIn"); isAdmin=false; checkLoginStatus(); });
     document.getElementById("confirmLoginBtn").addEventListener("click", function(){ let email=document.getElementById("loginEmail").value.trim(); let pwd=document.getElementById("loginPassword").value; if(email==="madrasahtaleemulquran98@gmail.com" && pwd==="admin123"){ sessionStorage.setItem("adminLoggedIn","true"); isAdmin=true; if(loginModalObj)loginModalObj.hide(); checkLoginStatus(); document.getElementById("loginError").innerHTML=""; } else { document.getElementById("loginError").innerHTML="❌ Email သို့မဟုတ် Password မမှန်ပါ"; } });
     
-    // Print only the result section
+    // Print only the result section (full page, no cut-off)
     document.getElementById("printResultBtn").addEventListener("click", function() {
         const originalTitle = document.title;
         document.title = "စာမေးပွဲရလဒ် - " + (classNames[currentClass] || "အတန်း");
