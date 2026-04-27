@@ -18,6 +18,7 @@
             overflow-x: hidden;
             padding: 18px;
         }
+        /* Mosque pattern background */
         body::before {
             content: "";
             position: fixed;
@@ -132,28 +133,17 @@
         .card-header { background: #2c5f2d; color: white; }
         .list-group-item { background: rgba(255,255,250,0.9); border-left: 4px solid #d4af37; }
         .table th { background: #2c5f2d; color: white; }
-        .grade-A { background-color: #d4edda !important; }
-        .grade-B { background-color: #d1ecf1 !important; }
-        .grade-C { background-color: #fff3cd !important; }
-        .grade-D { background-color: #f8d7da !important; }
-        footer {
-            background: rgba(30, 70, 32, 0.9);
-            backdrop-filter: blur(6px);
-            border-radius: 2rem;
-            color: #f9f3e2;
-            padding: 2rem;
-            text-align: center;
-            margin-top: 2rem;
-        }
-        .qr-card { background: white; border-radius: 20px; padding: 1rem; }
+        /* Make father name column wider */
+        .table th:nth-child(3), .table td:nth-child(3) { min-width: 180px; }
         .table input.mark-input { width: 85px; text-align: center; }
-        .table input.grade-input { width: 70px; text-align: center; }
+        .rank-cell { font-weight: bold; text-align: center; }
         @media (max-width: 768px) {
             body { padding: 8px; }
             .strip-h { height: 20px; font-size: 0.7rem; }
             .strip-v { width: 26px; font-size: 0.7rem; }
             .main-content { padding: 1rem; }
             .table input.mark-input { width: 65px; }
+            .table th:nth-child(3), .table td:nth-child(3) { min-width: 120px; }
         }
         @media print { .no-print, .border-frame { display: none; } body::before, body::after { display: none; } }
     </style>
@@ -312,7 +302,7 @@
             for(let c=1; c<=8; c++) {
                 let subsLen = subjectsByClass[c].length;
                 let studentData = [];
-                for(let i=0;i<ROWS;i++) studentData.push({ studentName:"", fatherName:"", marks: new Array(subsLen).fill(""), customGrade: "" });
+                for(let i=0;i<ROWS;i++) studentData.push({ studentName:"", fatherName:"", marks: new Array(subsLen).fill("") });
                 currentData[c] = { studentData };
             }
             saveAllData();
@@ -320,47 +310,64 @@
     }
     function saveAllData() { localStorage.setItem("examResultsData", JSON.stringify(currentData)); }
     function saveCurrentClassData(classId, data) { currentData[classId].studentData = data; saveAllData(); }
-    function getAutoGrade(perc) { if(perc>=80) return "A"; if(perc>=60) return "B"; if(perc>=40) return "C"; return "D"; }
-    function escapeHtml(str) { if(!str) return ""; return str.replace(/[&<>]/g, m=>({ '&':'&amp;', '<':'&lt;', '>':'&gt;' }[m])); }
+    function computeRanks(studentData) {
+        // Compute total marks for each student
+        let withTotals = studentData.map((stu, idx) => {
+            let total = 0;
+            for(let m of stu.marks) {
+                let v = parseFloat(m);
+                if(!isNaN(v) && v>=0 && v<=100) total += v;
+            }
+            return { idx, total };
+        });
+        // Sort by total descending
+        withTotals.sort((a,b) => b.total - a.total);
+        let ranks = new Array(studentData.length).fill(null);
+        let currentRank = 1;
+        for(let i=0; i<withTotals.length; i++) {
+            if(i>0 && withTotals[i].total === withTotals[i-1].total) {
+                ranks[withTotals[i].idx] = currentRank;
+            } else {
+                currentRank = i+1;
+                ranks[withTotals[i].idx] = currentRank;
+            }
+        }
+        return ranks;
+    }
 
     function renderTable(classId) {
         const container = document.getElementById("resultTableContainer");
         if(!classId || !subjectsByClass[classId]) { container.innerHTML='<div class="alert alert-info text-center">အတန်းရွေးပါ</div>'; return; }
         const subjects = subjectsByClass[classId];
         let studentData = currentData[classId]?.studentData || [];
-        while(studentData.length < ROWS) studentData.push({ studentName:"", fatherName:"", marks: new Array(subjects.length).fill(""), customGrade: "" });
+        while(studentData.length < ROWS) studentData.push({ studentName:"", fatherName:"", marks: new Array(subjects.length).fill("") });
+        // Compute ranks based on totals
+        let ranks = computeRanks(studentData);
+        
         let html = `<div class="table-responsive"><table class="table table-bordered align-middle" id="resultTable"><thead class="table-success"><tr><th>စဉ်</th><th>ကျောင်းသားအမည်</th><th>ဖခင်အမည်</th>`;
         subjects.forEach(s=>html+=`<th>${s}</th>`);
         html+=`<th>စုစုပေါင်း</th><th>အဆင့်</th></tr></thead><tbody>`;
         for(let i=0;i<ROWS;i++){
             let stu = studentData[i];
             let marks = stu.marks;
-            let total=0, valid=0;
-            for(let m of marks) { let v=parseFloat(m); if(!isNaN(v) && v>=0 && v<=100){ total+=v; valid++; } }
-            let perc = valid>0?total/valid:0;
-            let autoGrade = getAutoGrade(perc);
-            let displayGrade = (stu.customGrade && stu.customGrade.trim() !== "") ? stu.customGrade : autoGrade;
+            let total=0;
+            for(let m of marks) { let v=parseFloat(m); if(!isNaN(v) && v>=0 && v<=100) total+=v; }
+            let rank = ranks[i] !== null ? ranks[i] : "-";
             let disabledAttr = isAdmin ? '' : 'disabled';
-            let gradeInputDisabled = isAdmin ? '' : 'disabled';
-            html+=`<tr><td>${i+1}</td><td><input type="text" class="form-control form-control-sm student-name" value="${escapeHtml(stu.studentName)}" ${disabledAttr}></td><td><input type="text" class="form-control form-control-sm father-name" value="${escapeHtml(stu.fatherName)}" ${disabledAttr}></td>`;
+            html+=`<tr>
+                <td>${i+1}</td>
+                <td><input type="text" class="form-control form-control-sm student-name" value="${escapeHtml(stu.studentName)}" ${disabledAttr}></td>
+                <td><input type="text" class="form-control form-control-sm father-name" value="${escapeHtml(stu.fatherName)}" ${disabledAttr}></td>`;
             for(let s=0;s<subjects.length;s++){ let val=marks[s]!==undefined?marks[s]:""; html+=`<td><input type="number" class="form-control form-control-sm mark-input" value="${val}" min="0" max="100" step="1" ${disabledAttr}></td>`; }
-            html+=`<td class="fw-bold">${total.toFixed(2)}</td>`;
-            if(isAdmin){
-                html+=`<td><input type="text" class="form-control form-control-sm grade-input" value="${escapeHtml(displayGrade)}" placeholder="A/B/C/D"></td>`;
-            } else {
-                let gradeClass = "";
-                if(displayGrade === "A") gradeClass = "grade-A";
-                else if(displayGrade === "B") gradeClass = "grade-B";
-                else if(displayGrade === "C") gradeClass = "grade-C";
-                else if(displayGrade === "D") gradeClass = "grade-D";
-                html+=`<td class="fw-bold ${gradeClass}">${escapeHtml(displayGrade)}</td>`;
-            }
+            html+=`<td class="fw-bold text-center">${total.toFixed(2)}</td>`;
+            html+=`<td class="rank-cell fw-bold text-center">${rank}</td>`;
             html+=`</tr>`;
         }
         html+=`</tbody></table></div>`;
         container.innerHTML = html;
         if(isAdmin) attachEvents(classId);
     }
+    
     function attachEvents(classId){
         const rows = document.querySelectorAll("#resultTable tbody tr");
         const studentData = currentData[classId]?.studentData;
@@ -369,13 +376,13 @@
             let nameInp = row.querySelector(".student-name");
             let fatherInp = row.querySelector(".father-name");
             let marksInps = row.querySelectorAll(".mark-input");
-            let gradeInp = row.querySelector(".grade-input");
-            if(nameInp) nameInp.addEventListener("change", function(){ studentData[idx].studentName = this.value; saveCurrentClassData(classId, studentData); });
-            if(fatherInp) fatherInp.addEventListener("change", function(){ studentData[idx].fatherName = this.value; saveCurrentClassData(classId, studentData); });
+            if(nameInp) nameInp.addEventListener("change", function(){ studentData[idx].studentName = this.value; saveCurrentClassData(classId, studentData); renderTable(classId); });
+            if(fatherInp) fatherInp.addEventListener("change", function(){ studentData[idx].fatherName = this.value; saveCurrentClassData(classId, studentData); renderTable(classId); });
             marksInps.forEach((inp, subIdx)=>{ inp.addEventListener("change", function(){ let val = this.value===""?"":parseFloat(this.value); if(val===""||isNaN(val)) val=""; else val=Math.min(100,Math.max(0,val)); studentData[idx].marks[subIdx]=val; saveCurrentClassData(classId, studentData); renderTable(classId); }); });
-            if(gradeInp) gradeInp.addEventListener("change", function(){ studentData[idx].customGrade = this.value.trim(); saveCurrentClassData(classId, studentData); renderTable(classId); });
         });
     }
+
+    function escapeHtml(str) { if(!str) return ""; return str.replace(/[&<>]/g, m=>({ '&':'&amp;', '<':'&lt;', '>':'&gt;' }[m])); }
 
     // Admin login
     let loginModalObj = null;
