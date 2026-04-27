@@ -133,9 +133,8 @@
         .card-header { background: #2c5f2d; color: white; }
         .list-group-item { background: rgba(255,255,250,0.9); border-left: 4px solid #d4af37; }
         .table th { background: #2c5f2d; color: white; }
-        /* Make student name column wider */
-        .table th:nth-child(2), .table td:nth-child(2) { min-width: 180px; }
-        /* Father name column stays as is (already decent) */
+        /* Make student name column very wide, father column removed */
+        .table th:nth-child(2), .table td:nth-child(2) { min-width: 260px; width: 35%; }
         .table input.mark-input { width: 85px; text-align: center; }
         .rank-cell { font-weight: bold; text-align: center; }
         @media (max-width: 768px) {
@@ -144,9 +143,9 @@
             .strip-v { width: 26px; font-size: 0.7rem; }
             .main-content { padding: 1rem; }
             .table input.mark-input { width: 65px; }
-            .table th:nth-child(2), .table td:nth-child(2) { min-width: 130px; }
+            .table th:nth-child(2), .table td:nth-child(2) { min-width: 150px; }
         }
-        /* Print styles: only the result table section will be printed */
+        /* Print styles: only result table visible */
         @media print {
             .no-print, .border-frame, .navbar, .hero, #subjects, #enroll, #contact, footer, .admin-bar, .qr-card, .btn, .modal, .border-wrapper > .border-frame {
                 display: none !important;
@@ -348,7 +347,7 @@
             for(let c=1; c<=8; c++) {
                 let subsLen = subjectsByClass[c].length;
                 let studentData = [];
-                for(let i=0;i<ROWS;i++) studentData.push({ studentName:"", fatherName:"", marks: new Array(subsLen).fill("") });
+                for(let i=0;i<ROWS;i++) studentData.push({ studentName: "", marks: new Array(subsLen).fill("") }); // fatherName removed
                 currentData[c] = { studentData };
             }
             saveAllData();
@@ -384,12 +383,12 @@
         if(!classId || !subjectsByClass[classId]) { container.innerHTML='<div class="alert alert-info text-center">အတန်းရွေးပါ</div>'; return; }
         const subjects = subjectsByClass[classId];
         let studentData = currentData[classId]?.studentData || [];
-        while(studentData.length < ROWS) studentData.push({ studentName:"", fatherName:"", marks: new Array(subjects.length).fill("") });
+        while(studentData.length < ROWS) studentData.push({ studentName: "", marks: new Array(subjects.length).fill("") });
         let ranks = computeRanks(studentData);
         
-        let html = `<div class="table-responsive"><table class="table table-bordered align-middle" id="resultTable"><thead class="table-success"><tr><th>စဉ်</th><th>ကျောင်းသားအမည်</th><th>ဖခင်အမည်</th>`;
+        let html = `<div class="table-responsive"><table class="table table-bordered align-middle" id="resultTable"><thead class="table-success"><tr><th>စဉ်</th><th>ကျောင်းသားအမည်</th>`;
         subjects.forEach(s=>html+=`<th>${s}</th>`);
-        html+=`<th>စုစုပေါင်း</th><th>အဆင့်</th><tr></thead><tbody>`;
+        html+=`<th>စုစုပေါင်း</th><th>အဆင့်</th></tr></thead><tbody>`;
         for(let i=0;i<ROWS;i++){
             let stu = studentData[i];
             let marks = stu.marks;
@@ -399,14 +398,13 @@
             let disabledAttr = isAdmin ? '' : 'disabled';
             html+=`<tr>
                 <td>${i+1}</td>
-                <td><input type="text" class="form-control form-control-sm student-name" value="${escapeHtml(stu.studentName)}" ${disabledAttr}></td>
-                <td><input type="text" class="form-control form-control-sm father-name" value="${escapeHtml(stu.fatherName)}" ${disabledAttr}></td>`;
+                <td><input type="text" class="form-control form-control-sm student-name" value="${escapeHtml(stu.studentName)}" ${disabledAttr}></td>`;
             for(let s=0;s<subjects.length;s++){ let val=marks[s]!==undefined?marks[s]:""; html+=`<td><input type="number" class="form-control form-control-sm mark-input" value="${val}" min="0" max="100" step="1" ${disabledAttr}></td>`; }
             html+=`<td class="fw-bold text-center">${total.toFixed(2)}</td>
                    <td class="rank-cell fw-bold text-center">${rank}</td>
                </tr>`;
         }
-        html+=`</tbody><table></div>`;
+        html+=`</tbody></table></div>`;
         container.innerHTML = html;
         if(isAdmin) attachEvents(classId);
     }
@@ -417,10 +415,8 @@
         if(!studentData) return;
         rows.forEach((row, idx)=>{
             let nameInp = row.querySelector(".student-name");
-            let fatherInp = row.querySelector(".father-name");
             let marksInps = row.querySelectorAll(".mark-input");
             if(nameInp) nameInp.addEventListener("change", function(){ studentData[idx].studentName = this.value; saveCurrentClassData(classId, studentData); renderTable(classId); });
-            if(fatherInp) fatherInp.addEventListener("change", function(){ studentData[idx].fatherName = this.value; saveCurrentClassData(classId, studentData); renderTable(classId); });
             marksInps.forEach((inp, subIdx)=>{ inp.addEventListener("change", function(){ let val = this.value===""?"":parseFloat(this.value); if(val===""||isNaN(val)) val=""; else val=Math.min(100,Math.max(0,val)); studentData[idx].marks[subIdx]=val; saveCurrentClassData(classId, studentData); renderTable(classId); }); });
         });
     }
