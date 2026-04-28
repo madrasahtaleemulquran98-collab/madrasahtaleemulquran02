@@ -131,8 +131,7 @@
             .table input.mark-input { width: 65px; }
             .table th:nth-child(2), .table td:nth-child(2) { min-width: 150px; }
         }
-
-        /* PRINT STYLES – white background + footer */
+        /* PRINT – only change: add footer, fix dark background */
         @media print {
             .no-print, .border-frame, .navbar, .hero, #subjects, #enroll, #contact, footer, .admin-bar, .qr-card, .btn, .modal, .border-wrapper > .border-frame {
                 display: none !important;
@@ -200,13 +199,14 @@
             .table tbody tr {
                 page-break-inside: avoid;
             }
+            /* ONLY ADDED: print footer */
             .print-footer {
                 display: block !important;
-                margin-top: 20px !important;
+                margin-top: 15px !important;
                 text-align: center !important;
-                font-size: 10pt !important;
+                font-size: 9pt !important;
                 border-top: 1px solid #ccc !important;
-                padding-top: 8px !important;
+                padding-top: 6px !important;
                 font-family: 'Padauk', 'Noto Sans Myanmar', sans-serif !important;
                 color: black !important;
             }
@@ -294,7 +294,7 @@
                 </div>
             </div>
             <div id="resultTableContainer" class="table-responsive"><div class="alert alert-info text-center">အတန်းတစ်ခုခုကို ရွေးပါ။</div></div>
-            <!-- PRINT-ONLY FOOTER -->
+            <!-- PRINT FOOTER (only visible when printing) -->
             <div class="print-footer" style="display: none;">
                 <strong>မဒ်ရစဟ်သအ်လီမုလ်ကုရ်အာန် - Madrasah Taleemul Quran</strong><br>
                 📞 09952018168 &nbsp;|&nbsp; ✉️ madrasahtaleemulquran98@gmail.com<br>
@@ -405,7 +405,7 @@
         let ranks = computeRanks(studentData);
         let html = `<div class="table-responsive"><table class="table table-bordered align-middle" id="resultTable"><thead class="table-success"><tr><th>စဉ်</th><th>ကျောင်းသားအမည်</th>`;
         subjects.forEach(s=>html+=`<th>${s}</th>`);
-        html+=`<th>စုစုပေါင်း</th><th>အဆင့်</th></table></thead><tbody>`;
+        html+=`<th>စုစုပေါင်း</th><th>အဆင့်</th><tr></thead><tbody>`;
         for(let i=0;i<ROWS;i++){
             let stu = studentData[i];
             let marks = stu.marks;
@@ -418,7 +418,7 @@
             for(let s=0;s<subjects.length;s++){ let val=marks[s]!==undefined?marks[s]:""; html+=`<td><input type="number" class="form-control form-control-sm mark-input" value="${val}" min="0" max="100" step="1" ${disabledAttr}></td>`; }
             html+=`<td class="fw-bold text-center">${total.toFixed(2)}</td>
                    <td class="rank-cell fw-bold text-center">${rank}</td>
-               </tr>`;
+               <tr>`;
         }
         html+=`</tbody></table></div>`;
         container.innerHTML = html;
