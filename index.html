@@ -8,28 +8,112 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Padauk:wght@400;700&family=Noto+Sans+Myanmar:wght@400;600;700&family=Amiri:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     <style>
-        /* === all your existing styles (keep as is) === */
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Padauk', 'Noto Sans Myanmar', sans-serif; background: #fef8e7; position: relative; color: #2c2b28; line-height: 1.6; overflow-x: hidden; padding: 18px; }
-        body::before { content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200' opacity='0.12'%3E%3Cpath fill='%232c5f2d' d='M100 30L120 55H80L100 30zM70 60h60v10H70zM55 80h90v5H55zM40 100h120v8H40zM30 120h140v4H30zM20 140h160v4H20zM90 150h20v30H90zM110 150h20v30h-20z'/%3E%3Ccircle cx='100' cy='150' r='12' fill='%232c5f2d'/%3E%3Cpath d='M50 80 L70 80 L70 95 L50 95 Z' fill='%232c5f2d'/%3E%3Cpath d='M130 80 L150 80 L150 95 L130 95 Z' fill='%232c5f2d'/%3E%3C/svg%3E"); background-repeat: repeat; background-size: 80px; pointer-events: none; z-index: -2; }
-        body::after { content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at 20% 30%, rgba(255,245,215,0.65), rgba(235,245,225,0.8)); pointer-events: none; z-index: -1; }
-        .border-wrapper { position: relative; background: rgba(255, 254, 247, 0.96); border-radius: 32px; box-shadow: 0 12px 25px rgba(0,0,0,0.1); }
-        .border-frame { position: absolute; top: -10px; left: -10px; right: -10px; bottom: -10px; pointer-events: none; z-index: 10; border-radius: 40px; overflow: hidden; }
-        .strip-h { position: absolute; left: 0; right: 0; height: 28px; display: flex; align-items: center; justify-content: center; white-space: nowrap; font-size: 1rem; font-family: 'Amiri', monospace; font-weight: bold; color: #b57c1c; background: rgba(253, 246, 227, 0.95); overflow-x: hidden; }
+        body {
+            font-family: 'Padauk', 'Noto Sans Myanmar', sans-serif;
+            background: #fef8e7;
+            position: relative;
+            color: #2c2b28;
+            line-height: 1.6;
+            overflow-x: hidden;
+            padding: 18px;
+        }
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200' opacity='0.12'%3E%3Cpath fill='%232c5f2d' d='M100 30L120 55H80L100 30zM70 60h60v10H70zM55 80h90v5H55zM40 100h120v8H40zM30 120h140v4H30zM20 140h160v4H20zM90 150h20v30H90zM110 150h20v30h-20z'/%3E%3Ccircle cx='100' cy='150' r='12' fill='%232c5f2d'/%3E%3Cpath d='M50 80 L70 80 L70 95 L50 95 Z' fill='%232c5f2d'/%3E%3Cpath d='M130 80 L150 80 L150 95 L130 95 Z' fill='%232c5f2d'/%3E%3C/svg%3E");
+            background-repeat: repeat;
+            background-size: 80px;
+            pointer-events: none;
+            z-index: -2;
+        }
+        body::after {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 20% 30%, rgba(255,245,215,0.65), rgba(235,245,225,0.8));
+            pointer-events: none;
+            z-index: -1;
+        }
+        .border-wrapper {
+            position: relative;
+            background: rgba(255, 254, 247, 0.96);
+            border-radius: 32px;
+            box-shadow: 0 12px 25px rgba(0,0,0,0.1);
+        }
+        .border-frame {
+            position: absolute;
+            top: -10px; left: -10px; right: -10px; bottom: -10px;
+            pointer-events: none;
+            z-index: 10;
+            border-radius: 40px;
+            overflow: hidden;
+        }
+        .strip-h {
+            position: absolute;
+            left: 0; right: 0;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            white-space: nowrap;
+            font-size: 1rem;
+            font-family: 'Amiri', monospace;
+            font-weight: bold;
+            color: #b57c1c;
+            background: rgba(253, 246, 227, 0.95);
+            overflow-x: hidden;
+        }
         .strip-h span { display: inline-block; animation: scrollMarquee 28s linear infinite; padding: 0 10px; letter-spacing: 6px; }
         .top-strip { top: -6px; border-radius: 32px 32px 12px 12px; border-bottom: 1px solid #e4bc7c; }
         .bottom-strip { bottom: -6px; border-radius: 12px 12px 32px 32px; border-top: 1px solid #e4bc7c; }
-        .strip-v { position: absolute; top: 12px; bottom: 12px; width: 32px; display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 1rem; font-family: 'Amiri', monospace; font-weight: bold; color: #b57c1c; background: rgba(253, 246, 227, 0.95); overflow-y: hidden; }
+        .strip-v {
+            position: absolute;
+            top: 12px; bottom: 12px;
+            width: 32px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            font-family: 'Amiri', monospace;
+            font-weight: bold;
+            color: #b57c1c;
+            background: rgba(253, 246, 227, 0.95);
+            overflow-y: hidden;
+        }
         .strip-v span { display: flex; flex-direction: column; animation: scrollVertical 22s linear infinite; line-height: 1.6; text-align: center; }
         .left-strip { left: -6px; border-radius: 24px 6px 6px 24px; border-right: 1px solid #e4bc7c; }
         .right-strip { right: -6px; border-radius: 6px 24px 24px 6px; border-left: 1px solid #e4bc7c; }
         @keyframes scrollMarquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
         @keyframes scrollVertical { 0% { transform: translateY(0); } 100% { transform: translateY(-50%); } }
         .main-content { padding: 2rem 1.8rem; position: relative; z-index: 5; }
-        .section-card { background: rgba(255, 255, 245, 0.92); backdrop-filter: blur(3px); border-radius: 2rem; padding: 2rem 1.8rem; margin-bottom: 2rem; box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.1); border: 1px solid rgba(212, 175, 55, 0.4); transition: transform 0.2s; }
+        .section-card {
+            background: rgba(255, 255, 245, 0.92);
+            backdrop-filter: blur(3px);
+            border-radius: 2rem;
+            padding: 2rem 1.8rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            transition: transform 0.2s;
+        }
         .section-card:hover { transform: translateY(-3px); background: rgba(255, 255, 248, 0.96); }
         .navbar { background: #1e4620 !important; border-bottom: 2px solid #d4af37; border-radius: 60px; margin-bottom: 1rem; }
-        .hero { background: linear-gradient(135deg, rgba(44,95,45,0.15), rgba(249,241,207,0.6)); border-radius: 2.5rem; padding: 3rem 1.5rem; text-align: center; border: 1px solid #d4af37; }
+        .hero {
+            background: linear-gradient(135deg, rgba(44,95,45,0.15), rgba(249,241,207,0.6));
+            border-radius: 2.5rem;
+            padding: 3rem 1.5rem;
+            text-align: center;
+            border: 1px solid #d4af37;
+        }
         .arabic-hero { font-family: 'Amiri', serif; font-size: 1.9rem; color: #b8860b; }
         .btn-primary { background: #2c5f2d; border: none; border-radius: 3rem; padding: 0.7rem 2rem; font-weight: 600; }
         .btn-primary:hover { background: #1e4620; transform: scale(1.02); }
@@ -39,9 +123,16 @@
         .table th:nth-child(2), .table td:nth-child(2) { min-width: 260px; width: 35%; }
         .table input.mark-input { width: 85px; text-align: center; }
         .rank-cell { font-weight: bold; text-align: center; }
-        @media (max-width: 768px) { body { padding: 8px; } .strip-h { height: 20px; font-size: 0.7rem; } .strip-v { width: 26px; font-size: 0.7rem; } .main-content { padding: 1rem; } .table input.mark-input { width: 65px; } .table th:nth-child(2), .table td:nth-child(2) { min-width: 150px; } }
+        @media (max-width: 768px) {
+            body { padding: 8px; }
+            .strip-h { height: 20px; font-size: 0.7rem; }
+            .strip-v { width: 26px; font-size: 0.7rem; }
+            .main-content { padding: 1rem; }
+            .table input.mark-input { width: 65px; }
+            .table th:nth-child(2), .table td:nth-child(2) { min-width: 150px; }
+        }
 
-        /* ========== FIXED PRINT STYLES (white background + footer) ========== */
+        /* PRINT STYLES – white background + footer */
         @media print {
             .no-print, .border-frame, .navbar, .hero, #subjects, #enroll, #contact, footer, .admin-bar, .qr-card, .btn, .modal, .border-wrapper > .border-frame {
                 display: none !important;
@@ -109,7 +200,6 @@
             .table tbody tr {
                 page-break-inside: avoid;
             }
-            /* Print footer */
             .print-footer {
                 display: block !important;
                 margin-top: 20px !important;
@@ -204,7 +294,7 @@
                 </div>
             </div>
             <div id="resultTableContainer" class="table-responsive"><div class="alert alert-info text-center">အတန်းတစ်ခုခုကို ရွေးပါ။</div></div>
-            <!-- PRINT-ONLY FOOTER (madrasah details) -->
+            <!-- PRINT-ONLY FOOTER -->
             <div class="print-footer" style="display: none;">
                 <strong>မဒ်ရစဟ်သအ်လီမုလ်ကုရ်အာန် - Madrasah Taleemul Quran</strong><br>
                 📞 09952018168 &nbsp;|&nbsp; ✉️ madrasahtaleemulquran98@gmail.com<br>
@@ -322,9 +412,13 @@
             let total=0; for(let m of marks) { let v=parseFloat(m); if(!isNaN(v) && v>=0 && v<=100) total+=v; }
             let rank = ranks[i] !== null ? ranks[i] : "-";
             let disabledAttr = isAdmin ? '' : 'disabled';
-            html+=`<tr><td>${i+1}</td><td><input type="text" class="form-control form-control-sm student-name" value="${escapeHtml(stu.studentName)}" ${disabledAttr}></td>`;
+            html+=`<tr>
+                <td>${i+1}</td>
+                <td><input type="text" class="form-control form-control-sm student-name" value="${escapeHtml(stu.studentName)}" ${disabledAttr}></td>`;
             for(let s=0;s<subjects.length;s++){ let val=marks[s]!==undefined?marks[s]:""; html+=`<td><input type="number" class="form-control form-control-sm mark-input" value="${val}" min="0" max="100" step="1" ${disabledAttr}></td>`; }
-            html+=`<td class="fw-bold text-center">${total.toFixed(2)}</td><td class="rank-cell fw-bold text-center">${rank}</td></tr>`;
+            html+=`<td class="fw-bold text-center">${total.toFixed(2)}</td>
+                   <td class="rank-cell fw-bold text-center">${rank}</td>
+               </tr>`;
         }
         html+=`</tbody></table></div>`;
         container.innerHTML = html;
