@@ -72,12 +72,7 @@
             background: rgba(253, 246, 227, 0.95);
             overflow-x: hidden;
         }
-        .strip-h span {
-            display: inline-block;
-            animation: scrollMarquee 28s linear infinite;
-            padding: 0 10px;
-            letter-spacing: 6px;
-        }
+        .strip-h span { display: inline-block; animation: scrollMarquee 28s linear infinite; padding: 0 10px; letter-spacing: 6px; }
         .top-strip { top: -6px; border-radius: 32px 32px 12px 12px; border-bottom: 1px solid #e4bc7c; }
         .bottom-strip { bottom: -6px; border-radius: 12px 12px 32px 32px; border-top: 1px solid #e4bc7c; }
         .strip-v {
@@ -95,13 +90,7 @@
             background: rgba(253, 246, 227, 0.95);
             overflow-y: hidden;
         }
-        .strip-v span {
-            display: flex;
-            flex-direction: column;
-            animation: scrollVertical 22s linear infinite;
-            line-height: 1.6;
-            text-align: center;
-        }
+        .strip-v span { display: flex; flex-direction: column; animation: scrollVertical 22s linear infinite; line-height: 1.6; text-align: center; }
         .left-strip { left: -6px; border-radius: 24px 6px 6px 24px; border-right: 1px solid #e4bc7c; }
         .right-strip { right: -6px; border-radius: 6px 24px 24px 6px; border-left: 1px solid #e4bc7c; }
         @keyframes scrollMarquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
@@ -143,9 +132,8 @@
             .table input.mark-input { width: 65px; }
             .table th:nth-child(2), .table td:nth-child(2) { min-width: 150px; }
         }
-        /* ========== IMPROVED PRINT STYLES ========== */
+        /* ===== IMPROVED PRINT FOR ALL CLASSES (INCLUDING GRADE 2,3,4) ===== */
         @media print {
-            /* Hide everything except the result table */
             .no-print, .border-frame, .navbar, .hero, #subjects, #enroll, #contact, footer, .admin-bar, .qr-card, .btn, .modal, .border-wrapper > .border-frame {
                 display: none !important;
             }
@@ -157,19 +145,13 @@
                 border: none !important;
                 backdrop-filter: none !important;
             }
-            .border-wrapper {
-                display: block !important;
+            .border-wrapper, .main-content, #results {
                 width: 100% !important;
                 overflow: visible !important;
             }
-            .main-content {
-                width: 100% !important;
-                padding: 0 !important;
-            }
-            #results {
-                width: 100% !important;
-                padding: 0.2in !important;
-                margin: 0 !important;
+            @page {
+                size: landscape;
+                margin: 0.2in;
             }
             .table-responsive {
                 overflow: visible !important;
@@ -177,42 +159,47 @@
             }
             .table {
                 width: 100% !important;
-                font-size: 11pt !important;
+                font-size: 7pt !important;
                 border-collapse: collapse !important;
-                table-layout: auto !important;
+                table-layout: fixed !important;
+                page-break-inside: avoid;
             }
             .table th, .table td {
                 border: 1px solid #000 !important;
-                padding: 6px 4px !important;
+                padding: 3px 2px !important;
                 word-break: break-word !important;
+                vertical-align: middle !important;
             }
-            .table input {
+            .table th:nth-child(2), .table td:nth-child(2) {
+                width: 28% !important;
+                min-width: 120px !important;
+            }
+            .table input.mark-input {
                 border: none !important;
                 background: transparent !important;
                 padding: 0 !important;
-                font-size: 11pt !important;
-                width: auto !important;
-                min-width: 40px !important;
-            }
-            .mark-input {
+                font-size: 7pt !important;
+                width: 38px !important;
+                min-width: 30px !important;
                 text-align: center !important;
-                width: 60px !important;
             }
             .student-name {
+                border: none !important;
+                background: transparent !important;
+                font-size: 7pt !important;
                 width: 100% !important;
-                min-width: 180px !important;
-            }
-            body {
-                margin: 0 !important;
                 padding: 0 !important;
+            }
+            .table td:nth-last-child(2), .table th:nth-last-child(2),
+            .table td:last-child, .table th:last-child {
+                width: 10% !important;
+                text-align: center !important;
+            }
+            .table tbody tr {
+                page-break-inside: avoid;
             }
             body::before, body::after {
                 display: none !important;
-            }
-            /* Ensure table doesn't get cut off */
-            @page {
-                size: auto;
-                margin: 0.5in;
             }
         }
     </style>
@@ -348,12 +335,10 @@
 <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.0/build/qrcode.min.js"></script>
 
 <script>
-    // EmailJS
     emailjs.init({ publicKey: "xzGPcuOfvRCnsDKsp" });
     const EMAILJS_SERVICE = "service_32ki7nu";
     const EMAILJS_TEMPLATE = "template_dye00bf";
 
-    // Data (subjects and class names)
     const subjectsByClass = {
         1: ["ယစ္စရ်နလ် ကုရ်အာန်", "စူရဟ်အလွတ်ကျက်ခြင်း", "မစ္စနူးန် ဒိုအာ", "ဟဒီးဆ်တော်", "ကုရ်အာနီ ဒိုအာ", "ဂုဏ်တော်များ", "ကလိမဟ်", "အလ်မုဖရ်ရဒါးသ်"],
         2: ["ယစ္စရ်နလ် ကုရ်အာန်", "ဂုဏ်တော်", "စူရဟ်အလွတ်ကျက်မှတ်ခြင်း", "ကလိမဟ်", "ဟဒီးဆ်တော်", "အူရ်ဒူ ကာအေဒဟ်", "မစ္စနှုးန် ဒိုအာ", "အလ်မွဖ်ဖရ်ရဒါးသ်", "ကုရ်အာနီ ဒိုအာ"],
@@ -452,7 +437,6 @@
 
     function escapeHtml(str) { if(!str) return ""; return str.replace(/[&<>]/g, m=>({ '&':'&amp;', '<':'&lt;', '>':'&gt;' }[m])); }
 
-    // Admin login
     let loginModalObj = null;
     function initModal(){ if(typeof bootstrap!=='undefined') loginModalObj = new bootstrap.Modal(document.getElementById('loginModal')); }
     function showLogin(){ if(loginModalObj) loginModalObj.show(); }
@@ -464,7 +448,6 @@
         if(currentClass) renderTable(currentClass);
     }
 
-    // Enrollment handler
     document.getElementById("enrollForm").addEventListener("submit", function(e){
         e.preventDefault();
         let sname = document.getElementById("studentName").value.trim(), pname = document.getElementById("parentName").value.trim(), cls = document.getElementById("className").value, phone = document.getElementById("phone").value, addr = document.getElementById("address").value;
@@ -473,7 +456,6 @@
         emailjs.send(EMAILJS_SERVICE, EMAILJS_TEMPLATE, { student_name:sname, parent_name:pname, class_name:cls, phone:phone, address:addr, to_email:'madrasahtaleemulquran98@gmail.com' }).then(()=>{ document.getElementById("formMessage").innerHTML='<div class="alert alert-success">✅ အောင်မြင်စွာ ကျောင်းအပ်ပြီးပါပြီ။</div>'; document.getElementById("enrollForm").reset(); }).catch((err)=>{ document.getElementById("formMessage").innerHTML='<div class="alert alert-danger">❌ အမှားရှိသည်။ '+(err.text||'')+'</div>'; }).finally(()=>{ btn.disabled=false; btn.innerHTML='အပ်နှံမည်'; });
     });
 
-    // Subjects dropdown
     let subSelect = document.getElementById("classSelect");
     for(let id in classNames){ let opt = document.createElement("option"); opt.value=id; opt.textContent=classNames[id]; subSelect.appendChild(opt); }
     subSelect.addEventListener("change", function(){
@@ -485,7 +467,6 @@
         container.innerHTML=html;
     });
 
-    // Results dropdown
     let resSelect = document.getElementById("resultClassSelect");
     for(let id in classNames){ let opt = document.createElement("option"); opt.value=id; opt.textContent=classNames[id]; resSelect.appendChild(opt); }
     resSelect.addEventListener("change", function(){ currentClass = this.value; renderTable(currentClass); });
@@ -493,7 +474,6 @@
     document.getElementById("logoutBtn").addEventListener("click", function(){ sessionStorage.removeItem("adminLoggedIn"); isAdmin=false; checkLoginStatus(); });
     document.getElementById("confirmLoginBtn").addEventListener("click", function(){ let email=document.getElementById("loginEmail").value.trim(); let pwd=document.getElementById("loginPassword").value; if(email==="madrasahtaleemulquran98@gmail.com" && pwd==="admin123"){ sessionStorage.setItem("adminLoggedIn","true"); isAdmin=true; if(loginModalObj)loginModalObj.hide(); checkLoginStatus(); document.getElementById("loginError").innerHTML=""; } else { document.getElementById("loginError").innerHTML="❌ Email သို့မဟုတ် Password မမှန်ပါ"; } });
     
-    // Print only the result section (full page, no cut-off)
     document.getElementById("printResultBtn").addEventListener("click", function() {
         const originalTitle = document.title;
         document.title = "စာမေးပွဲရလဒ် - " + (classNames[currentClass] || "အတန်း");
@@ -501,7 +481,6 @@
         document.title = originalTitle;
     });
 
-    // QR
     let currentUrl = window.location.href;
     let qrCanvasDiv = document.getElementById("qrCodeCanvas");
     let qrCanvas = document.createElement("canvas");
