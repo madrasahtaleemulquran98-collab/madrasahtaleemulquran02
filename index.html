@@ -208,7 +208,7 @@
                 border-top: 1px solid #ccc !important;
                 padding-top: 6px !important;
                 font-family: 'Padauk', 'Noto Sans Myanmar', sans-serif !important;
-              color: black !important;
+                color: black !important;
             }
         }
     </style>
@@ -293,20 +293,20 @@
                     <button id="printResultBtn" class="btn btn-primary btn-sm ms-1"><i class="fas fa-print"></i> Print ရလဒ်</button>
                 </div>
             </div>
-            <strong>မဒ်ရစဟ်သအ်လီမုလ်ကုရ်အာန် - Madrasah Taleemul Quran</strong><br>
+            <div class="mb-2">
+                <strong>မဒ်ရစဟ်သအ်လီမုလ်ကုရ်အာန် - Madrasah Taleemul Quran</strong><br>
                 📞 09952018168 &nbsp;|&nbsp; ✉️ madrasahtaleemulquran98@gmail.com<br>
                 🕌 အမှတ်(6)၊ 98လမ်း၊ လွတ်လပ်ရေးရပ်ကွက်၊ မင်္ဂလာတောင်ညွန့်မြို့နယ်၊ ရန်ကုန်တိုင်း။
             </div>
             <div id="resultTableContainer" class="table-responsive"><div class="alert alert-info text-center">အတန်းတစ်ခုခုကို ရွေးပါ။</div></div>
             <!-- PRINT FOOTER (only visible when printing) -->
-            <div class="print-footer" style="display: none;">
-                
+            <div class="print-footer" style="display: none;"></div>
         </section>
 
         <section id="contact" class="section-card no-print">
             <h3 class="text-center mb-4" style="color:#1e4620;"><i class="fas fa-address-card"></i> ဆက်သွယ်ရန်</h3>
             <div class="row g-4">
-                <div class="col-md-7">
+                <div class="col-md-12">
                     <div class="card shadow-sm h-100 border-0 rounded-4">
                         <div class="card-header bg-success text-white rounded-top-4">📞 ဆက်သွယ်ရန်အချက်အလက်</div>
                         <div class="card-body">
@@ -317,19 +317,19 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-5">
-                    <div class="qr-card text-center p-3 h-100">
-                        <i class="fas fa-qrcode fa-2x text-success mb-2"></i>
-                        <h6 class="fw-bold">Scan QR - Visit Our Website</h6>
-                        <div id="qrCodeCanvas" class="d-flex justify-content-center mt-2"></div>
-                        <button id="downloadQrBtn" class="btn btn-outline-success btn-sm mt-3"><i class="fas fa-download"></i> QR Download</button>
-                        <p class="small text-muted mt-2">မူရင်းဝဘ်ဆိုက်သို့ ချိတ်ဆက်ရန်</p>
-                    </div>
-                </div>
             </div>
         </section>
 
-        <footer class="no-print">
+        <!-- QR Code ကို အောက်ဘက်သို့ ရွှေ့ထားပြီ -->
+        <div class="qr-card text-center p-3 mb-4" style="max-width: 300px; margin: 0 auto; background: white; border-radius: 32px; border: 1px solid #d4af37;">
+            <i class="fas fa-qrcode fa-2x text-success mb-2"></i>
+            <h6 class="fw-bold">Scan QR - Visit Our Website</h6>
+            <div id="qrCodeCanvas" class="d-flex justify-content-center mt-2"></div>
+            <button id="downloadQrBtn" class="btn btn-outline-success btn-sm mt-3"><i class="fas fa-download"></i> QR Download</button>
+            <p class="small text-muted mt-2">မူရင်းဝဘ်ဆိုက်သို့ ချိတ်ဆက်ရန်</p>
+        </div>
+
+        <footer class="no-print text-center">
             <i class="fas fa-mosque fa-lg me-2"></i> မဒ်ရစဟ်သအ်လီမုလ်ကုရ်အာန် - Madrasah Taleemul Quran<br>
             📞 09952018168 &nbsp;|&nbsp; ✉️ madrasahtaleemulquran98@gmail.com<br>
             🕌 အမှတ်(6)၊ 98လမ်း၊ မင်္ဂလာတောင်ညွန့်မြို့နယ်၊ ရန်ကုန်တိုင်း။<br>
@@ -419,9 +419,9 @@
             for(let s=0;s<subjects.length;s++){ let val=marks[s]!==undefined?marks[s]:""; html+=`<td><input type="number" class="form-control form-control-sm mark-input" value="${val}" min="0" max="100" step="1" ${disabledAttr}></td>`; }
             html+=`<td class="fw-bold text-center">${total.toFixed(2)}</td>
                    <td class="rank-cell fw-bold text-center">${rank}</td>
-               <tr>`;
+               <td>`;
         }
-        html+=`</tbody></table></div>`;
+        html+=`</tbody></tr></div>`;
         container.innerHTML = html;
         if(isAdmin) attachEvents(classId);
     }
@@ -446,7 +446,7 @@
     function checkLoginStatus(){
         let logged = sessionStorage.getItem("adminLoggedIn");
         isAdmin = (logged === "true");
-        <!-- Add a new student row with name and roll number -->
+        // HTML comment ကို ဖျက်ပြီးသား – အောက်ပါ code မှန်ကန်စွာ အလုပ်လုပ်မည်
         let statusSpan = document.getElementById("loginStatus"), loginBtn = document.getElementById("loginBtn"), logoutBtn = document.getElementById("logoutBtn");
         if(statusSpan){ if(isAdmin){ statusSpan.innerHTML="✅ Admin အကောင့်ဝင်ထားပြီး"; statusSpan.className="badge bg-success me-2"; loginBtn.style.display="none"; logoutBtn.style.display="inline-block"; } else { statusSpan.innerHTML="🔒 Admin မဝင်ရသေး"; statusSpan.className="badge bg-secondary me-2"; loginBtn.style.display="inline-block"; logoutBtn.style.display="none"; } }
         if(currentClass) renderTable(currentClass);
@@ -483,7 +483,6 @@
         document.title = "စာမေးပွဲရလဒ် - " + (classNames[currentClass] || "အတန်း");
         window.print();
         document.title = originalTitle;
-        
     });
 
     let currentUrl = window.location.href;
@@ -497,107 +496,6 @@
     loadAllData();
     initModal();
     checkLoginStatus();
-</script>
-</body>
-</html>
-<!DOCTYPE html>
-<html lang="my">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Madrasah QR Code (Correct URL)</title>
-    <style>
-        body {
-            background: #fef8e7;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            margin: 0;
-            padding: 20px;
-            font-family: 'Padauk', system-ui, sans-serif;
-        }
-        .qr-card {
-            background: white;
-            border-radius: 32px;
-            padding: 24px 20px;
-            text-align: center;
-            box-shadow: 0 12px 25px rgba(0,0,0,0.1);
-            border: 1px solid #d4af37;
-            max-width: 360px;
-            width: 100%;
-        }
-        h3 {
-            color: #1e4620;
-            margin-bottom: 15px;
-        }
-        canvas {
-            width: 180px;
-            height: 180px;
-            display: block;
-            margin: 10px auto;
-            background: white;
-            border-radius: 16px;
-        }
-        .url {
-            background: #f3f3e8;
-            padding: 8px 12px;
-            border-radius: 60px;
-            font-size: 0.7rem;
-            word-break: break-all;
-            font-family: monospace;
-            margin: 12px 0;
-            color: #2c5f2d;
-        }
-        button {
-            background: #2c5f2d;
-            border: none;
-            color: white;
-            padding: 8px 20px;
-            border-radius: 40px;
-            cursor: pointer;
-            font-weight: bold;
-            margin-top: 5px;
-        }
-        button:hover {
-            background: #1e4620;
-        }
-        .check {
-            font-size: 0.7rem;
-            margin-top: 15px;
-            color: #b57c1c;
-        }
-    </style>
-</head>
-<body>
-<div class="qr-card">
-    <h3>📘 မဒ်ရစဟ်သအ်လီမုလ်ကုရ်အာန်</h3>
-    <canvas id="qrCanvas" width="180" height="180"></canvas>
-    <div class="url">
-        🔗 madrasahtaleemulquran98-collab.github.io/madrasahtaleemulquran02/
-    </div>
-    <button id="downloadBtn">📥 QR ကုဒ် ဒေါင်းလုဒ်</button>
-    <div class="check">
-        ✅ မှန်ကန်သော URL (စာလုံးပေါင်း သေချာစစ်ပါ။)<br>
-        🌐 https://madrasahtaleemulquran98-collab.github.io/madrasahtaleemulquran02/
-    </div>
-</div>
-
-<script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.0/build/qrcode.min.js"></script>
-<script>
-    const CORRECT_URL = "https://madrasahtaleemulquran98-collab.github.io/madrasahtaleemulquran02/";
-    const canvas = document.getElementById("qrCanvas");
-
-    QRCode.toCanvas(canvas, CORRECT_URL, { width: 180, margin: 2 }, function(err) {
-        if (err) console.error(err);
-    });
-
-    document.getElementById("downloadBtn").addEventListener("click", function() {
-        const link = document.createElement("a");
-        link.download = "madrasah_qrcode_correct.png";
-        link.href = canvas.toDataURL();
-        link.click();
-    });
 </script>
 </body>
 </html>
