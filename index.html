@@ -124,91 +124,330 @@
         .table input.mark-input { width: 85px; text-align: center; }
         .rank-cell { font-weight: bold; text-align: center; }
         @media (max-width: 768px) {
-            body { padding: 8px; }
-            .strip-h { height: 20px; font-size: 0.7rem; }
-            .strip-v { width: 26px; font-size: 0.7rem; }
-            .main-content { padding: 1rem; }
-            .table input.mark-input { width: 65px; }
-            .table th:nth-child(2), .table td:nth-child(2) { min-width: 150px; }
+        <!DOCTYPE html>
+<html lang="my">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Madrasah Taleemul Quran - စာမေးပွဲရလဒ် (ပုံနှိပ်ရန်အတွက်)</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Padauk:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-        /* PRINT – only change: add footer, fix dark background */
+        body {
+            font-family: 'Padauk', 'Noto Sans Myanmar', sans-serif;
+            background: #fef8e7;
+            padding: 20px;
+        }
+        .print-container {
+            max-width: 1300px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 24px;
+            padding: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        .school-header {
+            text-align: center;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #d4af37;
+        }
+        .school-name {
+            font-size: 1.6rem;
+            font-weight: bold;
+            color: #1e4620;
+        }
+        .school-details {
+            font-size: 0.85rem;
+            color: #2c2b28;
+            margin-top: 5px;
+        }
+        .class-selector {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .class-selector select {
+            padding: 8px 20px;
+            border-radius: 40px;
+            border: 1px solid #2c5f2d;
+            font-size: 1rem;
+            background: white;
+        }
+        .table-container {
+            overflow-x: auto;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.75rem;
+            margin-top: 15px;
+        }
+        th, td {
+            border: 1px solid #aaa;
+            padding: 6px 4px;
+            text-align: center;
+            vertical-align: middle;
+        }
+        th {
+            background-color: #2c5f2d;
+            color: white;
+            font-weight: bold;
+            padding: 8px 4px;
+        }
+        td:first-child, th:first-child { width: 4%; }
+        td:nth-child(2), th:nth-child(2) { width: 18%; text-align: left; }
+        td:last-child, th:last-child { width: 7%; }
+        td:nth-last-child(2), th:nth-last-child(2) { width: 8%; }
+        .student-name {
+            font-weight: 500;
+            text-align: left;
+        }
+        .total-cell {
+            font-weight: bold;
+            background-color: #f9f2e0;
+        }
+        .rank-cell {
+            font-weight: bold;
+            background-color: #e6f0e6;
+        }
+        .print-btn {
+            text-align: center;
+            margin: 20px 0 10px;
+        }
+        button {
+            background: #2c5f2d;
+            border: none;
+            color: white;
+            padding: 10px 25px;
+            border-radius: 40px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #1e4620;
+        }
+
+        /* PRINT STYLES - single page guarantee */
         @media print {
-            .no-print, .border-frame, .navbar, .hero, #subjects, #enroll, #contact, footer, .admin-bar, .qr-card, .btn, .modal, .border-wrapper > .border-frame {
-                display: none !important;
+            body {
+                background: white;
+                padding: 0;
+                margin: 0;
             }
-            body, .border-wrapper, .main-content, .section-card, #results, .table, .table th, .table td, .table-responsive {
-                background: white !important;
-                background-color: white !important;
-                color: black !important;
-                -webkit-print-color-adjust: exact !important;
-                print-color-adjust: exact !important;
+            .print-container {
+                box-shadow: none;
+                padding: 0.1in;
+                max-width: 100%;
+                margin: 0;
+            }
+            .class-selector, .print-btn, .no-print {
+                display: none !important;
             }
             @page {
                 size: landscape;
                 margin: 0.2in;
             }
-            .border-wrapper, .main-content, #results {
-                width: 100% !important;
-                padding: 0 !important;
-                margin: 0 !important;
-                box-shadow: none !important;
-                border: none !important;
+            .school-header {
+                margin-bottom: 10px;
+                padding-bottom: 6px;
             }
-            .table-responsive {
-                overflow: visible !important;
-                width: 100% !important;
+            .school-name {
+                font-size: 1.3rem;
             }
-            .table {
-                width: 100% !important;
-                font-size: 7.5pt !important;
-                border-collapse: collapse !important;
-                table-layout: fixed !important;
+            table {
+                font-size: 0.65rem !important;
                 page-break-inside: avoid;
-            }
-            .table th, .table td {
-                border: 1px solid #000 !important;
-                padding: 4px 2px !important;
-                word-break: break-word !important;
-                vertical-align: middle !important;
-                background: white !important;
-                color: black !important;
-            }
-            .table th:nth-child(2), .table td:nth-child(2) {
-                width: 28% !important;
-                min-width: 120px !important;
-            }
-            .table input.mark-input, .student-name {
-                border: none !important;
-                background: transparent !important;
-                font-size: 7.5pt !important;
-                width: 38px !important;
-                min-width: 30px !important;
-                text-align: center !important;
-                padding: 0 !important;
-                color: black !important;
-            }
-            .student-name {
                 width: 100% !important;
-                text-align: left !important;
             }
-            .table td:nth-last-child(2), .table th:nth-last-child(2),
-            .table td:last-child, .table th:last-child {
-                width: 10% !important;
-                text-align: center !important;
+            th, td {
+                padding: 3px 2px !important;
             }
-            .table tbody tr {
+            /* Prevent any row from breaking across pages */
+            tr {
                 page-break-inside: avoid;
+                break-inside: avoid;
             }
-            /* ONLY ADDED: print footer */
-            .print-footer {
-                display: block !important;
-                margin-top: 15px !important;
-                text-align: center !important;
-                font-size: 9pt !important;
-                border-top: 1px solid #ccc !important;
-                padding-top: 6px !important;
-                font-family: 'Padauk', 'Noto Sans Myanmar', sans-serif !important;
-                color: black !important;
+            thead {
+                display: table-header-group;
+            }
+            /* Adjust column widths for print */
+            th:first-child, td:first-child { width: 3% !important; }
+            th:nth-child(2), td:nth-child(2) { width: 16% !important; }
+            th:last-child, td:last-child { width: 6% !important; }
+            td:nth-last-child(2), th:nth-last-child(2) { width: 7% !important; }
+        }
+    </style>
+</head>
+<body>
+<div class="print-container">
+    <div class="school-header">
+        <div class="school-name">မဒ်ရစဟ်သအ်လီမုလ်ကုရ်အာန် - Madrasah Taleemul Quran</div>
+        <div class="school-details">
+            📞 09952018168 &nbsp;|&nbsp; ✉️ madrasahtaleemulquran98@gmail.com<br>
+            🕌 အမှတ်(6)၊ 98လမ်း၊ လွတ်လပ်ရေးရပ်ကွက်၊ မင်္ဂလာတောင်ညွန့်မြို့နယ်၊ ရန်ကုန်တိုင်း။
+        </div>
+    </div>
+
+    <div class="class-selector no-print">
+        <label for="classSelect">အတန်းရွေးပါ : </label>
+        <select id="classSelect"></select>
+    </div>
+
+    <div class="table-container" id="tableContainer">
+        <div class="alert alert-info text-center">အတန်းတစ်ခုခုကို ရွေးပါ။</div>
+    </div>
+
+    <div class="print-btn no-print">
+        <button id="printButton">🖨️ ပုံနှိပ်မည် (Print)</button>
+    </div>
+</div>
+
+<script>
+    // ---------- မူရင်း subjectsByClass နှင့် classNames (index.html မှ အတိအကျ) ----------
+    const subjectsByClass = {
+        1: ["ယစ္စရ်နလ် ကုရ်အာန်", "စူရဟ်အလွတ်ကျက်ခြင်း", "မစ္စနူးန် ဒိုအာ", "ဟဒီးဆ်တော်", "ကုရ်အာနီ ဒိုအာ", "ဂုဏ်တော်များ", "ကလိမဟ်", "အလ်မုဖရ်ရဒါးသ်"],
+        2: ["ယစ္စရ်နလ် ကုရ်အာန်", "ဂုဏ်တော်", "စူရဟ်အလွတ်ကျက်မှတ်ခြင်း", "ကလိမဟ်", "ဟဒီးဆ်တော်", "အူရ်ဒူ ကာအေဒဟ်", "မစ္စနှုးန် ဒိုအာ", "အလ်မွဖ်ဖရ်ရဒါးသ်", "ကုရ်အာနီ ဒိုအာ"],
+        3: ["ယစ္စရ်နလ် ကုရ်အာန်", "စူရဟ်အလွတ်ကျက်မှတ်ခြင်း", "ဟဒီးဆ်တော်", "မစ္စနှုးန် ဒိုအာ", "ကုရ်အာနီ ဒိုအာ", "ဂုဏ်တော်", "ကလိမဟ်", "အူရ်ဒူ ကာအေဒဟ်", "အလ်မွဖ်ဖရ်ရဒါးသ်"],
+        4: ["ကုရ်အာန်", "စူရဟ်အလွတ်ကျက်မှတ်ခြင်း", "သခ်ျဝီးဒ်", "ဟဒီးဆ်တော်", "မစ္စနူးန်ဒိုအာ", "ကုရ်အာနီဒိုအာ", "ဂုဏ်တော်", "ကလိမဟ်", "အုရ်ဒူပဟ်လီ", "အလ်မုဖရ်ရဒါးသ်"],
+        5: ["ကုရ်အာန်", "စူရဟ်အလွတ်ကျက်မှတ်ခြင်း", "သဂ်ျဝီးဒ်", "အစ္စလာမ့်အခြေပြ(အတွဲ၁)", "သအ်လီမုလ်အစ္စလာမ်(အတွဲ၁)", "အစ္စလာမီးအာဒါးဘ်(အတွဲ၁)", "ကျွန်ုပ်တို့၏မြတ်နဗီ", "အုရ်ဒူ ပဟ်လီ", "သအ်လီမုလ်အစ္စလာမ်(အတွဲ၁)အုရ်ဒူ", "အလ်မုဖရ်ရဒါးသ်"],
+        6: ["ကုရ်အာန်", "စူရဟ်အလွတ်ကျက်မှတ်ခြင်း", "သခ်ျဝီးဒ်", "အစ္စလာမ့်အခြေပြ အတွဲ 2", "သအ်လီမုလ်အစ္စလာမ် အတွဲ 2", "အစ္စလာမီအားဒါဘ် အတွဲ 2", "ကျွန်ုပ်တို့မြတ်ရစူလ်", "အခြေခံသမိုင်း", "မစာအေလေနမားဇ်", "အုရ်ဒူ ဒူစရီး", "သအ်လီမုလ်အစ္စလာမ် အုရ်ဒူ", "အလ်မုဖရ်ရဒါးသ်"],
+        7: ["ကုရ်အာန်", "စူရဟ်အလွတ်ကျက်မှတ်ခြင်း", "သဂ်ျဝီးဒ်", "အခြေပြ အတွဲ3", "သအ်လီမုလ်အစ္စလာမ် အတွဲ3", "အစ္စလာမီ့အကာအီးဒ်", "တမန်တော်မြတ်၏အတ္ထုပ္ပတ္တိ", "နဗီတမန်တော်များအတ္ထုပ္ပတ္တိ", "ဟမာရေးအီမာန်", "ဟမာရေး နဗီ", "သအ်လီမုလ်အစ္စလာမ် အတွဲ3 အုရ်ဒူ", "အုရ်ဒူ သီစရီး"],
+        8: ["ကုရ်အာန်", "စူရဟ်အလွတ်ကျက်မှတ်ခြင်း", "သဂ်ျဝီးဒ်", "အစ္စလာမ့်အခြေပြ အတွဲ4", "သအ်လီမုလ်အစ္စလာမ် အတွဲ4", "တမန်တော်မြတ်အတ္ထုပ္ပတ္တိ", "နဗီတမန်တော်များအကြောင်း", "ကုရ်အာန်ရှင်းလင်းချက်", "ဟာမာရေးရစူလ်", "သအ်လီမုလ်အစ္စလာမ် 4 အုရ်ဒူ", "အစ္စလာမီ့အကာအီးဒ် အုရ်ဒူ", "မစာအေလေနမားဇ် အုရ်ဒူ", "ဒူရူစွလ်လုဂါးသ်", "အုရ်ဒူ ကြောဝ်ထီး"]
+    };
+    const classNames = {1:"မူကြိုတန်း",2:"သူငယ်တန်းလေး",3:"သူငယ်တန်းကြီး",4:"ပထမတန်းလေး",5:"ပထမတန်းကြီး",6:"ဒုတိယတန်း",7:"တတိယတန်း",8:"စတုတ္ထတန်း"};
+    const ROWS = 15;  // ကျောင်းသား အများဆုံး 15 ယောက်
+
+    // localStorage မှ data ဖတ်ရန် (မူရင်း index.html နှင့် တူညီသော key)
+    let currentData = {};
+
+    function loadResultsData() {
+        const saved = localStorage.getItem("examResultsData");
+        if(saved) {
+            currentData = JSON.parse(saved);
+        } else {
+            // အချက်အလက်မရှိပါက ဗလာဒေတာဖန်တီးပေး
+            for(let c=1; c<=8; c++) {
+                let subsLen = subjectsByClass[c].length;
+                let studentData = [];
+                for(let i=0;i<ROWS;i++) studentData.push({ studentName: "", marks: new Array(subsLen).fill("") });
+                currentData[c] = { studentData };
+            }
+        }
+    }
+
+    // အဆင့်တွက်ရန် function
+    function computeRanks(studentData) {
+        let withTotals = studentData.map((stu, idx) => {
+            let total = 0;
+            for(let m of stu.marks) {
+                let v = parseFloat(m);
+                if(!isNaN(v) && v>=0 && v<=100) total += v;
+            }
+            return { idx, total };
+        });
+        withTotals.sort((a,b) => b.total - a.total);
+        let ranks = new Array(studentData.length).fill(null);
+        let currentRank = 1;
+        for(let i=0; i<withTotals.length; i++) {
+            if(i>0 && withTotals[i].total === withTotals[i-1].total) {
+                ranks[withTotals[i].idx] = currentRank;
+            } else {
+                currentRank = i+1;
+                ranks[withTotals[i].idx] = currentRank;
+            }
+        }
+        return ranks;
+    }
+
+    function renderTable(classId) {
+        const container = document.getElementById("tableContainer");
+        if(!classId || !subjectsByClass[classId]) {
+            container.innerHTML = '<div class="alert alert-info text-center">အတန်းတစ်ခုခုကို ရွေးပါ။</div>';
+            return;
+        }
+        const subjects = subjectsByClass[classId];
+        let studentData = currentData[classId]?.studentData || [];
+        while(studentData.length < ROWS) studentData.push({ studentName: "", marks: new Array(subjects.length).fill("") });
+
+        const ranks = computeRanks(studentData);
+
+        let html = `<div class="table-responsive">
+            <table class="result-table" id="resultTable">
+                <thead>
+                    <tr>
+                        <th>စဉ်</th>
+                        <th>ကျောင်းသားအမည်</th>`;
+        subjects.forEach(s => html += `<th>${s}</th>`);
+        html += `<th>စုစုပေါင်း</th><th>အဆင့်</th></tr></thead><tbody>`;
+
+        for(let i=0; i<ROWS; i++) {
+            let stu = studentData[i];
+            let marks = stu.marks;
+            let total = 0;
+            for(let m of marks) {
+                let v = parseFloat(m);
+                if(!isNaN(v) && v>=0 && v<=100) total += v;
+            }
+            let rank = (ranks[i] !== null) ? ranks[i] : "-";
+            html += `<tr>
+                        <td>${i+1}</td>
+                        <td class="student-name">${escapeHtml(stu.studentName) || "—"}</td>`;
+            for(let s=0; s<subjects.length; s++) {
+                let val = (marks[s] !== undefined && marks[s] !== "") ? marks[s] : "—";
+                html += `<td>${val}</td>`;
+            }
+            html += `<td class="total-cell">${total.toFixed(2)}</td>
+                     <td class="rank-cell">${rank}</td>
+                     </tr>`;
+        }
+        html += `</tbody></table></div>`;
+        container.innerHTML = html;
+    }
+
+    function escapeHtml(str) {
+        if(!str) return "";
+        return str.replace(/[&<>]/g, function(m) {
+            if(m === '&') return '&amp;';
+            if(m === '<') return '&lt;';
+            if(m === '>') return '&gt;';
+            return m;
+        });
+    }
+
+    // Populate class dropdown
+    function initClassSelect() {
+        const select = document.getElementById("classSelect");
+        for(let id in classNames) {
+            let opt = document.createElement("option");
+            opt.value = id;
+            opt.textContent = classNames[id];
+            select.appendChild(opt);
+        }
+        select.addEventListener("change", function() {
+            renderTable(this.value);
+        });
+        // default load first class
+        if(select.options.length > 0) {
+            select.value = "1";
+            renderTable("1");
+        }
+    }
+
+    // Print button
+    document.getElementById("printButton").addEventListener("click", function() {
+        window.print();
+    });
+
+    loadResultsData();
+    initClassSelect();
+</script>
+</body>
+</html>
             }
         }
     </style>
