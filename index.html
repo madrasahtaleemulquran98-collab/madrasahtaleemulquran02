@@ -174,113 +174,91 @@
         .class-selector select {
             padding: 8px 20px;
             border-radius: 40px;
-            border: 1px solid #2c5f2d;
-            font-size: 1rem;
-            background: white;
-        }
-        .table-container {
-            overflow-x: auto;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 0.75rem;
-            margin-top: 15px;
-        }
-        th, td {
-            border: 1px solid #aaa;
-            padding: 6px 4px;
-            text-align: center;
-            vertical-align: middle;
-        }
-        th {
-            background-color: #2c5f2d;
-            color: white;
-            font-weight: bold;
-            padding: 8px 4px;
-        }
-        td:first-child, th:first-child { width: 4%; }
-        td:nth-child(2), th:nth-child(2) { width: 18%; text-align: left; }
-        td:last-child, th:last-child { width: 7%; }
-        td:nth-last-child(2), th:nth-last-child(2) { width: 8%; }
-        .student-name {
-            font-weight: 500;
-            text-align: left;
-        }
-        .total-cell {
-            font-weight: bold;
-            background-color: #f9f2e0;
-        }
-        .rank-cell {
-            font-weight: bold;
-            background-color: #e6f0e6;
-        }
-        .print-btn {
-            text-align: center;
-            margin: 20px 0 10px;
-        }
-        button {
-            background: #2c5f2d;
-            border: none;
-            color: white;
-            padding: 10px 25px;
-            border-radius: 40px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-        button:hover {
-            background: #1e4620;
-        }
-
-        /* PRINT STYLES - single page guarantee */
-        @media print {
-            body {
-                background: white;
-                padding: 0;
-                margin: 0;
-            }
-            .print-container {
-                box-shadow: none;
-                padding: 0.1in;
-                max-width: 100%;
-                margin: 0;
-            }
-            .class-selector, .print-btn, .no-print {
-                display: none !important;
-            }
-            @page {
-                size: landscape;
-                margin: 0.2in;
-            }
-            .school-header {
-                margin-bottom: 10px;
-                padding-bottom: 6px;
-            }
-            .school-name {
-                font-size: 1.3rem;
-            }
-            table {
-                font-size: 0.65rem !important;
-                page-break-inside: avoid;
-                width: 100% !important;
-            }
-            th, td {
-                padding: 3px 2px !important;
-            }
-            /* Prevent any row from breaking across pages */
-            tr {
-                page-break-inside: avoid;
-                break-inside: avoid;
-            }
-            thead {
-                display: table-header-group;
-            }
-            /* Adjust column widths for print */
-            th:first-child, td:first-child { width: 3% !important; }
-            th:nth-child(2), td:nth-child(2) { width: 16% !important; }
-            th:last-child, td:last-child { width: 6% !important; }
-            td:nth-last-child(2), th:nth-last-child(2) { width: 7% !important; }
-        }
+@media print {
+    .no-print, .border-frame, .navbar, .hero, #subjects, #enroll, #contact, footer, .admin-bar, .qr-card, .btn, .modal, .border-wrapper > .border-frame, .class-selector, .print-btn {
+        display: none !important;
+    }
+    body, .border-wrapper, .main-content, .section-card, #results, .table, .table th, .table td, .table-responsive, .print-container {
+        background: white !important;
+        background-color: white !important;
+        color: black !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+    @page {
+        size: landscape;
+        margin: 0.2in;
+    }
+    .border-wrapper, .main-content, #results {
+        width: 100% !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        box-shadow: none !important;
+        border: none !important;
+    }
+    .table-responsive {
+        overflow: visible !important;
+        width: 100% !important;
+    }
+    .table {
+        width: 100% !important;
+        font-size: 7pt !important;
+        border-collapse: collapse !important;
+        table-layout: fixed !important;
+        page-break-inside: avoid;
+    }
+    /* column widths for print */
+    .table th:first-child, .table td:first-child { width: 4% !important; }
+    .table th:nth-child(2), .table td:nth-child(2) { width: 18% !important; text-align: left; }
+    .table th:nth-child(n+3):nth-last-child(n+3),
+    .table td:nth-child(n+3):nth-last-child(n+3) {
+        width: auto !important;
+        min-width: 35px !important;
+    }
+    .table th:nth-last-child(2), .table td:nth-last-child(2),
+    .table th:last-child, .table td:last-child {
+        width: 7% !important;
+    }
+    .table th, .table td {
+        padding: 2px 1px !important;
+        word-break: break-word;
+    }
+    .table input.mark-input, .student-name {
+        border: none !important;
+        background: transparent !important;
+        font-size: 7pt !important;
+        width: 35px !important;
+        min-width: 25px !important;
+        text-align: center !important;
+        padding: 0 !important;
+        color: black !important;
+    }
+    .student-name {
+        width: 100% !important;
+        text-align: left !important;
+    }
+    .table tbody tr {
+        page-break-inside: avoid;
+    }
+    /* school header for print (မူရင်းကျောင်းအချက်အလက် print မှာပါစေ) */
+    .school-header-print {
+        display: block !important;
+        text-align: center;
+        margin-bottom: 10px;
+        font-size: 10pt;
+    }
+    .print-footer {
+        display: block !important;
+        margin-top: 10px;
+        text-align: center;
+        font-size: 8pt;
+        border-top: 1px solid #ccc;
+        padding-top: 4px;
+    }
+}။ <div><strong>မဒ်ရစဟ်သအ်လီမုလ်ကုရ်အာန် - Madrasah Taleemul Quran</strong><br>
+📞 09952018168 &nbsp;|&nbsp; ✉️ madrasahtaleemulquran98@gmail.com<br>
+🕌 အမှတ်(6)၊ 98လမ်း၊ လွတ်လပ်ရေးရပ်ကွက်၊ မင်္ဂလာတောင်ညွန့်မြို့နယ်၊ ရန်ကုန်တိုင်း။
+</div>
     </style>
 </head>
 <body>
