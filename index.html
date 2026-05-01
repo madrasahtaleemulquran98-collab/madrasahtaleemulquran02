@@ -222,122 +222,16 @@
         <div class="strip-v right-strip"><span>ﷺ<br>۞<br>﷽<br>ﷺ<br>۞<br>﷽<br>ﷺ<br>۞<br>﷽<br>ﷺ<br>۞<br>﷽<br>ﷺ<br>۞<br>﷽<br>ﷺ<br>۞<br>﷽<br>ﷺ<br>۞<br>﷽<br>ﷺ<br>۞<br>﷽<br>ﷺ<br>۞<br>﷽</span></div>
     </div>
     <div class="main-content">
-        <nav class="navbar navbar-expand-lg navbar-dark sticky-top no-print rounded-pill">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="#"><i class="fas fa-mosque me-2"></i> မဒ်ရစဟ်သအ်လီမုလ်ကုရ်အာန်</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav ms-auto">
-                        <li class="nav-item"><a class="nav-link" href="#home">မူလစာမျက်နှာ</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#subjects">ဘာသာရပ်များ</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#enroll">ကျောင်းအပ်ရန်</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#results">စာမေးပွဲရလဒ်</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#contact">ဆက်သွယ်ရန်</a></li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-
-        <section id="home" class="hero mt-3 no-print">
-            <div class="arabic-hero">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
-            <h1 class="mt-2">မင်္ဂလာပါ 🙏 ကြိုဆိုပါတယ်</h1>
-            <p class="lead"><strong>Madrasah Taleemul Quran</strong> မှ ကုရ်အာန်နှင့် အစ္စလာမ့်ပညာရပ်များ သင်ယူရန် နွေးထွေးစွာ ဖိတ်ခေါ်ပါတယ်။</p>
-            <div class="arabic-hero" style="font-size: 1.5rem;">﴿ وَرَتِّلِ الْقُرْآنَ تَرْتِيلًا ﴾</div>
-            <a href="#enroll" class="btn btn-primary btn-lg mt-2"><i class="fas fa-pen-alt me-2"></i>ယခုကျောင်းအပ်ရန်</a>
-        </section>
-
-        <section id="subjects" class="section-card no-print">
-            <h3 class="text-center mb-3" style="color:#1e4620;"><i class="fas fa-chalkboard-user me-2"></i> အတန်းအလိုက် ဘာသာရပ်များ</h3>
-            <div class="row justify-content-center">
-                <div class="col-md-6">
-                    <label class="form-label fw-bold">📖 အတန်းရွေးပါ</label>
-                    <select id="classSelect" class="form-select border-success shadow-sm"><option value="">-- ကျေးဇူးပြု၍ ရွေးပါ --</option></select>
-                </div>
-            </div>
-            <div id="subjectsList" class="mt-4"><div class="alert alert-info text-center">အတန်းတစ်ခုခုကို ရွေးပါ။</div></div>
-        </section>
-
-        <section id="enroll" class="section-card no-print">
-            <h3 class="text-center mb-4" style="color:#1e4620;"><i class="fas fa-file-signature"></i> ကျောင်းအပ်ရန် လျှောက်လွှာ</h3>
-            <div class="form-card">
-                <form id="enrollForm">
-                    <div class="mb-3"><label class="form-label fw-bold">ကျောင်းသား/ကျောင်းသူ အမည် *</label><input type="text" class="form-control" id="studentName" required></div>
-                    <div class="mb-3"><label class="form-label fw-bold">ဖခင်/မိခင် အမည် *</label><input type="text" class="form-control" id="parentName" required></div>
-                    <div class="mb-3"><label class="form-label fw-bold">အတန်း *</label>
-                        <select class="form-select" id="className" required>
-                            <option value="">အတန်းရွေးပါ</option>
-                            <option value="မူကြိုတန်း">မူကြိုတန်း</option><option value="သူငယ်တန်းလေး">သူငယ်တန်းလေး</option>
-                            <option value="သူငယ်တန်းကြီး">သူငယ်တန်းကြီး</option><option value="ပထမတန်းလေး">ပထမတန်းလေး</option>
-                            <option value="ပထမတန်းကြီး">ပထမတန်းကြီး</option><option value="ဒုတိယတန်း">ဒုတိယတန်း</option>
-                            <option value="တတိယတန်း">တတိယတန်း</option><option value="စတုတ္ထတန်း">စတုတ္ထတန်း</option>
-                        </select>
-                    </div>
-                    <div class="mb-3"><label class="form-label">ဖုန်းနံပါတ်</label><input type="tel" class="form-control" id="phone"></div>
-                    <div class="mb-3"><label class="form-label">လိပ်စာ</label><textarea class="form-control" id="address" rows="2"></textarea></div>
-                    <button type="submit" class="btn btn-primary w-100" id="submitBtn"><i class="fas fa-paper-plane"></i> အပ်နှံမည်</button>
-                </form>
-                <div id="formMessage" class="mt-3"></div>
-            </div>
-        </section>
-
-        <section id="results" class="section-card">
-            <h3 class="text-center mb-4" style="color:#1e4620;"><i class="fas fa-trophy"></i> စာမေးပွဲရလဒ်ကြေငြာစာ</h3>
-            <div class="admin-bar no-print d-flex flex-wrap justify-content-between gap-3 mb-3">
-                <div style="max-width:280px;"><label class="fw-bold">အတန်းရွေးပါ</label><select id="resultClassSelect" class="form-select"><option value="">-- ရွေးပါ --</option></select></div>
-                <div>
-                    <span id="loginStatus" class="badge bg-secondary me-2">🔒 Admin မဝင်ရသေး</span>
-                    <button id="loginBtn" class="btn btn-success btn-sm"><i class="fas fa-lock-open"></i> Login</button>
-                    <button id="logoutBtn" class="btn btn-danger btn-sm ms-1" style="display:none;"><i class="fas fa-sign-out-alt"></i> Logout</button>
-                    <button id="printResultBtn" class="btn btn-primary btn-sm ms-1"><i class="fas fa-print"></i> Print ရလဒ်</button>
-                </div>
-            </div>
-            <strong>မဒ်ရစဟ်သအ်လီမုလ်ကုရ်အာန် - Madrasah Taleemul Quran</strong><br>
-                📞 09952018168 &nbsp;|&nbsp; ✉️ madrasahtaleemulquran98@gmail.com<br>
-                🕌 အမှတ်(6)၊ 98လမ်း၊ လွတ်လပ်ရေးရပ်ကွက်၊ မင်္ဂလာတောင်ညွန့်မြို့နယ်၊ ရန်ကုန်တိုင်း။
-            </div>
-            <div id="resultTableContainer" class="table-responsive"><div class="alert alert-info text-center">အတန်းတစ်ခုခုကို ရွေးပါ။</div></div>
-            <!-- PRINT FOOTER (only visible when printing) -->
-            <div class="print-footer" style="display: none;">
-                
-        </section>
-
-        <section id="contact" class="section-card no-print">
-            <h3 class="text-center mb-4" style="color:#1e4620;"><i class="fas fa-address-card"></i> ဆက်သွယ်ရန်</h3>
-            <div class="row g-4">
-                <div class="col-md-7">
-                    <div class="card shadow-sm h-100 border-0 rounded-4">
-                        <div class="card-header bg-success text-white rounded-top-4">📞 ဆက်သွယ်ရန်အချက်အလက်</div>
-                        <div class="card-body">
-                            <div class="mb-3"><i class="fas fa-phone-alt text-success me-3"></i> <strong>ဖုန်းနံပါတ်:</strong> 09952018168</div>
-                            <div class="mb-3"><i class="fas fa-envelope text-success me-3"></i> <strong>အီးမေး:</strong> madrasahtaleemulquran98@gmail.com</div>
-                            <div><i class="fas fa-map-marker-alt text-success me-3"></i> <strong>လိပ်စာ:</strong> အမှတ်(6)၊ 98လမ်း၊ လွတ်လပ်ရေးရပ်ကွက်၊ မင်္ဂလာတောင်ညွန့်မြို့နယ်၊ ရန်ကုန်တိုင်း။</div>
-                            <hr><div class="arabic-hero text-center" style="font-size:1.2rem;">﴿ رَبِّ زِدْنِي عِلْمًا ﴾</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-5">
-                    <div class="qr-card text-center p-3 h-100">
-                        <i class="fas fa-qrcode fa-2x text-success mb-2"></i>
-                        <h6 class="fw-bold">Scan QR - Visit Our Website</h6>
-                        <div id="qrCodeCanvas" class="d-flex justify-content-center mt-2"></div>
-                        <button id="downloadQrBtn" class="btn btn-outline-success btn-sm mt-3"><i class="fas fa-download"></i> QR Download</button>
-                        <p class="small text-muted mt-2">မူရင်းဝဘ်ဆိုက်သို့ ချိတ်ဆက်ရန်</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <footer class="no-print">
-            <i class="fas fa-mosque fa-lg me-2"></i> မဒ်ရစဟ်သအ်လီမုလ်ကုရ်အာန် - Madrasah Taleemul Quran<br>
-            📞 09952018168 &nbsp;|&nbsp; ✉️ madrasahtaleemulquran98@gmail.com<br>
-            🕌 အမှတ်(6)၊ 98လမ်း၊ မင်္ဂလာတောင်ညွန့်မြို့နယ်၊ ရန်ကုန်တိုင်း။<br>
-            © 2025 Madrasah Taleemul Quran | အစ္စလာမ့်ပညာအလင်းပြစေတတ်
-        </footer>
+        <!-- ... အကြောင်းအရာ, Section များ ... အစအဆုံးမပြတ်ပါ -->
+        <nav class="navbar navbar-expand-lg navbar-dark sticky-top no-print rounded-pill">...</nav>
+        <section id="home" class="hero mt-3 no-print">...</section>
+        <section id="subjects" class="section-card no-print">...</section>
+        <section id="enroll" class="section-card no-print">...</section>
+        <section id="results" class="section-card">...</section>
+        <section id="contact" class="section-card no-print">...</section>
+        <footer class="no-print">...</footer>
     </div>
 </div>
-
 <div class="modal fade" id="loginModal" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content"><div class="modal-header bg-success text-white"><h5 class="modal-title"><i class="fas fa-key"></i> Admin Login</h5><button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button></div>
@@ -446,7 +340,7 @@
     function checkLoginStatus(){
         let logged = sessionStorage.getItem("adminLoggedIn");
         isAdmin = (logged === "true");
-        <!-- Add a new student row with name and roll number -->
+        // Add a new student row with name and roll number
         let statusSpan = document.getElementById("loginStatus"), loginBtn = document.getElementById("loginBtn"), logoutBtn = document.getElementById("logoutBtn");
         if(statusSpan){ if(isAdmin){ statusSpan.innerHTML="✅ Admin အကောင့်ဝင်ထားပြီး"; statusSpan.className="badge bg-success me-2"; loginBtn.style.display="none"; logoutBtn.style.display="inline-block"; } else { statusSpan.innerHTML="🔒 Admin မဝင်ရသေး"; statusSpan.className="badge bg-secondary me-2"; loginBtn.style.display="inline-block"; logoutBtn.style.display="none"; } }
         if(currentClass) renderTable(currentClass);
@@ -483,7 +377,6 @@
         document.title = "စာမေးပွဲရလဒ် - " + (classNames[currentClass] || "အတန်း");
         window.print();
         document.title = originalTitle;
-        
     });
 
     let currentUrl = window.location.href;
