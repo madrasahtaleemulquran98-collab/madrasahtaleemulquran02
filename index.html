@@ -197,38 +197,44 @@
         max-height: none !important;
         overflow: visible !important;
         margin: 0 !important;
-        padding: 0 !important;
+@media print {
+    /* ပုံနှိပ်မပြရမည့်အရာ */
+    .no-print, .border-frame, .navbar, .hero, #subjects, #enroll, #contact, footer, .admin-bar, .qr-card, .btn, .modal, .border-wrapper > .border-frame,
+    .strip-h, .strip-v {
+        display: none !important;
     }
 
-    /* ဇယား wrapper ကိုလည်း flex နဲ့ ဆန့် */
-    .table-responsive {
-        flex-grow: 1 !important;
-        display: flex !important;
-        flex-direction: column !important;
-        overflow: visible !important;
+    /* အဖြူခံ */
+    body, .border-wrapper, .main-content, .section-card, #results, .table, .table th, .table td, .table-responsive,
+    .table tbody, .table tr, .table tbody td, .table thead th {
+        background: white !important;
+        background-color: white !important;
+        color: black !important;
+        print-color-adjust: exact;
+        -webkit-print-color-adjust: exact;
     }
 
+    /* စာမျက်နှာပုံစံ */
+    @page {
+        size: landscape;
+        margin: 0.15in;
+    }
+
+    /* ဇယားကို အလယ်ရောက်အောင် */
     .table {
-        width: 100% !important;
+        width: auto !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
         font-size: 8pt !important;
         border-collapse: collapse !important;
         table-layout: auto !important;
         page-break-inside: avoid !important;
-        /* margin auto က အလယ်ချိတ် */
-        margin-left: auto !important;
-        margin-right: auto !important;
     }
 
     .table th, .table td {
         border: 1px solid black !important;
         padding: 3px 2px !important;
-        word-break: break-word;
-        line-height: 1.2 !important;  /* အတန်းအမြင့်ကို လျှော့ပြီး တစ်မျက်နှာတည်းကျအောင် */
-    }
-
-    .table th:nth-child(2), .table td:nth-child(2) {
-        width: 25% !important;
-        min-width: 100px !important;
+        line-height: 1.2 !important;
     }
 
     .table input.mark-input, .student-name {
@@ -236,40 +242,48 @@
         background: transparent !important;
         font-size: 7pt !important;
         width: 36px !important;
-        min-width: 28px !important;
         text-align: center !important;
-        padding: 0 !important;
         color: black !important;
     }
 
-    .student-name {
-        width: 100% !important;
-        text-align: left !important;
-    }
-
-    .table td:nth-last-child(2), .table th:nth-last-child(2),
-    .table td:last-child, .table th:last-child {
-        width: 8% !important;
+    /* ========== ကျောင်းလိပ်စာ – စာမျက်နှာတိုင်းရဲ့ အပေါ်ဆုံးမှာ ကပ်ပြီးပေါ် ========== */
+    .print-footer {
+        display: block !important;
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        background: white !important;
+        border-bottom: 1px solid black !important;
         text-align: center !important;
+        font-size: 8pt !important;
+        padding: 4px !important;
+        z-index: 999;
     }
 
-    .table tbody tr {
-        page-break-inside: avoid !important;
+    /* ဇယားပေါ်မှာ header မဖုံးအောင် အပေါ်ကနေရာချန် */
+    .main-content {
+        margin-top: 35pt !important;
+        padding-top: 0 !important;
     }
-.print-footer {
-    position: fixed !important;
-    top: 0 !important;        /* bottom:0 ကို top:0 ပြောင်း */
-    left: 0 !important;
-    right: 0 !important;
-    margin: 0 !important;
-    padding: 4px !important;
-    background: white !important;
-    border-bottom: 1px solid black !important;  /* အောက်ခြေလိုင်းထည့် (ချင်ရင်) */
-    text-align: center !important;
-    font-size: 8pt !important;
-    ...
-}
-    
+
+    /* အောက်ခြေနေရာလွတ် လုံးဝမဖြစ်စေရန် */
+    html, body, .border-wrapper, .main-content, #results {
+        height: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+    .main-content {
+        display: flex !important;
+        flex-direction: column !important;
+    }
+    #resultTableContainer {
+        flex-grow: 1 !important;
+        display: flex !important;
+        flex-direction: column !important;
+    }
+    .table-responsive {
+        flex-grow: 1 !important;
     }
 }
     </style>
