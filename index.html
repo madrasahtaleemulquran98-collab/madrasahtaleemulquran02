@@ -506,7 +506,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Madrasah QR Code (GitHub)</title>
+    <title>Madrasah QR Code</title>
     <style>
         body {
             background: #fef8e7;
@@ -516,44 +516,38 @@
             min-height: 100vh;
             margin: 0;
             padding: 20px;
-            font-family: 'Padauk', 'Segoe UI', sans-serif;
+            font-family: 'Padauk', system-ui, sans-serif;
         }
-        .qr-container {
+        .qr-card {
             background: white;
             border-radius: 32px;
-            padding: 30px 25px 25px 25px;
+            padding: 24px 20px;
             text-align: center;
-            box-shadow: 0 12px 28px rgba(0,0,0,0.1);
+            box-shadow: 0 12px 25px rgba(0,0,0,0.1);
             border: 1px solid #d4af37;
-            max-width: 320px;
+            max-width: 340px;
             width: 100%;
         }
         h3 {
             color: #1e4620;
             margin-bottom: 15px;
-            font-size: 1.4rem;
-        }
-        .qr-canvas-wrapper {
-            background: white;
-            padding: 10px;
-            display: inline-block;
-            border-radius: 20px;
-            margin: 10px 0;
         }
         canvas {
             width: 180px;
             height: 180px;
             display: block;
-            margin: 0 auto;
+            margin: 10px auto;
+            background: white;
+            border-radius: 16px;
         }
-        .url-text {
-            background: #f0f0e0;
+        .url {
+            background: #f3f3e8;
             padding: 8px 12px;
-            border-radius: 40px;
-            font-size: 0.8rem;
+            border-radius: 60px;
+            font-size: 0.7rem;
             word-break: break-all;
             font-family: monospace;
-            margin: 15px 0;
+            margin: 12px 0;
             color: #2c5f2d;
         }
         button {
@@ -562,50 +556,45 @@
             color: white;
             padding: 8px 20px;
             border-radius: 40px;
-            font-size: 1rem;
             cursor: pointer;
-            margin-top: 8px;
-            transition: 0.2s;
+            font-weight: bold;
+            margin-top: 5px;
         }
         button:hover {
             background: #1e4620;
-            transform: scale(1.02);
         }
-        .note {
+        .small {
             font-size: 0.7rem;
             color: #6c757d;
-            margin-top: 20px;
+            margin-top: 15px;
         }
     </style>
 </head>
 <body>
-<div class="qr-container">
-    <h3>📘 Madrasah Taleemul Quran</h3>
-    <div class="qr-canvas-wrapper">
-        <canvas id="qrCanvas" width="180" height="180"></canvas>
-    </div>
-    <div class="url-text">
-        🔗 madrasahtaleemulquran02.github.io
+<div class="qr-card">
+    <h3>📘 မဒ်ရစဟ်သအ်လီမုလ်ကုရ်အာန်</h3>
+    <canvas id="qrCanvas" width="180" height="180"></canvas>
+    <div class="url">
+        🔗 madasahtaleemulquran98-collab.github.io/madasahtaleemulquran02/
     </div>
     <button id="downloadBtn">📥 QR ကုဒ် ဒေါင်းလုဒ်</button>
-    <div class="note">
-        * ဤ QR ကုဒ်သည် GitHub Pages လိပ်စာကို ညွှန်ပြပါသည်။
+    <div class="small">
+        * စကင်ဖတ်ပြီး ဝဘ်ဆိုက်သို့ တိုက်ရိုက်သွားရောက်နိုင်ပါသည်။
     </div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.0/build/qrcode.min.js"></script>
 <script>
-    const GITHUB_URL = "https://madrasahtaleemulquran02.github.io";
-    const canvas = document.getElementById('qrCanvas');
-    
-    QRCode.toCanvas(canvas, GITHUB_URL, { width: 180, margin: 2 }, function (error) {
-        if (error) console.error(error);
-        else console.log('QR code generated for GitHub Pages');
+    const SITE_URL = "https://madasahtaleemulquran98-collab.github.io/madasahtaleemulquran02/";
+    const canvas = document.getElementById("qrCanvas");
+
+    QRCode.toCanvas(canvas, SITE_URL, { width: 180, margin: 2 }, function(err) {
+        if (err) console.error(err);
     });
 
-    document.getElementById('downloadBtn').addEventListener('click', function() {
-        const link = document.createElement('a');
-        link.download = 'madrasah_github_qrcode.png';
+    document.getElementById("downloadBtn").addEventListener("click", function() {
+        const link = document.createElement("a");
+        link.download = "madrasah_qrcode.png";
         link.href = canvas.toDataURL();
         link.click();
     });
