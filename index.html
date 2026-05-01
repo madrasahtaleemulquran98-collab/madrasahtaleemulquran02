@@ -293,13 +293,14 @@
                     <button id="printResultBtn" class="btn btn-primary btn-sm ms-1"><i class="fas fa-print"></i> Print ရလဒ်</button>
                 </div>
             </div>
-            <div id="resultTableContainer" class="table-responsive"><div class="alert alert-info text-center">အတန်းတစ်ခုခုကို ရွေးပါ။</div></div>
-            <!-- PRINT FOOTER (only visible when printing) -->
-            <div class="print-footer" style="display: none;">
-                <strong>မဒ်ရစဟ်သအ်လီမုလ်ကုရ်အာန် - Madrasah Taleemul Quran</strong><br>
+            <strong>မဒ်ရစဟ်သအ်လီမုလ်ကုရ်အာန် - Madrasah Taleemul Quran</strong><br>
                 📞 09952018168 &nbsp;|&nbsp; ✉️ madrasahtaleemulquran98@gmail.com<br>
                 🕌 အမှတ်(6)၊ 98လမ်း၊ လွတ်လပ်ရေးရပ်ကွက်၊ မင်္ဂလာတောင်ညွန့်မြို့နယ်၊ ရန်ကုန်တိုင်း။
             </div>
+            <div id="resultTableContainer" class="table-responsive"><div class="alert alert-info text-center">အတန်းတစ်ခုခုကို ရွေးပါ။</div></div>
+            <!-- PRINT FOOTER (only visible when printing) -->
+            <div class="print-footer" style="display: none;">
+                
         </section>
 
         <section id="contact" class="section-card no-print">
@@ -445,6 +446,7 @@
     function checkLoginStatus(){
         let logged = sessionStorage.getItem("adminLoggedIn");
         isAdmin = (logged === "true");
+        <!-- Add a new student row with name and roll number -->
         let statusSpan = document.getElementById("loginStatus"), loginBtn = document.getElementById("loginBtn"), logoutBtn = document.getElementById("logoutBtn");
         if(statusSpan){ if(isAdmin){ statusSpan.innerHTML="✅ Admin အကောင့်ဝင်ထားပြီး"; statusSpan.className="badge bg-success me-2"; loginBtn.style.display="none"; logoutBtn.style.display="inline-block"; } else { statusSpan.innerHTML="🔒 Admin မဝင်ရသေး"; statusSpan.className="badge bg-secondary me-2"; loginBtn.style.display="inline-block"; logoutBtn.style.display="none"; } }
         if(currentClass) renderTable(currentClass);
@@ -481,7 +483,7 @@
         document.title = "စာမေးပွဲရလဒ် - " + (classNames[currentClass] || "အတန်း");
         window.print();
         document.title = originalTitle;
-        <!-- Add a new student row with name and roll number -->
+        
     });
 
     let currentUrl = window.location.href;
