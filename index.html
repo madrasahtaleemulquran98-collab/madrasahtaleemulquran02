@@ -506,7 +506,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Madrasah QR Code</title>
+    <title>Madrasah QR Code (Correct URL)</title>
     <style>
         body {
             background: #fef8e7;
@@ -525,7 +525,7 @@
             text-align: center;
             box-shadow: 0 12px 25px rgba(0,0,0,0.1);
             border: 1px solid #d4af37;
-            max-width: 340px;
+            max-width: 360px;
             width: 100%;
         }
         h3 {
@@ -563,10 +563,10 @@
         button:hover {
             background: #1e4620;
         }
-        .small {
+        .check {
             font-size: 0.7rem;
-            color: #6c757d;
             margin-top: 15px;
+            color: #b57c1c;
         }
     </style>
 </head>
@@ -575,26 +575,27 @@
     <h3>📘 မဒ်ရစဟ်သအ်လီမုလ်ကုရ်အာန်</h3>
     <canvas id="qrCanvas" width="180" height="180"></canvas>
     <div class="url">
-        🔗 madasahtaleemulquran98-collab.github.io/madasahtaleemulquran02/
+        🔗 madrasahtaleemulquran98-collab.github.io/madrasahtaleemulquran02/
     </div>
     <button id="downloadBtn">📥 QR ကုဒ် ဒေါင်းလုဒ်</button>
-    <div class="small">
-        * စကင်ဖတ်ပြီး ဝဘ်ဆိုက်သို့ တိုက်ရိုက်သွားရောက်နိုင်ပါသည်။
+    <div class="check">
+        ✅ မှန်ကန်သော URL (စာလုံးပေါင်း သေချာစစ်ပါ။)<br>
+        🌐 https://madrasahtaleemulquran98-collab.github.io/madrasahtaleemulquran02/
     </div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.0/build/qrcode.min.js"></script>
 <script>
-    const SITE_URL = "https://madasahtaleemulquran98-collab.github.io/madasahtaleemulquran02/";
+    const CORRECT_URL = "https://madrasahtaleemulquran98-collab.github.io/madrasahtaleemulquran02/";
     const canvas = document.getElementById("qrCanvas");
 
-    QRCode.toCanvas(canvas, SITE_URL, { width: 180, margin: 2 }, function(err) {
+    QRCode.toCanvas(canvas, CORRECT_URL, { width: 180, margin: 2 }, function(err) {
         if (err) console.error(err);
     });
 
     document.getElementById("downloadBtn").addEventListener("click", function() {
         const link = document.createElement("a");
-        link.download = "madrasah_qrcode.png";
+        link.download = "madrasah_qrcode_correct.png";
         link.href = canvas.toDataURL();
         link.click();
     });
