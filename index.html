@@ -240,13 +240,80 @@
     .table input.mark-input, .student-name {
         border: none !important;
         background: transparent !important;
+@media print {
+    /* ပုံနှိပ်မပြရမည့်အရာ */
+    .no-print, .border-frame, .navbar, .hero, #subjects, #enroll, #contact, footer, .admin-bar, .qr-card, .btn, .modal, .border-wrapper > .border-frame,
+    .strip-h, .strip-v {
+        display: none !important;
+    }
+
+    /* အဖြူခံ */
+    body, .border-wrapper, .main-content, .section-card, #results, .table, .table th, .table td, .table-responsive,
+    .table tbody, .table tr, .table tbody td, .table thead th {
+        background: white !important;
+        background-color: white !important;
+        color: black !important;
+        print-color-adjust: exact;
+        -webkit-print-color-adjust: exact;
+    }
+
+    /* စာမျက်နှာပုံစံ */
+    @page {
+        size: landscape;
+        margin: 0.1in;
+    }
+
+    /* ဇယားကို အလယ်ရောက်အောင်နှင့် အပြည့်မဖြတ်ရန် */
+    .table {
+        width: auto !important;
+        max-width: 100% !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        font-size: 8pt !important;
+        border-collapse: collapse !important;
+        table-layout: auto !important;
+        page-break-inside: avoid !important;
+    }
+
+    .table th, .table td {
+        border: 1px solid black !important;
+        padding: 3px 2px !important;
+        line-height: 1.2 !important;
+        word-break: break-word;
+    }
+
+    .table th:nth-child(2), .table td:nth-child(2) {
+        width: 25% !important;
+        min-width: 100px !important;
+    }
+
+    .table input.mark-input, .student-name {
+        border: none !important;
+        background: transparent !important;
         font-size: 7pt !important;
         width: 36px !important;
+        min-width: 28px !important;
         text-align: center !important;
+        padding: 0 !important;
         color: black !important;
     }
 
-    /* ========== ကျောင်းလိပ်စာ – စာမျက်နှာတိုင်းရဲ့ အပေါ်ဆုံးမှာ ကပ်ပြီးပေါ် ========== */
+    .student-name {
+        width: 100% !important;
+        text-align: left !important;
+    }
+
+    .table td:nth-last-child(2), .table th:nth-last-child(2),
+    .table td:last-child, .table th:last-child {
+        width: 8% !important;
+        text-align: center !important;
+    }
+
+    .table tbody tr {
+        page-break-inside: avoid !important;
+    }
+
+    /* ===== ကျောင်းလိပ်စာ – စာမျက်နှာအပေါ်ဆုံးမှာ ကပ်ပေါ် ===== */
     .print-footer {
         display: block !important;
         position: fixed !important;
@@ -261,13 +328,13 @@
         z-index: 999;
     }
 
-    /* ဇယားပေါ်မှာ header မဖုံးအောင် အပေါ်ကနေရာချန် */
+    /* ဇယားပေါ်မှာ header မဖုံးအောင် နေရာချန် */
     .main-content {
-        margin-top: 35pt !important;
+        margin-top: 30pt !important;
         padding-top: 0 !important;
     }
 
-    /* အောက်ခြေနေရာလွတ် လုံးဝမဖြစ်စေရန် */
+    /* အောက်ခြေနေရာလွတ် လုံးဝမကျန်စေရန် */
     html, body, .border-wrapper, .main-content, #results {
         height: 100% !important;
         margin: 0 !important;
@@ -281,9 +348,12 @@
         flex-grow: 1 !important;
         display: flex !important;
         flex-direction: column !important;
+        overflow: visible !important;
     }
     .table-responsive {
         flex-grow: 1 !important;
+        overflow: visible !important;
+        width: 100% !important;
     }
 }
     </style>
