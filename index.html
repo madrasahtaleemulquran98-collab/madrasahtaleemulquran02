@@ -131,299 +131,121 @@
             .table input.mark-input { width: 65px; }
             .table th:nth-child(2), .table td:nth-child(2) { min-width: 150px; }
         }
-        /* PRINT – only change: add footer, fix white background */
+
+        /* ========== PRINT MEDIA (တစ်ခုတည်းသာ) ========== */
         @media print {
-    /* ပုံနှိပ်မပြသင့်တဲ့ အရာအားလုံး */
-    .no-print, .border-frame, .navbar, .hero, #subjects, #enroll, #contact, footer, .admin-bar, .qr-card, .btn, .modal, .border-wrapper > .border-frame,
-    #results .mb-2,   /* လိပ်စာကြော်ငြာကို ထပ်ဖျောက် */
-    .print-footer {
-        display: none !important;
-    }
+            .no-print, .border-frame, .navbar, .hero, #subjects, #enroll, #contact, footer, .admin-bar, .qr-card, .btn, .modal, .border-wrapper > .border-frame,
+            .strip-h, .strip-v {
+                display: none !important;
+            }
 
-    /* ဇယားနဲ့ ပတ်ဝန်းကျင် အားလုံး အဖြူခံ */
-    body, .border-wrapper, .main-content, .section-card, #results, .table, .table th, .table td, .table-responsive,
-    .table tbody, .table tr, .table tbody td, .table thead th {
-        background: white !important;
-        background-color: white !important;
-        color: black !important;
-        -webkit-print-color-adjust: exact !important;
-        print-color-adjust: exact !important;
-    }
+            body, .border-wrapper, .main-content, .section-card, #results, .table, .table th, .table td, .table-responsive,
+            .table tbody, .table tr, .table tbody td, .table thead th {
+                background: white !important;
+                background-color: white !important;
+                color: black !important;
+                print-color-adjust: exact;
+                -webkit-print-color-adjust: exact;
+            }
 
-    /* စာမျက်နှာ နေရာချိန်ညှိချက် – တစ်မျက်နှာတည်းဖြစ်အောင် */
-    @page {
-        size: landscape;
-        margin: 0.15in;
-    }
+            @page {
+                size: landscape;
+                margin: 0.1in;
+            }
 
-    body {
-        margin: 0;
-        padding: 0;
-    }
+            body {
+                margin: 0;
+                padding: 0;
+            }
 
-    .border-wrapper, .main-content, #results {
-        width: 100% !important;
-        padding: 0 !important;
-        margin: 0 !important;
-        box-shadow: none !important;
-        border: none !important;
-    }
+            .border-wrapper, .main-content, #results {
+                width: 100% !important;
+                padding: 0 !important;
+                margin: 0 !important;
+                box-shadow: none !important;
+                border: none !important;
+            }
 
-    /* ဇယားကို စာမျက်နှာမခွဲစေရန် */
-    .table-responsive {
-        overflow: visible !important;
-        width: 100% !important;
-    }
+            .table-responsive {
+                overflow: visible !important;
+                width: 100% !important;
+            }
 
-    .table {
-        width: 100% !important;
-        font-size: 7.5pt !important;
-        border-collapse: collapse !important;
-        table-layout: fixed !important;
-        page-break-inside: avoid !important;
-        page-break-before: avoid !important;
-        page-break-after: avoid !important;
-    }
+            .table {
+                width: 100% !important;
+                font-size: 7pt !important;
+                border-collapse: collapse !important;
+                table-layout: auto !important;
+                page-break-inside: avoid !important;
+                page-break-before: avoid !important;
+                page-break-after: avoid !important;
+            }
 
-    .table th, .table td {
-        border: 1px solid #000 !important;
-        padding: 4px 2px !important;
-        word-break: break-word !important;
-        vertical-align: middle !important;
-        background: white !important;
-        color: black !important;
-    }
+            .table th, .table td {
+                border: 1px solid black !important;
+                padding: 3px 2px !important;
+                word-break: break-word;
+            }
 
-    .table th:nth-child(2), .table td:nth-child(2) {
-        width: 28% !important;
-        min-width: 120px !important;
-    }
+            .table th:nth-child(2), .table td:nth-child(2) {
+                width: 25% !important;
+                min-width: 100px !important;
+            }
 
-    .table input.mark-input, .student-name {
-        border: none !important;
-        background: transparent !important;
-        font-size: 7.5pt !important;
-        width: 38px !important;
-        min-width: 30px !important;
-        text-align: center !important;
-        padding: 0 !important;
-        color: black !important;
-    }
+            .table input.mark-input, .student-name {
+                border: none !important;
+                background: transparent !important;
+                font-size: 7pt !important;
+                width: 36px !important;
+                min-width: 28px !important;
+                text-align: center !important;
+                padding: 0 !important;
+                color: black !important;
+            }
 
-    .student-name {
-        width: 100% !important;
-        text-align: left !important;
-    }
+            .student-name {
+                width: 100% !important;
+                text-align: left !important;
+            }
 
-    .table td:nth-last-child(2), .table th:nth-last-child(2),
-@media print {
-    /* ပုံနှိပ်မပြရမည့် အရာများအားလုံး */
-    .no-print, .border-frame, .navbar, .hero, #subjects, #enroll, #contact, footer, .admin-bar, .qr-card, .btn, .modal, .border-wrapper > .border-frame,
-    #results .mb-2 {
-        display: none !important;
-    }
+            .table td:nth-last-child(2), .table th:nth-last-child(2),
+            .table td:last-child, .table th:last-child {
+                width: 8% !important;
+                text-align: center !important;
+            }
 
-    /* နောက်ခံများ အားလုံးကို အဖြူချပါ */
-    body, .border-wrapper, .main-content, .section-card, #results, .table, .table th, .table td, .table-responsive,
-    .table tbody, .table tr, .table tbody td, .table thead th {
-        background: white !important;
-        background-color: white !important;
-        color: black !important;
-        -webkit-print-color-adjust: exact !important;
-        print-color-adjust: exact !important;
-    }
+            .table tbody tr {
+                page-break-inside: avoid !important;
+            }
 
-    /* စာမျက်နှာ ချိန်ညှိချက် – တစ်မျက်နှာတည်းအတွက် */
-    @page {
-        size: landscape;
-        margin: 0.2in;
-    }
+            /* အောက်ခြေ ကျောင်းလိပ်စာ – စာမျက်နှာတိုင်း၏အောက်ဆုံးတွင် ကပ် */
+            .print-footer {
+                display: block !important;
+                position: fixed !important;
+                bottom: 0 !important;
+                left: 0 !important;
+                right: 0 !important;
+                margin: 0 !important;
+                padding: 4px !important;
+                background: white !important;
+                border-top: 1px solid black !important;
+                text-align: center !important;
+                font-size: 8pt !important;
+                font-family: 'Padauk', 'Noto Sans Myanmar', sans-serif !important;
+                color: black !important;
+                z-index: 999;
+            }
 
-    body {
-        margin: 0;
-        padding: 0;
-    }
+            .main-content {
+                margin-bottom: 30pt !important;
+                padding-bottom: 10pt !important;
+            }
 
-    .border-wrapper, .main-content, #results {
-        width: 100% !important;
-        padding: 0 !important;
-        margin: 0 !important;
-        box-shadow: none !important;
-        border: none !important;
-    }
-
-    .table-responsive {
-        overflow: visible !important;
-        width: 100% !important;
-    }
-
-    .table {
-        width: 100% !important;
-        font-size: 7pt !important;   /* စာလုံးအရွယ်အစား လျှော့ချပါ */
-        border-collapse: collapse !important;
-        table-layout: auto !important;  /* fixed မဟုတ်ဘဲ auto သုံးပါ → အတန်းမကျိုး */
-        page-break-inside: avoid !important;
-        page-break-before: avoid !important;
-        page-break-after: avoid !important;
-    }
-
-    .table th, .table td {
-        border: 1px solid #000 !important;
-        padding: 3px 2px !important;
-        word-break: break-word !important;
-        vertical-align: middle !important;
-        background: white !important;
-        color: black !important;
-    }
-
-    .table th:nth-child(2), .table td:nth-child(2) {
-        width: 25% !important;
-        min-width: 100px !important;
-    }
-
-    .table input.mark-input, .student-name {
-        border: none !important;
-        background: transparent !important;
-        font-size: 7pt !important;
-        width: 36px !important;
-        min-width: 28px !important;
-        text-align: center !important;
-        padding: 0 !important;
-        color: black !important;
-    }
-
-    .student-name {
-        width: 100% !important;
-        text-align: left !important;
-    }
-
-    .table td:nth-last-child(2), .table th:nth-last-child(2),
-    .table td:last-child, .table th:last-child {
-        width: 8% !important;
-        text-align: center !important;
-@media print {
-    /* ပုံနှိပ်မပြရမည့် အရာအားလုံး – ဇယားနှင့် print-footer မှလွဲ */
-    .no-print, .border-frame, .navbar, .hero, #subjects, #enroll, #contact, footer, .admin-bar, .qr-card, .btn, .modal, .border-wrapper > .border-frame,
-    #results .mb-2 {
-        display: none !important;
-    }
-
-    /* နောက်ခံများ အားလုံး အဖြူ */
-    body, .border-wrapper, .main-content, .section-card, #results, .table, .table th, .table td, .table-responsive,
-    .table tbody, .table tr, .table tbody td, .table thead th {
-        background: white !important;
-        background-color: white !important;
-        color: black !important;
-        print-color-adjust: exact !important;
-        -webkit-print-color-adjust: exact !important;
-    }
-
-    /* စာမျက်နှာအရွယ် */
-    @page {
-        size: landscape;
-        margin: 0.1in;
-    }
-
-    body {
-        margin: 0;
-        padding: 0;
-    }
-
-    /* ဇယားပတ်လည်အကွက်များ */
-    .border-wrapper, .main-content, #results {
-        width: 100% !important;
-        padding: 0 !important;
-        margin: 0 !important;
-        box-shadow: none !important;
-        border: none !important;
-    }
-
-    .table-responsive {
-        overflow: visible !important;
-        width: 100% !important;
-    }
-
-    /* ဇယားကို တစ်မျက်နှာတည်းကျအောင် သတ်မှတ် */
-    .table {
-        width: 100% !important;
-        font-size: 7pt !important;   /* လိုအပ်ပါက 6.5pt ထိ လျှော့နိုင် */
-        border-collapse: collapse !important;
-        table-layout: auto !important;
-        page-break-inside: avoid !important;
-        page-break-before: avoid !important;
-        page-break-after: avoid !important;
-    }
-
-    .table th, .table td {
-        border: 1px solid #000 !important;
-        padding: 3px 2px !important;
-        word-break: break-word !important;
-        vertical-align: middle !important;
-        background: white !important;
-        color: black !important;
-    }
-
-    .table th:nth-child(2), .table td:nth-child(2) {
-        width: 25% !important;
-        min-width: 100px !important;
-    }
-
-    .table input.mark-input, .student-name {
-        border: none !important;
-        background: transparent !important;
-        font-size: 7pt !important;
-        width: 36px !important;
-        min-width: 28px !important;
-        text-align: center !important;
-        padding: 0 !important;
-        color: black !important;
-    }
-
-    .student-name {
-        width: 100% !important;
-        text-align: left !important;
-    }
-
-    .table td:nth-last-child(2), .table th:nth-last-child(2),
-    .table td:last-child, .table th:last-child {
-        width: 8% !important;
-        text-align: center !important;
-    }
-
-    .table tbody tr {
-        page-break-inside: avoid !important;
-    }
-
-    /* အောက်ခြေရှိ ကျောင်းလိပ်စာ – စာမျက်နှာတိုင်း၏အောက်ဆုံးတွင် ကပ် */
-    .print-footer {
-        display: block !important;
-        position: fixed !important;
-        bottom: 0 !important;
-        left: 0 !important;
-        right: 0 !important;
-        margin: 0 !important;
-        padding: 4px !important;
-        background: white !important;
-        border-top: 1px solid #000 !important;
-        text-align: center !important;
-        font-size: 8pt !important;
-        font-family: 'Padauk', 'Noto Sans Myanmar', sans-serif !important;
-        color: black !important;
-        z-index: 999;
-    }
-
-    /* footer က ဇယားကို မဖုံးစေရန် */
-    .main-content {
-        margin-bottom: 30pt !important;
-        padding-bottom: 10pt !important;
-    }
-
-    /* ဇယားရှည်လျားလျှင် အတွင်းစာမျက်နှာမခွဲ */
-    #resultTableContainer {
-        max-height: none !important;
-        overflow: visible !important;
-    }
-}
+            #resultTableContainer {
+                max-height: none !important;
+                overflow: visible !important;
+            }
+        }
     </style>
 </head>
 <body>
@@ -498,7 +320,9 @@
         <section id="results" class="section-card">
             <h3 class="text-center mb-4" style="color:#1e4620;"><i class="fas fa-trophy"></i> စာမေးပွဲရလဒ်ကြေငြာစာ</h3>
             <div class="admin-bar no-print d-flex flex-wrap justify-content-between gap-3 mb-3">
-                <div style="max-width:280px;"><label class="fw-bold">အတန်းရွေးပါ</label><select id="resultClassSelect" class="form-select"><option value="">-- ရွေးပါ --</option></select></div>
+                <div style="max-width:280px;"><label class="fw-bold">အတန်းရွေးပါ</label>
+                    <select id="resultClassSelect" class="form-select"><option value="">-- ရွေးပါ --</option></select>
+                </div>
                 <div>
                     <span id="loginStatus" class="badge bg-secondary me-2">🔒 Admin မဝင်ရသေး</span>
                     <button id="loginBtn" class="btn btn-success btn-sm"><i class="fas fa-lock-open"></i> Login</button>
@@ -506,15 +330,18 @@
                     <button id="printResultBtn" class="btn btn-primary btn-sm ms-1"><i class="fas fa-print"></i> Print ရလဒ်</button>
                 </div>
             </div>
-           </div> <!-- resultTableContainer ပိတ် -->
-    <div class="print-footer">
-        <strong>မဒ်ရစဟ်သအ်လီမုလ်ကုရ်အာန် - Madrasah Taleemul Quran</strong><br>
-        📞 09952018168 &nbsp;|&nbsp; ✉️ madrasahtaleemulquran98@gmail.com<br>
-        🕌 အမှတ်(6)၊ 98လမ်း၊ လွတ်လပ်ရေးရပ်ကွက်၊ မင်္ဂလာတောင်ညွန့်မြို့နယ်၊ ရန်ကုန်တိုင်း။
-    </div>
-</section>
-    </div>
-</section>
+            <!-- ဇယားထည့်မည့် container -->
+            <div id="resultTableContainer" class="table-responsive">
+                <div class="alert alert-info text-center">အတန်းတစ်ခုခုကို ရွေးပါ။</div>
+            </div>
+            <!-- Print Footer (စာမျက်နှာအ‌ပေတွင် ကပ်ပေါ်) -->
+            <div class="print-footer" style="display: none;">
+                <strong>မဒ်ရစဟ်သအ်လီမုလ်ကုရ်အာန် - Madrasah Taleemul Quran</strong><br>
+                📞 09952018168 &nbsp;|&nbsp; ✉️ madrasahtaleemulquran98@gmail.com<br>
+                🕌 အမှတ်(6)၊ 98လမ်း၊ လွတ်လပ်ရေးရပ်ကွက်၊ မင်္ဂလာတောင်ညွန့်မြို့နယ်၊ ရန်ကုန်တိုင်း။
+            </div>
+        </section>
+
         <section id="contact" class="section-card no-print">
             <h3 class="text-center mb-4" style="color:#1e4620;"><i class="fas fa-address-card"></i> ဆက်သွယ်ရန်</h3>
             <div class="row g-4">
@@ -532,7 +359,7 @@
             </div>
         </section>
 
-        <!-- QR Code ကို အောက်ဘက်သို့ ရွှေ့ထားပြီ -->
+        <!-- QR Code အောက်ဘက်သို့ရွှေ့ပြီးဖြစ်သည် -->
         <div class="qr-card text-center p-3 mb-4" style="max-width: 300px; margin: 0 auto; background: white; border-radius: 32px; border: 1px solid #d4af37;">
             <i class="fas fa-qrcode fa-2x text-success mb-2"></i>
             <h6 class="fw-bold">Scan QR - Visit Our Website</h6>
@@ -631,7 +458,7 @@
             for(let s=0;s<subjects.length;s++){ let val=marks[s]!==undefined?marks[s]:""; html+=`<td><input type="number" class="form-control form-control-sm mark-input" value="${val}" min="0" max="100" step="1" ${disabledAttr}></td>`; }
             html+=`<td class="fw-bold text-center">${total.toFixed(2)}</td>
                    <td class="rank-cell fw-bold text-center">${rank}</td>
-               <td>`;
+               </tr>`;
         }
         html+=`</tbody></tr></div>`;
         container.innerHTML = html;
@@ -658,7 +485,6 @@
     function checkLoginStatus(){
         let logged = sessionStorage.getItem("adminLoggedIn");
         isAdmin = (logged === "true");
-        // HTML comment ကို ဖျက်ပြီးသား – အောက်ပါ code မှန်ကန်စွာ အလုပ်လုပ်မည်
         let statusSpan = document.getElementById("loginStatus"), loginBtn = document.getElementById("loginBtn"), logoutBtn = document.getElementById("logoutBtn");
         if(statusSpan){ if(isAdmin){ statusSpan.innerHTML="✅ Admin အကောင့်ဝင်ထားပြီး"; statusSpan.className="badge bg-success me-2"; loginBtn.style.display="none"; logoutBtn.style.display="inline-block"; } else { statusSpan.innerHTML="🔒 Admin မဝင်ရသေး"; statusSpan.className="badge bg-secondary me-2"; loginBtn.style.display="inline-block"; logoutBtn.style.display="none"; } }
         if(currentClass) renderTable(currentClass);
