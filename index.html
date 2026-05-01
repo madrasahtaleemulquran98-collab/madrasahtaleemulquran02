@@ -301,13 +301,100 @@
     .table td:last-child, .table th:last-child {
         width: 8% !important;
         text-align: center !important;
+@media print {
+    /* ပုံနှိပ်မပြရမည့် အရာအားလုံး – ဇယားနှင့် print-footer မှလွဲ */
+    .no-print, .border-frame, .navbar, .hero, #subjects, #enroll, #contact, footer, .admin-bar, .qr-card, .btn, .modal, .border-wrapper > .border-frame,
+    #results .mb-2 {
+        display: none !important;
+    }
+
+    /* နောက်ခံများ အားလုံး အဖြူ */
+    body, .border-wrapper, .main-content, .section-card, #results, .table, .table th, .table td, .table-responsive,
+    .table tbody, .table tr, .table tbody td, .table thead th {
+        background: white !important;
+        background-color: white !important;
+        color: black !important;
+        print-color-adjust: exact !important;
+        -webkit-print-color-adjust: exact !important;
+    }
+
+    /* စာမျက်နှာအရွယ် */
+    @page {
+        size: landscape;
+        margin: 0.1in;
+    }
+
+    body {
+        margin: 0;
+        padding: 0;
+    }
+
+    /* ဇယားပတ်လည်အကွက်များ */
+    .border-wrapper, .main-content, #results {
+        width: 100% !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        box-shadow: none !important;
+        border: none !important;
+    }
+
+    .table-responsive {
+        overflow: visible !important;
+        width: 100% !important;
+    }
+
+    /* ဇယားကို တစ်မျက်နှာတည်းကျအောင် သတ်မှတ် */
+    .table {
+        width: 100% !important;
+        font-size: 7pt !important;   /* လိုအပ်ပါက 6.5pt ထိ လျှော့နိုင် */
+        border-collapse: collapse !important;
+        table-layout: auto !important;
+        page-break-inside: avoid !important;
+        page-break-before: avoid !important;
+        page-break-after: avoid !important;
+    }
+
+    .table th, .table td {
+        border: 1px solid #000 !important;
+        padding: 3px 2px !important;
+        word-break: break-word !important;
+        vertical-align: middle !important;
+        background: white !important;
+        color: black !important;
+    }
+
+    .table th:nth-child(2), .table td:nth-child(2) {
+        width: 25% !important;
+        min-width: 100px !important;
+    }
+
+    .table input.mark-input, .student-name {
+        border: none !important;
+        background: transparent !important;
+        font-size: 7pt !important;
+        width: 36px !important;
+        min-width: 28px !important;
+        text-align: center !important;
+        padding: 0 !important;
+        color: black !important;
+    }
+
+    .student-name {
+        width: 100% !important;
+        text-align: left !important;
+    }
+
+    .table td:nth-last-child(2), .table th:nth-last-child(2),
+    .table td:last-child, .table th:last-child {
+        width: 8% !important;
+        text-align: center !important;
     }
 
     .table tbody tr {
         page-break-inside: avoid !important;
     }
 
-    /* အောက်ခြေ ပုံနှိပ်စာသား (ကျောင်းလိပ်စာ) – စာမျက်နှာတိုင်းရဲ့အောက်ခြေတွင် ကပ်ပါ */
+    /* အောက်ခြေရှိ ကျောင်းလိပ်စာ – စာမျက်နှာတိုင်း၏အောက်ဆုံးတွင် ကပ် */
     .print-footer {
         display: block !important;
         position: fixed !important;
@@ -325,13 +412,13 @@
         z-index: 999;
     }
 
-    /* ဇယားပေါ်တွင် footer က မဖုံးစေရန် */
+    /* footer က ဇယားကို မဖုံးစေရန် */
     .main-content {
-        margin-bottom: 25pt !important;
+        margin-bottom: 30pt !important;
         padding-bottom: 10pt !important;
     }
 
-    /* စာမျက်နှာနှစ်ပိုင်းမကျော်စေရန် */
+    /* ဇယားရှည်လျားလျှင် အတွင်းစာမျက်နှာမခွဲ */
     #resultTableContainer {
         max-height: none !important;
         overflow: visible !important;
@@ -419,21 +506,13 @@
                     <button id="printResultBtn" class="btn btn-primary btn-sm ms-1"><i class="fas fa-print"></i> Print ရလဒ်</button>
                 </div>
             </div>
-            <div class="mb-2">
-                <strong>မဒ်ရစဟ်သအ်လီမုလ်ကုရ်အာန် - Madrasah Taleemul Quran</strong><br>
-                📞 09952018168 &nbsp;|&nbsp; ✉️ madrasahtaleemulquran98@gmail.com<br>
-                🕌 အမှတ်(6)၊ 98လမ်း၊ လွတ်လပ်ရေးရပ်ကွက်၊ မင်္ဂလာတောင်ညွန့်မြို့နယ်၊ ရန်ကုန်တိုင်း။
-            </div>
-            <div id="resultTableContainer" class="table-responsive"><div class="alert alert-info text-center">အတန်းတစ်ခုခုကို ရွေးပါ။</div></div>
-            <!-- PRINT FOOTER (only visible when printing) -->
-            <div class="print-footer" style="display: none;"></div>
-        </section>
-    </div> <!-- resultTableContainer ပိတ် -->
-    <!-- PRINT FOOTER (စာမျက်နှာတိုင်းရဲ့အ‌ပေါ်တွင် ပေါ်မည်) -->
+           </div> <!-- resultTableContainer ပိတ် -->
     <div class="print-footer">
-        မဒ်ရစဟ်သအ်လီမုလ်ကုရ်အာန် - Madrasah Taleemul Quran<br>
+        <strong>မဒ်ရစဟ်သအ်လီမုလ်ကုရ်အာန် - Madrasah Taleemul Quran</strong><br>
         📞 09952018168 &nbsp;|&nbsp; ✉️ madrasahtaleemulquran98@gmail.com<br>
-        🕌 အမှတ်(6)၊ 98လမ်း၊ မင်္ဂလာတောင်ညွန့်မြို့နယ်၊ ရန်ကုန်တိုင်း။
+        🕌 အမှတ်(6)၊ 98လမ်း၊ လွတ်လပ်ရေးရပ်ကွက်၊ မင်္ဂလာတောင်ညွန့်မြို့နယ်၊ ရန်ကုန်တိုင်း။
+    </div>
+</section>
     </div>
 </section>
         <section id="contact" class="section-card no-print">
