@@ -217,7 +217,15 @@
             .table tbody tr {
                 page-break-inside: avoid !important;
             }
-
+                z-index: 999;
+            }
+            
+#resultTableContainer .table-responsive {
+    height: 100% !important;
+}
+#resultTableContainer table {
+    height: 100% !important;
+}
             .print-footer {
                 display: block !important;
                 position: fixed !important;
@@ -232,15 +240,7 @@
                 font-size: 12pt !important;
                 font-family: 'Padauk', 'Noto Sans Myanmar', sans-serif !important;
                 color: black !important;
-                z-index: 999;
-            }
-            
-#resultTableContainer .table-responsive {
-    height: 100% !important;
-}
-#resultTableContainer table {
-    height: 100% !important;
-}
+
             .main-content {
                 margin-bottom: 30pt !important;
                 padding-bottom: 10pt !important;
