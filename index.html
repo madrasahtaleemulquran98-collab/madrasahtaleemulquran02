@@ -217,19 +217,7 @@
             .table tbody tr {
                 page-break-inside: avoid !important;
             }
-  /* ========== ဇယားကို စာမျက်နှာအပြည့်ဆန့်ရန် (flex) ========== */
-    .main-content {
-        min-height: 100vh !important;
-        display: flex !important;
-        flex-direction: column !important;
-    }
 
-    #resultTableContainer {
-        flex: 1 !important;
-        display: flex !important;
-    
-    }        
-            /* အောက်ခြေ ကျောင်းလိပ်စာ – စာမျက်နှာတိုင်း၏အောက်ဆုံးတွင် ကပ် */
             .print-footer {
                 display: block !important;
                 position: fixed !important;
@@ -246,7 +234,13 @@
                 color: black !important;
                 z-index: 999;
             }
-
+            
+#resultTableContainer .table-responsive {
+    height: 100% !important;
+}
+#resultTableContainer table {
+    height: 100% !important;
+}
             .main-content {
                 margin-bottom: 30pt !important;
                 padding-bottom: 10pt !important;
