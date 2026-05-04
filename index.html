@@ -217,7 +217,17 @@
             .table tbody tr {
                 page-break-inside: avoid !important;
             }
-
+@media print {
+    .main-content {
+        min-height: 100vh !important;
+        display: flex !important;
+        flex-direction: column !important;
+    }
+    #resultTableContainer {
+        flex: 1 !important;
+    }
+}
+            
             /* အောက်ခြေ ကျောင်းလိပ်စာ – စာမျက်နှာတိုင်း၏အောက်ဆုံးတွင် ကပ် */
             .print-footer {
                 display: block !important;
@@ -230,7 +240,7 @@
                 background: white !important;
                 border-top: 1px solid black !important;
                 text-align: center !important;
-                font-size: 8pt !important;
+                font-size: 12pt !important;
                 font-family: 'Padauk', 'Noto Sans Myanmar', sans-serif !important;
                 color: black !important;
                 z-index: 999;
