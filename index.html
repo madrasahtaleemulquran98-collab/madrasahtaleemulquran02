@@ -496,16 +496,38 @@
     }
     
     function attachEvents(classId){
-        const rows = document.querySelectorAll("#resultTable tbody tr");
-        const studentData = currentData[classId]?.studentData;
-        if(!studentData) return;
-        rows.forEach((row, idx)=>{
-            let nameInp = row.querySelectorAll(".student-name");
-            let marksInps = row.querySelectorAll(".mark-input");
-            if(nameInp) nameInp.addEventListener("change", function(){ studentData[idx].studentName = this.value; saveCurrentClassData(classId, studentData); renderTable(classId); });
-            marksInps.forEach((inp, subIdx)=>{ inp.addEventListener("change", function(){ let val = this.value===""?"":parseFloat(this.value); if(val===""||isNaN(val)) val=""; else val=Math.min(100,Math.max(0,val)); studentData[idx].marks[subIdx]=val; saveCurrentClassData(classId, studentData); renderTable(classId); }); });
+    const rows = document.querySelectorAll("#resultTable tbody tr");
+    const studentData = currentData[classId]?.studentData;
+    if(!studentData) return;
+    
+    rows.forEach((row, idx)=>{
+        // ✅ querySelector (တစ်ခုပဲ) — array မဟုတ်
+        let nameInp = row.querySelector(".student-name");
+        
+        // ✅ name input မှာ event listener တပ်ရန်
+        if(nameInp) {
+            nameInp.addEventListener("change", function(){ 
+                studentData[idx].studentName = this.value; 
+                saveCurrentClassData(classId, studentData); 
+                renderTable(classId); 
+            });
+        }
+        
+        // ✅ marks input တွေအတွက် (querySelectorAll + forEach)
+        let marksInps = row.querySelectorAll(".mark-input");
+        marksInps.forEach((inp, subIdx)=>{ 
+            inp.addEventListener("change", function(){ 
+                let val = this.value===""?"":parseFloat(this.value); 
+                if(val===""||isNaN(val)) val=""; 
+                else val=Math.min(100,Math.max(0,val)); 
+                studentData[idx].marks[subIdx]=val; 
+                saveCurrentClassData(classId, studentData); 
+                renderTable(classId); 
+            }); 
         });
-    }
+    });
+}
+
 
     function escapeHtml(str) { if(!str) return ""; return str.replace(/[&<>]/g, m=>({ '&':'&amp;', '<':'&lt;', '>':'&gt;' }[m])); }
 
