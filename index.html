@@ -134,74 +134,29 @@
         }
 
         /* ========== PRINT MEDIA (တစ်ခုတည်းသာ) ========== */
-        @media print {
-            .no-print, .border-frame, .navbar, .hero, #subjects, #enroll, #contact, footer, .admin-bar, .qr-card, .btn, .modal, .border-wrapper > .border-frame,
-            .strip-h, .strip-v     {
-                display: none !important;
-            }
+        
+@media print {
+    /* မလိုအပ်တာတွေ အကုန်ဖျောက်ခြင်း */
+    .no-print, .navbar, .hero, #subjects, #enroll, #contact, footer, .admin-bar, .qr-card {
+        display: none !important;
+    }
 
-            body::before,
-         body::after {
-          display: none !important;
-          background: none !important;
-            }
-            thead {
-    display: table-header-group !important;
+    @page {
+        size: A4 landscape; /* စာရွက်ကို အလျားလိုက်ထားခြင်း */
+        margin: 5mm;        /* ဘေးအနားသတ်ကို အနည်းဆုံးထားခြင်း */
+    }
+
+    .table {
+        font-size: 8pt !important; /* စာလုံးကို သေးပေးခြင်း */
+        table-layout: fixed !important; /* ဇယားကို အသေချာဆန့်စေရန် */
+    }
+
+    /* အမည်ကော်လံကို အကျယ်သတ်မှတ်ခြင်း */
+    .table th:nth-child(2), .table td:nth-child(2) { 
+        width: 150px !important; 
+        text-align: left !important; 
+    }
 }
-            body, .border-wrapper, .main-content, .section-card, #results, .table, .table th, .table td, .table-responsive,
-            .table tbody, .table tr, .table tbody td, .table thead th {
-                background: white !important;
-                background-color: white !important;
-                color: black !important;
-                print-color-adjust: exact;
-                -webkit-print-color-adjust: exact;
-            }
-
-            @page {
-                size: A4 landscape;
-                margin: 0;
-            }
-
-            body {
-                height: 100% !important;
-                margin: 0 !important;
-                padding: 0 !important;
-            }
-
-            .border-wrapper, .main-content, #results {
-                width: 100% !important;
-                padding: 0 !important;
-                margin: 0 !important;
-                box-shadow: none !important;
-                border: none !important;
-            }
-
-            .table-responsive {
-                overflow: visible !important;
-                width: 100% !important;
-            }
-
-            .table {
-                width: 100% !important;
-                font-size: 8.5pt !important;
-                border-collapse: collapse !important;
-                table-layout: auto !important;
-                page-break-inside: auto !important;
-                page-break-before: avoid !important;
-                page-break-after: avoid !important;
-            }
-
-            .table th, .table td {
-                border: 1px solid black !important;
-                padding: 2px 1px !important;
-                vertical-align: middle !important;
-            }
-            
-           
-            .table th:nth-child(2), .table td:nth-child(2) {
-                width: 23% !important;
-                min-width: 100px !important;
-            }
 
             .table input.mark-input, .student-name {
                 border: none !important;
