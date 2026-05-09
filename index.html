@@ -423,20 +423,42 @@
     const ROWS = 20;
     let isAdmin = false, currentClass = "";
     let currentData = {};
+     // အတန်းအလိုက် ကျောင်းသားအမည်များ (loadAllData ၏ အပေါ်တွင် ထည့်ပါ)
+const studentNamesByClass = {
+    1: ["محمد مصطفی", "شاہ ولی اللہ", "احسان", "جنید", "سعید", "برکت", "عبد الخالد", "سبحان", "كبشه بی", "صوفیہ بی", "عافیہ بی", "عینہ", "صوفيه", "عائشد بی", "صوفیہ بی", "روبینه بی", "وحيده", "عائشه بي", "عبد الرحمن", "نور بي"],
+    2: ["محمد هشام", "محمد صفوان", "محمد سفیان", "محمد", "معاذ", "حمیدہ", "ریشمہ بی", "خورشیدہ", "ام سلمہ", "فوزیہ"],
+    3: ["حمد اظهر", "محمد صلاح الدین", "محمد مصطفی", "طاهره بی", "شبنم", "ریحانہ", "ریشہ", "فاطمه", "یاسمین بی", "صفیہ بی", "فرزانہ", "صفیہ بی", "ساجدہ بی"],
+    4: ["محمد هشام", "محمد صفوان", "محمد سفیان", "محمد", "معاذ", "حمیدہ", "ریشمہ بی", "خورشدہ", "ام سلمہ", "فوزیہ"],
+    5: ["سعد", "یوسف", "عرفان", "طاهره", "ريثه بیغم", "حمیره", "فیروزہ", "ایمن", "انس", "سعد یہ", "هدا یہ"],
+    6: ["محمد سہیل", "محمد جمیل", "محمد عامر خان", "محمد احمد", "رومانہ ہی", "حمیرہ میں", "سعدیہ ہی"],
+    7: ["سلطان", "روقيه", "ثمره بی", "عائشہ بی", "ماجدہ بی", "فرحانہ بی"],
+    8: ["محمد فرحان", "برکت", "سهیل", "عرفان", "بلال", "أبو حمزه", "صفیہ بی", "أفضل", "عبد الله"]
+};
 
-    function loadAllData() {
-        const saved = localStorage.getItem("examResultsData");
-        if(saved) currentData = JSON.parse(saved);
-        else {
-            for(let c=1; c<=8; c++) {
-                let subsLen = subjectsByClass[c].length;
-                let studentData = [];
-                for(let i=0;i<ROWS;i++) studentData.push({ studentName: "", marks: new Array(subsLen).fill("") });
-                currentData[c] = { studentData };
+// loadAllData function (ဤနေရာတွင် ပြင်ဆင်ပြီး ဖြစ်စေရန်)
+function loadAllData() {
+    const saved = localStorage.getItem("examResultsData");
+    if (saved) {
+        currentData = JSON.parse(saved);
+    } else {
+        for (let c = 1; c <= 8; c++) {
+            let subsLen = subjectsByClass[c].length;
+            let studentData = [];
+            let nameList = studentNamesByClass[c] || [];
+            let maxRows = Math.max(ROWS, nameList.length);
+            for (let i = 0; i < maxRows; i++) {
+                let studentName = (i < nameList.length) ? nameList[i] : "";
+                studentData.push({
+                    studentName: studentName,
+                    marks: new Array(subsLen).fill("")
+                });
             }
-            saveAllData();
+            currentData[c] = { studentData };
         }
+        saveAllData();   // ပြင်ပရှိ saveAllData ကိုသာ ခေါ်ပါ
     }
+}
+    
     function saveAllData() { localStorage.setItem("examResultsData", JSON.stringify(currentData)); }
     function saveCurrentClassData(classId, data) { currentData[classId].studentData = data; saveAllData(); }
     function computeRanks(studentData) {
