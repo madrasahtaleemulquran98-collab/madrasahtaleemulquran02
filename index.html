@@ -124,6 +124,17 @@
         .table th:nth-child(2), .table td:nth-child(2) { min-width: 260px; width: 35%; }
         .table input.mark-input { width: 85px; text-align: center; }
         .rank-cell { font-weight: bold; text-align: center; }
+        
+        .print-header {
+            display: none;
+            text-align: center;
+            margin-bottom: 10px;
+            border-bottom: 2px solid #000;
+            padding-bottom: 10px;
+        }
+
+        .print-only { display: none; }
+
         @media (max-width: 768px) {
             body { padding: 8px; }
             .strip-h { height: 20px; font-size: 0.7rem; }
@@ -133,92 +144,99 @@
             .table th:nth-child(2), .table td:nth-child(2) { min-width: 150px; }
         }
 
-        /* ========== PRINT MEDIA (တစ်ခုတည်းသာ) ========== */
-        
-@media print {
-    /* မလိုအပ်တာတွေ အကုန်ဖျောက်ခြင်း */
-    .no-print, .navbar, .hero, #subjects, #enroll, #contact, footer, .admin-bar, .qr-card {
-        display: none !important;
-    }
-
-    @page {
-        size: A4 landscape; /* စာရွက်ကို အလျားလိုက်ထားခြင်း */
-        margin: 5mm;        /* ဘေးအနားသတ်ကို အနည်းဆုံးထားခြင်း */
-    }
-
-    .table {
-        font-size: 8pt !important; /* စာလုံးကို သေးပေးခြင်း */
-        table-layout: fixed !important; /* ဇယားကို အသေချာဆန့်စေရန် */
-    }
-
-    /* အမည်ကော်လံကို အကျယ်သတ်မှတ်ခြင်း */
-    .table th:nth-child(2), .table td:nth-child(2) { 
-        width: 150px !important; 
-        text-align: left !important; 
-    }
-}
-
-            .table input.mark-input, .student-name {
-                border: none !important;
+        /* ========== PRINT MEDIA (အဓိက ပြင်ဆင်ချက်) ========== */
+        @media print {
+            /* ၁။ အလှဆင်ထားတဲ့ ဘောင်တွေနဲ့ နောက်ခံအားလုံးကို လုံးဝဖျောက်ခြင်း */
+            * {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
                 background: transparent !important;
-               font-size: 9pt !important;
-                width: 100% !important;
-                min-width: 40px !important;
-                text-align: center !important;
+                box-shadow: none !important;
+                text-shadow: none !important;
+            }
+
+            body::before, body::after, .border-frame, .strip-h, .strip-v, 
+            .no-print, .navbar, .hero, #subjects, #enroll, #contact, footer, 
+            .admin-bar, .qr-card, .btn, .modal {
+                display: none !important;
+            }
+
+            /* ၂။ စာမျက်နှာကို အဖြူရောင်သန့်သန့်ဖြစ်စေခြင်း */
+            body {
+                background-color: white !important;
+                color: black !important;
                 padding: 0 !important;
-                color: black !important;
+                margin: 0 !important;
+                height: auto !important;
+                width: 100% !important;
             }
 
-            .student-name {
-                width: auto !important;
-                text-align: left !important;
-            }
-
-            .table td:nth-last-child(2), .table th:nth-last-child(2),
-            .table td:last-child, .table th:last-child {
-                width: 8% !important;
-                text-align: center !important;
-            }
-
-            .table tbody tr {
-             page-break-inside: auto !important;
-              }
-           .print-header {
-               position: fixed;
-              top: 0;
-              }
-           /* အောက်ခြေ ကျောင်းလိပ်စာ – စာမျက်နှာတိုင်း၏အောက်ဆုံးတွင် ကပ် */
-            .print-footer {
-                display: block !important;
-                position: relative !important;
-                margin-top: 0 !important;
-                left: 5px !important;
-                right: 5px !important;
-                margin-bottom: 10px !important; 
-                padding: 5px !important;
+            .border-wrapper, .main-content, .section-card, #results {
                 background: white !important;
-                border-top: 1px solid black !important;
-                text-align: center !important;
-                font-size: 20pt !important;
-                font-family: 'Padauk', 'Noto Sans Myanmar', sans-serif !important;
+                padding: 0 !important;
+                margin: 0 !important;
+                width: 100% !important;
+                border: none !important;
+                border-radius: 0 !important;
+            }
+
+            /* ၃။ စာရွက်အရွယ်အစားနှင့် ဘေးအနားသတ် */
+            @page {
+                size: A4 landscape;
+                margin: 5mm;
+            }
+
+            /* ၄။ ဇယားကို တစ်မျက်နှာတည်းဆံ့အောင် ကျုံ့ခြင်း */
+            .print-header {
+                display: block !important;
+                margin-bottom: 5px !important;
+            }
+
+            .print-only {
+                display: block !important;
+            }
+
+            .no-print-input {
+                display: none !important;
+            }
+
+            .table {
+                font-size: 7.5pt !important; /* စာလုံးကို ထပ်လျှော့ခြင်း */
+                width: 100% !important;
+                border-collapse: collapse !important;
+                table-layout: fixed !important;
+                margin-top: 5px !important;
+            }
+
+            .table th, .table td {
+                border: 1px solid black !important;
+                padding: 1px 2px !important;
                 color: black !important;
-                z-index: 999;
+                background: white !important;
+                line-height: 2 !important; /* စာကြောင်းကြားကျဉ်းစေရန် */
             }
 
-            .main-content, 
-                #results, .border-wrapper {
-             height: 100% !important;
-            
+            .table thead th {
+                background-color: #eee !important;
+                font-weight: bold !important;
             }
 
-            #resultTableContainer {
-                margin-top: 10px !important;
+            /* ကော်လံအကျယ်များ */
+            .table th:nth-child(1), .table td:nth-child(1) { width: 25px !important; } /* စဉ် */
+            .table th:nth-child(2), .table td:nth-child(2) { width: 140px !important; text-align: left !important; } /* အမည် */
+            .table th:last-child, .table td:last-child { width: 35px !important; } /* အဆင့် */
+            .table th:nth-last-child(2), .table td:nth-last-child(2) { width: 50px !important; } /* စုစုပေါင်း */
+
+            .student-name-text {
+                font-weight: bold !important;
+                font-size: 8.5pt !important;
+            }
         }
     </style>
 </head>
 <body>
 <div class="border-wrapper">
-    <div class="border-frame">
+    <div class="border-frame no-print">
         <div class="strip-h top-strip"><span>ﷺ ۞ ﷽ ﷺ ۞ ﷽ ﷺ ۞ ﷽ ﷺ ۞ ﷽ ﷺ ۞ ﷽ ﷺ ۞ ﷽ ﷺ ۞ ﷽ ﷺ ۞ ﷽ ﷺ ۞ ﷽ ﷺ ۞ ﷽</span></div>
         <div class="strip-h bottom-strip"><span>ﷺ ۞ ﷽ ﷺ ۞ ﷽ ﷺ ۞ ﷽ ﷺ ۞ ﷽ ﷺ ۞ ﷽ ﷺ ۞ ﷽ ﷺ ۞ ﷽ ﷺ ۞ ﷽ ﷺ ۞ ﷽ ﷺ ۞ ﷽</span></div>
         <div class="strip-v left-strip"><span>ﷺ<br>۞<br>﷽<br>ﷺ<br>۞<br>﷽<br>ﷺ<br>۞<br>﷽<br>ﷺ<br>۞<br>﷽<br>ﷺ<br>۞<br>﷽<br>ﷺ<br>۞<br>﷽<br>ﷺ<br>۞<br>﷽<br>ﷺ<br>۞<br>﷽<br>ﷺ<br>۞<br>﷽</span></div>
@@ -286,7 +304,15 @@
         </section>
 
         <section id="results" class="section-card">
-            <h3 class="text-center mb-4" style="color:#1e4620;"><i class="fas fa-trophy"></i> စာမေးပွဲရလဒ်ကြေငြာစာ</h3>
+            <div class="print-header">
+                <h2 style="margin: 0; color: #1e4620;">မဒ်ရစဟ်သအ်လီမုလ်ကုရ်အာန်</h2>
+                <h4 style="margin: 5px 0;">Madrasah Taleemul Quran</h4>
+                <p style="margin: 2px 0; font-size: 10pt;">အမှတ်(6)၊ 98လမ်း၊ လွတ်လပ်ရေးရပ်ကွက်၊ မင်္ဂလာတောင်ညွန့်မြို့နယ်၊ ရန်ကုန်တိုင်း။</p>
+                <p style="margin: 2px 0; font-size: 10pt;">📞 09952018168 | ✉️ madrasahtaleemulquran98@gmail.com</p>
+                <h5 class="mt-2" style="text-decoration: underline;">စာမေးပွဲရလဒ်ကြေငြာစာ (<span id="printClassName"></span>)</h5>
+            </div>
+
+            <h3 class="text-center mb-4 no-print" style="color:#1e4620;"><i class="fas fa-trophy"></i> စာမေးပွဲရလဒ်ကြေငြာစာ</h3>
             <div class="admin-bar no-print d-flex flex-wrap justify-content-between gap-3 mb-3">
                 <div style="max-width:280px;"><label class="fw-bold">အတန်းရွေးပါ</label>
                     <select id="resultClassSelect" class="form-select"><option value="">-- ရွေးပါ --</option></select>
@@ -299,17 +325,9 @@
                 </div>
             </div>
             
-                <div class="print-footer" style="display: none;">
-                <strong>မဒ်ရစဟ်သအ်လီမုလ်ကုရ်အာန် - Madrasah Taleemul Quran</strong><br>
-                📞 09952018168 &nbsp;|&nbsp; ✉️ madrasahtaleemulquran98@gmail.com<br>
-                🕌 အမှတ်(6)၊ 98လမ်း၊ လွတ်လပ်ရေးရပ်ကွက်၊ မင်္ဂလာတောင်ညွန့်မြို့နယ်၊ ရန်ကုန်တိုင်း။
-            </div>
-            <!-- ဇယားထည့်မည့် container -->
             <div id="resultTableContainer" class="table-responsive">
                 <div class="alert alert-info text-center">အတန်းတစ်ခုခုကို ရွေးပါ။</div>
             </div>
-            <!-- Print Footer (စာမျက်နှာအောက်ခြေတွင် ကပ်ပေါ်) -->
-            
         </section>
 
         <section id="contact" class="section-card no-print">
@@ -322,15 +340,14 @@
                             <div class="mb-3"><i class="fas fa-phone-alt text-success me-3"></i> <strong>ဖုန်းနံပါတ်:</strong> 09952018168</div>
                             <div class="mb-3"><i class="fas fa-envelope text-success me-3"></i> <strong>အီးမေး:</strong> madrasahtaleemulquran98@gmail.com</div>
                             <div><i class="fas fa-map-marker-alt text-success me-3"></i> <strong>လိပ်စာ:</strong> အမှတ်(6)၊ 98လမ်း၊ လွတ်လပ်ရေးရပ်ကွက်၊ မင်္ဂလာတောင်ညွန့်မြို့နယ်၊ ရန်ကုန်တိုင်း။</div>
-                            <hr><div class="arabic-hero text-center" style="font-size:1.2rem;">﴿ رَبِّ زِدْنِي عِلْمًا ﴾</div>
+                            <hr><div class="arabic-hero text-center" style="font-size:1.2rem;">﴿ رَبِّ زِدْنِي عِلْمံ ﴾</div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- QR Code အောက်ဘက်သို့ရွှေ့ပြီးဖြစ်သည် -->
-        <div class="qr-card text-center p-3 mb-4" style="max-width: 300px; margin: 0 auto; background: white; border-radius: 32px; border: 1px solid #d4af37;">
+        <div class="qr-card no-print text-center p-3 mb-4" style="max-width: 300px; margin: 0 auto; background: white; border-radius: 32px; border: 1px solid #d4af37;">
             <i class="fas fa-qrcode fa-2x text-success mb-2"></i>
             <h6 class="fw-bold">Scan QR - Visit Our Website</h6>
             <div id="qrCodeCanvas" class="d-flex justify-content-center mt-2"></div>
@@ -378,41 +395,40 @@
     const ROWS = 20;
     let isAdmin = false, currentClass = "";
     let currentData = {};
-     // အတန်းအလိုက် ကျောင်းသားအမည်များ (loadAllData ၏ အပေါ်တွင် ထည့်ပါ)
-const studentNamesByClass = {
-    1: ["محمد مصطفی", "شاہ ولی اللہ", "احسان", "جنید", "سعید", "برکت", "عبد الخالد", "سبحان", "كبشه بی", "صوفیہ بی", "عافیہ بی", "عینہ", "صوفيه", "عائشد بی", "صوفیہ بی", "روبینه بی", "وحيده", "عائشه بي", "عبد الرحمن", "نور بي"],
-    2: ["محمد هشام", "محمد صفوان", "محمد سفیان", "محمد", "معاذ", "حمیدہ", "ریشمہ بی", "خورشیدہ", "ام سلمہ", "فوزیہ"],
-    3: ["حمد اظهر", "محمد صلاح الدین", "محمد مصطفی", "طاهره بی", "شبنم", "ریحانہ", "ریشہ", "فاطمه", "یاسمین بی", "صفیہ بی", "فرزانہ", "صفیہ بی", "ساجدہ بی"],
-    4: ["محمد هشام", "محمد صفوان", "محمد سفیان", "محمد", "معاذ", "حمیدہ", "ریشمہ بی", "خورشدہ", "ام سلمہ", "فوزیہ"],
-    5: ["سعد", "یوسف", "عرفان", "طاهره", "ريثه بیغم", "حمیره", "فیروزہ", "ایمن", "انس", "سعد یہ", "هدا یہ"],
-    6: ["محمد سہیل", "محمد جمیل", "محمد عامر خان", "محمد احمد", "رومانہ ہی", "حمیرہ میں", "سعدیہ ہی"],
-    7: ["سلطان", "روقيه", "ثمره بی", "عائشہ بی", "ماجدہ بی", "فرحانہ بی"],
-    8: ["محمد فرحان", "برکت", "سهیل", "عرفان", "بلال", "أبو حمزه", "صفیہ بی", "أفضل", "عبد الله"]
-};
 
-// loadAllData function (ဤနေရာတွင် ပြင်ဆင်ပြီး ဖြစ်စေရန်)
-function loadAllData() {
-    const saved = localStorage.getItem("examResultsData");
-    if (saved) {
-        currentData = JSON.parse(saved);
-    } else {
-        for (let c = 1; c <= 8; c++) {
-            let subsLen = subjectsByClass[c].length;
-            let studentData = [];
-            let nameList = studentNamesByClass[c] || [];
-            let maxRows = Math.max(ROWS, nameList.length);
-            for (let i = 0; i < maxRows; i++) {
-                let studentName = (i < nameList.length) ? nameList[i] : "";
-                studentData.push({
-                    studentName: studentName,
-                    marks: new Array(subsLen).fill("")
-                });
+    const studentNamesByClass = {
+        1: ["محمد مصطفی", "شاہ ولی اللہ", "احمد", "محمد زبیر", "محمد ریان", "محمد حذیفہ", "محمد حمزہ", "محمد طلحہ", "محمد عمر", "محمد عثمان"],
+        2: ["محمد علی", "محمد حسن", "محمد حسین", "محمد بلال", "محمد انس", "محمد زید", "محمد سعد", "محمد یوسف", "محمد ابراہیم", "محمد اسماعیل"],
+        3: ["محمد اسحاق", "محمد یعقوب", "محمد موسی", "محمد عیسی", "محمد داؤد", "محمد سلیمان", "محمد ادریس", "محمد نوح", "محمد ہود", "محمد صالح"],
+        4: ["محمد هشام", "محمد صفوان", "محمد سفیان", "محمد", "معاذ", "حمیدہ", "ریشمہ بی", "خورشدہ", "ام سلمہ", "فوزیہ"],
+        5: ["سعد", "یوسف", "عرفان", "طاهره", "ريثه بیغم", "حمیره", "فیروزہ", "ایمن", "انس", "سعد یہ", "هدا یہ"],
+        6: ["محمد سہیل", "محمد جمیل", "محمد عامر خان", "محمد احمد", "رومانہ ہی", "حمیرہ میں", "سعدیہ ہی"],
+        7: ["سلطان", "روقيه", "ثمره بی", "عائشہ بی", "ماجدہ بی", "فرحانہ بی"],
+        8: ["محمد فرحان", "برکت", "سهیل", "عرفان", "بلال", "أبو حمزه", "صفیہ بی", "أفضل", "عبد الله"]
+    };
+
+    function loadAllData() {
+        const saved = localStorage.getItem("examResultsData");
+        if (saved) {
+            currentData = JSON.parse(saved);
+        } else {
+            for (let c = 1; c <= 8; c++) {
+                let subsLen = subjectsByClass[c].length;
+                let studentData = [];
+                let nameList = studentNamesByClass[c] || [];
+                let maxRows = Math.max(ROWS, nameList.length);
+                for (let i = 0; i < maxRows; i++) {
+                    let studentName = (i < nameList.length) ? nameList[i] : "";
+                    studentData.push({
+                        studentName: studentName,
+                        marks: new Array(subsLen).fill("")
+                    });
+                }
+                currentData[c] = { studentData };
             }
-            currentData[c] = { studentData };
+            saveAllData();
         }
-        saveAllData();   // ပြင်ပရှိ saveAllData ကိုသာ ခေါ်ပါ
     }
-}
     
     function saveAllData() { localStorage.setItem("examResultsData", JSON.stringify(currentData)); }
     function saveCurrentClassData(classId, data) { currentData[classId].studentData = data; saveAllData(); }
@@ -430,29 +446,51 @@ function loadAllData() {
 
     function renderTable(classId) {
         const container = document.getElementById("resultTableContainer");
-        if(!classId || !subjectsByClass[classId]) { container.innerHTML='<div class="alert alert-info text-center">အတန်းရွေးပါ</div>'; return; }
+        const printClassName = document.getElementById("printClassName");
+        if(!classId || !subjectsByClass[classId]) { 
+            container.innerHTML='<div class="alert alert-info text-center">အတန်းရွေးပါ</div>'; 
+            if(printClassName) printClassName.textContent = "";
+            return; 
+        }
+        if(printClassName) printClassName.textContent = classNames[classId];
+        
         const subjects = subjectsByClass[classId];
         let studentData = currentData[classId]?.studentData || [];
         while(studentData.length < ROWS) studentData.push({ studentName: "", marks: new Array(subjects.length).fill("") });
         let ranks = computeRanks(studentData);
-        let html = `<div class="table-responsive"><table class="table table-bordered align-middle" id="resultTable"><thead class="table-success"><tr><th>စဉ်</th><th>ကျောင်းသားအမည်</th>`;
+        
+        let html = `<table class="table table-bordered align-middle" id="resultTable"><thead class="table-success"><tr><th>စဉ်</th><th>ကျောင်းသားအမည်</th>`;
         subjects.forEach(s=>html+=`<th>${s}</th>`);
-        html+=`<th>စုစုပေါင်း</th><th>အဆင့်</th><tr></thead><tbody>`;
+        html+=`<th>စုစုပေါင်း</th><th>အဆင့်</th></tr></thead><tbody>`;
+        
         for(let i=0;i<ROWS;i++){
             let stu = studentData[i];
             let marks = stu.marks;
             let total=0; for(let m of marks) { let v=parseFloat(m); if(!isNaN(v) && v>=0 && v<=100) total+=v; }
             let rank = ranks[i] !== null ? ranks[i] : "-";
             let disabledAttr = isAdmin ? '' : 'disabled';
+            let sName = escapeHtml(stu.studentName);
+            
             html+=`<tr>
-                <td>${i+1}</td>
-                <td><input type="text" class="form-control form-control-sm student-name" value="${escapeHtml(stu.studentName)}" ${disabledAttr}></td>`;
-            for(let s=0;s<subjects.length;s++){ let val=marks[s]!==undefined?marks[s]:""; html+=`<td><input type="number" class="form-control form-control-sm mark-input" value="${val}" min="0" max="100" step="1" ${disabledAttr}></td>`; }
+                <td class="text-center">${i+1}</td>
+                <td>
+                    <span class="print-only student-name-text">${sName || "-"}</span>
+                    <input type="text" class="form-control form-control-sm student-name no-print-input" value="${sName}" ${disabledAttr}>
+                </td>`;
+            
+            for(let s=0;s<subjects.length;s++){ 
+                let val=marks[s]!==undefined?marks[s]:""; 
+                html+=`<td class="text-center">
+                    <span class="print-only">${val}</span>
+                    <input type="number" class="form-control form-control-sm mark-input no-print-input" value="${val}" min="0" max="100" step="1" ${disabledAttr}>
+                </td>`; 
+            }
+            
             html+=`<td class="fw-bold text-center">${total.toFixed(2)}</td>
                    <td class="rank-cell fw-bold text-center">${rank}</td>
                </tr>`;
         }
-        html+=`</tbody></tr></div>`;
+        html+=`</tbody></table>`;
         container.innerHTML = html;
         if(isAdmin) attachEvents(classId);
     }
@@ -463,7 +501,7 @@ function loadAllData() {
         if(!studentData) return;
         rows.forEach((row, idx)=>{
             let nameInp = row.querySelector(".student-name");
-            let marksInps = row.querySelectorAll(".mark-input");
+            let marksInps = row.querySelector(".mark-input");
             if(nameInp) nameInp.addEventListener("change", function(){ studentData[idx].studentName = this.value; saveCurrentClassData(classId, studentData); renderTable(classId); });
             marksInps.forEach((inp, subIdx)=>{ inp.addEventListener("change", function(){ let val = this.value===""?"":parseFloat(this.value); if(val===""||isNaN(val)) val=""; else val=Math.min(100,Math.max(0,val)); studentData[idx].marks[subIdx]=val; saveCurrentClassData(classId, studentData); renderTable(classId); }); });
         });
