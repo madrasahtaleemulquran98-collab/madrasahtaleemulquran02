@@ -411,13 +411,23 @@
     const saved = localStorage.getItem("examResultsData");
     if (saved) {
         currentData = JSON.parse(saved);
+        // ✅ အဟောင်းမှာ row မပြည့်ရင် ပြည့်အောင် ထပ်ဖြည့်
+        for (let c = 1; c <= 8; c++) {
+            let subsLen = subjectsByClass[c].length;
+            if (!currentData[c]) currentData[c] = { studentData: [] };
+            let studentData = currentData[c].studentData || [];
+            while (studentData.length < ROWS) {
+                studentData.push({
+                    studentName: "",
+                    marks: new Array(subsLen).fill("")
+                });
+            }
+        }
     } else {
         for (let c = 1; c <= 8; c++) {
             let subsLen = subjectsByClass[c].length;
             let studentData = [];
             let nameList = studentNamesByClass[c] || [];
-            
-            // ✅ ROWS (20) အပြည့် loop လုပ်ရန်
             for (let i = 0; i < ROWS; i++) {
                 let studentName = (i < nameList.length) ? nameList[i] : "";
                 studentData.push({
@@ -430,6 +440,7 @@
         saveAllData();
     }
 }
+
 
     function saveAllData() { localStorage.setItem("examResultsData", JSON.stringify(currentData)); }
     function saveCurrentClassData(classId, data) { currentData[classId].studentData = data; saveAllData(); }
