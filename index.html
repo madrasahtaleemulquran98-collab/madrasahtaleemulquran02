@@ -1347,6 +1347,777 @@ function buildPrintTable(subjects, studentData, ranks, isFinal) {
     html += `<th>စုပေါင်း</th>`;
     if (isFinal) html += `<th>ပျမ်းမျှ</th>`;
     html += `<th>အဆင့်</th></tr></thead><tbody>`;
+<!DOCTYPE html>
+<html lang="my">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>မဒ်ရစဟ်သအ်လီမုလ်ကုရ်အာန် - စာမေးပွဲရလဒ်</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Padauk:wght@400;700&family=Noto+Sans+Myanmar:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Padauk', 'Pyidaungsu', 'Noto Sans Myanmar', 'Myanmar Text', 'Myanmar Sangam MN', sans-serif;
+            background: #fef8e7;
+            color: #2c2b28;
+            line-height: 1.6;
+            padding: 18px;
+        }
+        
+        .main-content { padding: 2rem 1.8rem; }
+        
+        .section-card {
+            background: rgba(255, 255, 245, 0.96);
+            border-radius: 2rem;
+            padding: 2rem 1.8rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(212, 175, 55, 0.4);
+        }
+        
+        .navbar { 
+            background: #1e4620 !important; 
+            border-bottom: 2px solid #d4af37; 
+            border-radius: 60px; 
+            margin-bottom: 1rem; 
+        }
+        
+        .btn-primary { 
+            background: #2c5f2d; 
+            border: none; 
+            border-radius: 3rem; 
+            padding: 0.7rem 2rem; 
+            font-weight: 600; 
+        }
+        .btn-primary:hover { background: #1e4620; }
+        
+        .exam-tab {
+            border-radius: 2rem 2rem 0 0;
+            font-weight: bold;
+            border: 2px solid #2c5f2d;
+            border-bottom: none;
+            padding: 10px 25px;
+            margin-right: 5px;
+            cursor: pointer;
+        }
+        .exam-tab.active {
+            background: #2c5f2d !important;
+            color: white !important;
+        }
+        .exam-tab:not(.active) {
+            background: #e8f5e9;
+            color: #2c5f2d;
+        }
+        
+        .table th { 
+            background: #2c5f2d !important; 
+            color: white; 
+            text-align: center;
+            vertical-align: middle;
+            font-size: 0.85rem;
+        }
+        .table td {
+            text-align: center;
+            vertical-align: middle;
+            padding: 4px 6px;
+        }
+        .table th:nth-child(2), .table td:nth-child(2) { 
+            min-width: 200px; 
+            text-align: left;
+        }
+        .table input.mark-input { 
+            width: 55px; 
+            text-align: center; 
+            font-size: 0.85rem;
+            padding: 2px;
+        }
+        .table input.student-name {
+            font-size: 0.9rem;
+            width: 100%;
+        }
+        .rank-cell { 
+            font-weight: bold; 
+            text-align: center; 
+        }
+        .total-cell {
+            font-weight: bold;
+            background: #fff8e1;
+        }
+        
+        .exam-badge {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            font-weight: bold;
+            margin-left: 5px;
+        }
+        .badge-first { background: #ffd700; color: #000; }
+        .badge-second { background: #c0c0c0; color: #000; }
+        .badge-third { background: #cd7f32; color: #fff; }
+        
+        .print-header { display: none; }
+        .print-only { display: none; }
+        
+        .tab-content > .tab-pane { display: none; }
+        .tab-content > .tab-pane.active { display: block; }
+        
+        @media (max-width: 768px) {
+            body { padding: 8px; }
+            .main-content { padding: 1rem; }
+            .table input.mark-input { width: 45px; font-size: 0.75rem; }
+            .table th:nth-child(2), .table td:nth-child(2) { min-width: 120px; }
+            .exam-tab { padding: 8px 15px; font-size: 0.85rem; }
+        }
+
+        /* ========== PRINT ========== */
+        @media print {
+            * {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+                background: transparent !important;
+                box-shadow: none !important;
+            }
+
+            .no-print, .navbar, #contact, footer, .admin-bar, .btn, .modal, .nav-tabs {
+                display: none !important;
+            }
+
+            body {
+                background-color: white !important;
+                color: black !important;
+                padding: 0 !important;
+                margin: 0 !important;
+            }
+
+            .section-card, #results {
+                background: white !important;
+                padding: 0 !important;
+                margin: 0 !important;
+                width: 100% !important;
+                border: none !important;
+                border-radius: 0 !important;
+                box-shadow: none !important;
+            }
+
+            @page {
+                size: A4 landscape;
+                margin: 5mm;
+            }
+
+            .print-header {
+                display: block !important;
+                margin-bottom: 5px !important;
+                text-align: center;
+                border-bottom: 2px solid #000;
+                padding-bottom: 8px;
+            }
+
+            .print-only {
+                display: inline-block !important;
+            }
+
+            .no-print-input {
+                display: none !important;
+            }
+
+            .tab-content > .tab-pane {
+                display: block !important;
+            }
+            
+            .exam-results-print {
+                page-break-after: always;
+            }
+            .exam-results-print:last-child {
+                page-break-after: auto;
+            }
+
+            .table {
+                font-size: 6.5pt !important;
+                width: 100% !important;
+                border-collapse: collapse !important;
+                table-layout: fixed !important;
+                margin-top: 5px !important;
+                margin-bottom: 10px !important;
+            }
+
+            .table th, .table td {
+                border: 1px solid black !important;
+                padding: 1px 2px !important;
+                color: black !important;
+                background: white !important;
+                line-height: 1.6 !important;
+            }
+
+            .table thead th {
+                background-color: #ddd !important;
+                font-weight: bold !important;
+                color: black !important;
+            }
+
+            .table th:nth-child(1), .table td:nth-child(1) { width: 20px !important; }
+            .table th:nth-child(2), .table td:nth-child(2) { width: 110px !important; text-align: left !important; }
+            .table th:last-child, .table td:last-child { width: 28px !important; }
+            .table th:nth-last-child(2), .table td:nth-last-child(2) { width: 38px !important; }
+
+            .student-name-text {
+                font-weight: bold !important;
+                font-size: 7.5pt !important;
+            }
+            
+            .exam-title-print {
+                font-size: 10pt !important;
+                font-weight: bold !important;
+                text-align: center !important;
+                margin: 6px 0 !important;
+                text-decoration: underline;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="main-content">
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top no-print rounded-pill">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#"><i class="fas fa-mosque me-2"></i> မဒ်ရစဟ်သအ်လီမုလ်ကုရ်အာန်</a>
+        </div>
+    </nav>
+
+    <section id="results" class="section-card">
+        <div class="print-header">
+            <h2 style="margin: 0;">မဒ်ရစဟ်သအ်လီမုလ်ကုရ်အာန်</h2>
+            <h4 style="margin: 5px 0;">Madrasah Taleemul Quran</h4>
+            <p style="margin: 2px 0; font-size: 9pt;">အမှတ်(6)၊ 98လမ်း၊ လွတ်လပ်ရေးရပ်ကွက်၊ မင်္ဂလာတောင်ညွန့်မြို့နယ်</p>
+            <h5 style="margin: 5px 0;">
+                <span id="printClassName"></span> - <span id="printYear"></span> ခုနှစ် စာမေးပွဲရလဒ်
+            </h5>
+        </div>
+
+        <h3 class="text-center mb-4 no-print" style="color:#1e4620;">
+            <i class="fas fa-trophy"></i> စာမေးပွဲရလဒ်ကြေငြာစာ
+        </h3>
+        
+        <!-- Admin Bar -->
+        <div class="admin-bar no-print d-flex flex-wrap justify-content-between gap-3 mb-3">
+            <div class="d-flex gap-3 flex-wrap align-items-end">
+                <div style="max-width:180px;">
+                    <label class="fw-bold small">📅 ခုနှစ်</label>
+                    <select id="yearSelect" class="form-select form-select-sm"></select>
+                </div>
+                <div style="max-width:180px;">
+                    <label class="fw-bold small">🏫 အတန်း</label>
+                    <select id="resultClassSelect" class="form-select form-select-sm">
+                        <option value="">-- ရွေးပါ --</option>
+                    </select>
+                </div>
+            </div>
+            <div class="d-flex align-items-end gap-2">
+                <span id="loginStatus" class="badge bg-secondary">🔒 Admin မဝင်ရသေး</span>
+                <button id="loginBtn" class="btn btn-success btn-sm"><i class="fas fa-lock-open"></i> Login</button>
+                <button id="logoutBtn" class="btn btn-danger btn-sm" style="display:none;"><i class="fas fa-sign-out-alt"></i> Logout</button>
+                <button id="printResultBtn" class="btn btn-primary btn-sm"><i class="fas fa-print"></i> Print</button>
+            </div>
+        </div>
+        
+        <!-- Exam Tabs -->
+        <ul class="nav nav-tabs no-print mb-3" id="examTabs">
+            <li class="nav-item" role="presentation">
+                <button class="exam-tab active" id="tab-first" onclick="switchTab('first')">
+                    သုံးလပတ် <span class="exam-badge badge-first">1st</span>
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="exam-tab" id="tab-second" onclick="switchTab('second')">
+                    ခြောက်လပတ် <span class="exam-badge badge-second">2nd</span>
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="exam-tab" id="tab-third" onclick="switchTab('third')">
+                    နှစ်ပတ်လည် <span class="exam-badge badge-third">3rd</span>
+                </button>
+            </li>
+        </ul>
+
+        <!-- Tab Contents -->
+        <div class="tab-content" id="examTabContent">
+            <div class="tab-pane active" id="first-exam">
+                <div id="firstExamContainer" class="table-responsive">
+                    <div class="alert alert-info text-center">အတန်းရွေးပါ။</div>
+                </div>
+            </div>
+            <div class="tab-pane" id="second-exam">
+                <div id="secondExamContainer" class="table-responsive">
+                    <div class="alert alert-info text-center">အတန်းရွေးပါ။</div>
+                </div>
+            </div>
+            <div class="tab-pane" id="third-exam">
+                <div id="thirdExamContainer" class="table-responsive">
+                    <div class="alert alert-info text-center">အတန်းရွေးပါ။</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Print View -->
+        <div id="printAllExams" class="d-none"></div>
+    </section>
+
+    <footer class="no-print text-center mt-4">
+        <i class="fas fa-mosque fa-lg me-2"></i> မဒ်ရစဟ်သအ်လီမုလ်ကုရ်အာန်<br>
+        © <span id="footerYear"></span>
+    </footer>
+</div>
+
+<!-- Login Modal -->
+<div class="modal fade" id="loginModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header bg-success text-white">
+                <h5 class="modal-title"><i class="fas fa-key"></i> Admin Login</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <input type="email" id="loginEmail" class="form-control mb-2" placeholder="Email" value="madrasahtaleemulquran98@gmail.com">
+                <input type="password" id="loginPassword" class="form-control mb-2" placeholder="Password">
+                <div id="loginError" class="text-danger small"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ပိတ်</button>
+                <button type="button" id="confirmLoginBtn" class="btn btn-success">ဝင်ရောက်</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+// ============================================
+//  DATA & CONFIG
+// ============================================
+const EXAMS = ['first', 'second', 'third'];
+const EXAM_NAMES = { first: 'သုံးလပတ်', second: 'ခြောက်လပတ်', third: 'နှစ်ပတ်လည်' };
+const ROWS = 20;
+
+const subjectsByClass = {
+    1: ["ယစ္စရ်နလ် ကုရ်အာန်", "စူရဟ်အလွတ်ကျက်ခြင်း", "မစ္စနူးန် ဒိုအာ", "ဟဒီးဆ်တော်", "ကုရ်အာနီ ဒိုအာ", "ဂုဏ်တော်များ", "ကလိမဟ်", "အလ်မုဖရ်ရဒါးသ်"],
+    2: ["ယစ္စရ်နလ် ကုရ်အာန်", "ဂုဏ်တော်", "စူရဟ်အလွတ်ကျက်မှတ်ခြင်း", "ကလိမဟ်", "ဟဒီးဆ်တော်", "အူရ်ဒူ ကာအေဒဟ်", "မစ္စနှုးန် ဒိုအာ", "အလ်မွဖ်ဖရ်ရဒါးသ်", "ကုရ်အာနီ ဒိုအာ"],
+    3: ["ယစ္စရ်နလ် ကုရ်အာန်", "စူရဟ်အလွတ်ကျက်မှတ်ခြင်း", "ဟဒီးဆ်တော်", "မစ္စနှုးန် ဒိုအာ", "ကုရ်အာနီ ဒိုအာ", "ဂုဏ်တော်", "ကလိမဟ်", "အူရ်ဒူ ကာအေဒဟ်", "အလ်မွဖ်ဖရ်ရဒါးသ်"],
+    4: ["ကုရ်အာန်", "စူရဟ်အလွတ်ကျက်မှတ်ခြင်း", "သဂ်ျဝီးဒ်", "ဟဒီးဆ်တော်", "မစ္စနူးန်ဒိုအာ", "ကုရ်အာနီဒိုအာ", "ဂုဏ်တော်", "ကလိမဟ်", "အုရ်ဒူပဟ်လီ", "အလ်မုဖရ်ရဒါးသ်"],
+    5: ["ကုရ်အာန်", "စူရဟ်အလွတ်ကျက်မှတ်ခြင်း", "သဂ်ျဝီးဒ်", "အစ္စလာမ့်အခြေပြ(အတွဲ၁)", "သအ်လီမုလ်အစ္စလာမ်(အတွဲ၁)", "အစ္စလာမီးအာဒါးဘ်(အတွဲ၁)", "ကျွန်ုပ်တို့၏မြတ်နဗီ", "အုရ်ဒူ ပဟ်လီ", "သအ်လီမုလ်အစ္စလာမ်(အတွဲ၁)အုရ်ဒူ", "အလ်မုဖရ်ရဒါးသ်"],
+    6: ["ကုရ်အာန်", "စူရဟ်အလွတ်ကျက်မှတ်ခြင်း", "သဂျ်ဝီးဒ်", "အစ္စလာမ့်အခြေပြ အတွဲ 2", "သအ်လီမုလ်အစ္စလာမ် အတွဲ 2", "အစ္စလာမီအားဒါဘ် အတွဲ 2", "ကျွန်ုပ်တို့မြတ်ရစူလ်", "အခြေခံသမိုင်း", "မစာအေလေနမားဇ်", "အုရ်ဒူ ဒူစရီး", "သအ်လီမုလ်အစ္စလာမ် အုရ်ဒူ", "အလ်မုဖရ်ရဒါးသ်"],
+    7: ["ကုရ်အာန်", "စူရဟ်အလွတ်ကျက်မှတ်ခြင်း", "သဂ်ျဝီးဒ်", "အခြေပြ အတွဲ3", "သအ်လီမုလ်အစ္စလာမ် အတွဲ3", "အစ္စလာမီ့အကာအီးဒ်", "တမန်တော်မြတ်၏အတ္ထုပ္ပတ္တိ", "နဗီတမန်တော်များအတ္ထုပ္ပတ္တိ", "ဟမာရေးအီမာန်", "ဟမာရေး နဗီ", "သအ်လီမုလ်အစ္စလာမ် အတွဲ3 အုရ်ဒူ", "အုရ်ဒူ သီစရီး"],
+    8: ["ကုရ်အာန်", "စူရဟ်အလွတ်ကျက်မှတ်ခြင်း", "သဂ်ျဝီးဒ်", "အစ္စလာမ့်အခြေပြ အတွဲ4", "သအ်လီမုလ်အစ္စလာမ် အတွဲ4", "တမန်တော်မြတ်အတ္ထုပ္ပတ္တိ", "နဗီတမန်တော်များအကြောင်း", "ကုရ်အာန်ရှင်းလင်းချက်", "ဟာမာရေးရစူလ်", "သအ်လီမုလ်အစ္စလာမ် 4 အုရ်ဒူ", "အစ္စလာမီ့အကာအီးဒ် အုရ်ဒူ", "မစာအေလေနမားဇ် အုရ်ဒူ", "ဒူရူစွလ်လုဂါးသ်", "အုရ်ဒူ ကြောဝ်ထီး"]
+};
+
+const classNames = {
+    1: "မူကြိုတန်း", 2: "သူငယ်တန်းလေး", 3: "သူငယ်တန်းကြီး",
+    4: "ပထမတန်းလေး", 5: "ပထမတန်းကြီး", 6: "ဒုတိယတန်း",
+    7: "တတိယတန်း", 8: "စတုတ္ထတန်း"
+};
+
+// ============================================
+//  STUDENT NAMES (မြန်မာလိုစာလုံးပေါင်း အပြည့်အစုံ)
+// ============================================
+const studentNamesByClass = {
+    // 1. မူကြိုတန်း (၂၀ ယောက်)
+    1: [
+        "မုဟမ္မဒ် မုဆ်သဖာ – ဟဘိဘုလ္လာဟ်",
+        "ရှာ ဝလီယလ္လာဟ် – အဗ္ဒုရ် ရရှိဒ်",
+        "အဟ်ဆာန် – နီစာရ်အဟ်မဒ်",
+        "ဂျူနိဒ် – အဟ်မဒ်",
+        "ဆအိဒ် – ရှမ်ရှီးရ်",
+        "ဘရကတ်အလီ – ရှမ်စွဒ္ဒီးန်",
+        "အဗ္ဒု လ်ခါလိဒ် – အဗ္ဒု ရ်ရဇာ့ခ်",
+        "အဗ်ဒွဆ်ဆုဘဟန် – ဂျမလုဒ္ဒိန်",
+        "အုမရ် – အဗ်ဒုလ်လာဟ်",
+        "ကဗ်ရှားဟ် ဘီ – ဟနိဖ်",
+        "ဆူဖိယာ ဘီ – အဗ္ဒုရှ်ရှူကိုရ်",
+        "အာဖိယာ ဘီ – အဟ်မဒ်",
+        "အိုင်နဟ် – ရဟ်မသွလ္လာဟ်",
+        "ဆူဖိယာ – အဗ္ဒုလ္လာဟ်",
+        "အာအိရှာ ဘီ – အဗ္ဒုလ္လာဟ်",
+        "ဆူဖိယာ ဘီ – အဗ္ဒု ရ်ရဇာ့ခ်",
+        "ရုဘိနာ ဘီ – ယာစိးန်",
+        "ဝဟိဒဟ် – ဟဖီဇွလ္လာဟ်",
+        "အာအိရှာ ဘီ – အဗ်ဒွရ်ရဟီးမ်",
+        "နစီမဟ်ဘီ – အဗ်ဒုလ်လာဟ်"
+    ],
+    
+    // 2. သူငယ်တန်းလေး (၁၅ ယောက်)
+    2: [
+        "မဟာမဒ် အုစ်မန် — မုဟမ္မဒ် ဘိလာလ်",
+        "အဗ္ဒုရ်ရရှိဒ် — မုဟမ္မဒ် အလီ",
+        "ရိုင်ဟန် — အဗ္ဒုရရဟမန်",
+        "ဖာရုခ် — အဟ်မဒ်",
+        "မုဆ်တဖာ — ဟဘီဘုလ္လဟ်",
+        "ဇိုင်ဒ် — မုဟမ္မဒ် စအိဒ်",
+        "ဆုမိယ ဟ်ဘီ — အဗ္ဒုလ္လာဟ်",
+        "ဟုမိုင်ရဟ် ဘီ — ဟဘီဘုလ္လာဟ်",
+        "စာအ်ဒ်ီယ ဟ်ဟီ — အဗ္ဒုလ်ဟမိဒ်",
+        "ရိုမာနဟ် — ယာစီးန်",
+        "ဇိုင်နပ် ဘီ — မုဟမ္မဒ်",
+        "ဖိုအီဇဟ် — ရှမိမ်",
+        "ဂျုဝိုင်ရီယဟ် ဘီ — အဗ္ဒုရ်ှရှကုရ်",
+        "အဆွဂရ် — ရှမ်ရှိရ်",
+        "အဘူဘကရ် — ရှမ်စဒ္ဒိန်"
+    ],
+    
+    // 3. သူငယ်တန်းကြီး (၁၄ ယောက်)
+    3: [
+        "အဇဟ်ရ် – အခ်တာ",
+        "ဆလာဟွဒ္ဒိန် – မဟာမဒ် အယ်လိယာ့ခ်",
+        "မုဆ်သဖာ – ရှေ့ခ် မဟာမဒ်",
+        "တာဟိရဟ် ဘီ – ရဖိက်",
+        "ရှဗနမ် – ဖိုင်ဆလ်",
+        "ရိဟာနာ – ဆိုလိမန်",
+        "ရိရှ်မဟ် – ဆိုလိမန်",
+        "ဖာတိမဟ် – ဆိုလိမန်",
+        "ယာဆမိန် ဘီ – အဗ္ဒုရ် ရဇာ့ခ်",
+        "ဆဖိယာ ဘီ – ဟဆန်",
+        "ဖရဇာနာ – ရဖိက်",
+        "ဆဖိယာ ဘီ – အဟ်မဒ်",
+        "ဆာဂျိဒဟ် ဘီ – အဗ်ဒွလ်ကာဒီရ်",
+        "အိုဝိုယ်စ် – နူးရ်မုဟမ္မဒ်"
+    ],
+    
+    // 4. ပထမတန်းလေး (၁၀ ယောက်)
+    4: [
+        "ဟိရှမ် – အယ်လိယာ့စ်",
+        "ဆဖဝန် – အလီ",
+        "ဆိုဖိယန် – မဟ်မုဒ်",
+        "မုဟမ္မဒ် – အဟ်မဒ်",
+        "မုအာဇ် – အဗ္ဒုရ်ရဇာ့ခ်",
+        "ဟမိဒဟ် – ရှာ မုဟမ္မဒ်",
+        "ရိရှမဟ် ဘီ – အဗ္ဒုလ်အဇိဇ်",
+        "ခိုရရှီဒဟ် – ရှဘိရ်",
+        "အွမ်မေ ဆလမဟ် – ရမဇာန် အလီ",
+        "ဖောင်ဇိယာ – ဂျမညလုဒ္ဒိန်"
+    ],
+    
+    // 5. ပထမတန်းကြီး (၁၁ ယောက်)
+    5: [
+        "ဆအဒ် – ဆအိဒ်",
+        "ယူဆုဖ် – ဟာရှင်မ်",
+        "အိရ်ဖန် – အယ်လိယာ့စ်",
+        "တာဟိရဟ် – အလီ",
+        "ရိစဟ် ဘိဂမ် – အာရိဖ်",
+        "ဟိုမိုင်ရဟ် – ဖာရုခ်",
+        "ဖိရိုဇဟ် – ရှာ မုဟမ္မဒ်",
+        "အိုင်မန် – ဆိုလိုင်မန်",
+        "အနတ်စ် – အဗ္ဒုလ် ဝါဟိဒ်",
+        "ဆအ်ဒ်ီယဟ် – ဟဆန်",
+        "ဟီဒါယဟ် – အဗ္ဒုရ် ရဟိမ်"
+    ],
+    
+    // 6. ဒုတိယတန်း (၇ ယောက်)
+    6: [
+        "ဆုဟိုင်လ် – အယ်လိယာ့စ်",
+        "ဂျမိလ် – အဗ္ဒုရ်ရဟ်မန်",
+        "အာမီရ် ခန် – အဗ္ဒု ရ်ရဟိမ်",
+        "အဟ်မဒ် – ဟဘိဘုလ္လာဟ်",
+        "ရုမာနာဘီ – အဇိဇ်",
+        "ဟိုမိုင်ရဟ် ဘီ – ဟာရှမ်",
+        "ဆအ်ဒိယာ ဘီ – ဇုဘိုင်ရ်"
+    ],
+    
+    // 7. တတိယတန်း (၆ ယောက်)
+    7: [
+        "ဆူလ်သွာန် – ဆိုလိုင်မန်",
+        "ရုကီယာ – ရှရီဖ်",
+        "စမရဟ် ဘီ – ရှေ့ခ် မုဟမ္မဒ်",
+        "အာအိရှာ ဘီ – ဟနိဖ်",
+        "မာဂျိဒဟ် ဘီ – နိဆာရ် အဟ်မဒ်",
+        "ဖရ်ဟာနာ ဘီ – ဟာရုန်"
+    ],
+    
+    // 8. စတုတ္ထတန်း (၈ ယောက်)
+    8: [
+        "ဖရ်ဟန် – အဗ္ဒုရ်ရဟ်မန်",
+        "ဘရကတ် – ရဖိက်",
+        "ဆုဟိုင်လ် – အဘူဘကရ်",
+        "အီရ်ဖန် – အလီ",
+        "ဘိလာလ် – ရှရီးဖ်",
+        "အဘူ ဟမ်ဇဟ် – အာရိဖ်",
+        "ဆဖိယာ ဘီ – ဆအိဒ်",
+        "အဖဇလ် – အိဗ်ဒရ်ရဟိမ်"
+    ]
+};
+
+// ============================================
+//  STATE
+// ============================================
+let isAdmin = false;
+let currentClass = "";
+let currentYear = new Date().getFullYear();
+let allData = {};
+let currentTab = 'first';
+
+// ============================================
+//  INIT
+// ============================================
+function init() {
+    const yearSelect = document.getElementById("yearSelect");
+    const currentY = new Date().getFullYear();
+    for (let y = currentY - 5; y <= currentY + 1; y++) {
+        const opt = document.createElement("option");
+        opt.value = y;
+        opt.textContent = y + " ခုနှစ်";
+        if (y === currentY) opt.selected = true;
+        yearSelect.appendChild(opt);
+    }
+    document.getElementById("footerYear").textContent = currentY;
+    
+    const resSelect = document.getElementById("resultClassSelect");
+    for (let id in classNames) {
+        let opt = document.createElement("option");
+        opt.value = id;
+        opt.textContent = classNames[id];
+        resSelect.appendChild(opt);
+    }
+    
+    loadAllData();
+    checkLoginStatus();
+}
+
+// ============================================
+//  DATA MANAGEMENT
+// ============================================
+function loadAllData() {
+    const saved = localStorage.getItem("examResultsData_v3");
+    if (saved) {
+        allData = JSON.parse(saved);
+    }
+    ensureYearData(currentYear);
+}
+
+function ensureYearData(year) {
+    if (!allData[year]) allData[year] = {};
+    for (let c = 1; c <= 8; c++) {
+        if (!allData[year][c]) {
+            allData[year][c] = {};
+            const subsLen = subjectsByClass[c].length;
+            const nameList = studentNamesByClass[c] || [];
+            
+            EXAMS.forEach(exam => {
+                let studentData = [];
+                for (let i = 0; i < ROWS; i++) {
+                    studentData.push({
+                        studentName: (i < nameList.length) ? nameList[i] : "",
+                        marks: new Array(subsLen).fill("")
+                    });
+                }
+                allData[year][c][exam] = studentData;
+            });
+        }
+    }
+    saveAllData();
+}
+
+function saveAllData() {
+    localStorage.setItem("examResultsData_v3", JSON.stringify(allData));
+}
+
+function getExamData(year, classId, exam) {
+    ensureYearData(year);
+    return allData[year][classId][exam];
+}
+
+function saveExamData(year, classId, exam, data) {
+    allData[year][classId][exam] = data;
+    saveAllData();
+}
+
+// ============================================
+//  RANK
+// ============================================
+function computeRanks(studentData) {
+    let withTotals = studentData.map((stu, idx) => {
+        let total = 0;
+        let count = 0;
+        for (let m of stu.marks) {
+            let v = parseFloat(m);
+            if (!isNaN(v) && v >= 0 && v <= 100) {
+                total += v;
+                count++;
+            }
+        }
+        return { idx, total: count > 0 ? total : -1 };
+    });
+    
+    withTotals.sort((a, b) => b.total - a.total);
+    let ranks = new Array(studentData.length).fill(null);
+    let currentRank = 1;
+    
+    for (let i = 0; i < withTotals.length; i++) {
+        if (withTotals[i].total < 0) break;
+        if (i > 0 && withTotals[i].total === withTotals[i - 1].total) {
+            ranks[withTotals[i].idx] = currentRank;
+        } else {
+            currentRank = i + 1;
+            ranks[withTotals[i].idx] = currentRank;
+        }
+    }
+    return ranks;
+}
+
+// ============================================
+//  TAB SWITCHING
+// ============================================
+function switchTab(exam) {
+    currentTab = exam;
+    
+    document.querySelectorAll('.exam-tab').forEach(btn => btn.classList.remove('active'));
+    document.getElementById('tab-' + exam).classList.add('active');
+    
+    document.querySelectorAll('.tab-pane').forEach(pane => pane.classList.remove('active'));
+    document.getElementById(exam + '-exam').classList.add('active');
+}
+
+// ============================================
+//  RENDER TABLE
+// ============================================
+function renderAllTables() {
+    if (!currentClass) {
+        document.getElementById("firstExamContainer").innerHTML = '<div class="alert alert-info text-center">အတန်းရွေးပါ။</div>';
+        document.getElementById("secondExamContainer").innerHTML = '<div class="alert alert-info text-center">အတန်းရွေးပါ။</div>';
+        document.getElementById("thirdExamContainer").innerHTML = '<div class="alert alert-info text-center">အတန်းရွေးပါ။</div>';
+        return;
+    }
+    
+    EXAMS.forEach(exam => {
+        renderExamTable(exam);
+    });
+}
+
+function renderExamTable(exam) {
+    const container = document.getElementById(exam + "ExamContainer");
+    const subjects = subjectsByClass[currentClass];
+    let studentData = getExamData(currentYear, currentClass, exam);
+    let ranks = computeRanks(studentData);
+    
+    let html = buildTableHTML(subjects, studentData, ranks, exam);
+    container.innerHTML = html;
+    
+    if (isAdmin) attachExamEvents(exam);
+}
+
+function buildTableHTML(subjects, studentData, ranks, exam) {
+    let disabledAttr = isAdmin ? '' : 'disabled';
+    let examLabel = EXAM_NAMES[exam];
+    
+    let html = `<h5 class="no-print text-center mb-3" style="color:#1e4620;">${examLabel} စာမေးပွဲရလဒ်</h5>`;
+    html += `<table class="table table-bordered align-middle" id="table-${exam}"><thead class="table-success"><tr><th>စဉ်</th><th>ကျောင်းသားအမည်</th>`;
+    subjects.forEach(s => html += `<th>${s}</th>`);
+    html += `<th>စုစုပေါင်း</th><th>အဆင့်</th></tr></thead><tbody>`;
+    
+    for (let i = 0; i < ROWS; i++) {
+        let stu = studentData[i];
+        let marks = stu.marks;
+        let total = 0;
+        let count = 0;
+        for (let m of marks) {
+            let v = parseFloat(m);
+            if (!isNaN(v) && v >= 0 && v <= 100) {
+                total += v;
+                count++;
+            }
+        }
+        let rank = ranks[i] !== null ? ranks[i] : "-";
+        let sName = escapeHtml(stu.studentName);
+        
+        html += `<tr>
+            <td class="text-center">${i + 1}</td>
+            <td>
+                <span class="print-only student-name-text">${sName || "-"}</span>
+                <input type="text" class="form-control form-control-sm student-name no-print-input" 
+                       value="${sName}" data-row="${i}" ${disabledAttr}>
+            </td>`;
+        
+        for (let s = 0; s < subjects.length; s++) {
+            let val = marks[s] !== undefined ? marks[s] : "";
+            html += `<td class="text-center">
+                <span class="print-only">${val}</span>
+                <input type="number" class="form-control form-control-sm mark-input no-print-input" 
+                       value="${val}" min="0" max="100" step="0.1" data-row="${i}" data-sub="${s}" ${disabledAttr}>
+            </td>`;
+        }
+        
+        html += `<td class="total-cell fw-bold text-center">${total > 0 ? total.toFixed(1) : "-"}</td>
+               <td class="rank-cell fw-bold text-center">${rank}</td></tr>`;
+    }
+    html += `</tbody></table>`;
+    return html;
+}
+
+// ============================================
+//  EVENTS
+// ============================================
+function attachExamEvents(exam) {
+    const table = document.getElementById("table-" + exam);
+    if (!table) return;
+    
+    const rows = table.querySelectorAll("tbody tr");
+    let studentData = getExamData(currentYear, currentClass, exam);
+    
+    rows.forEach((row, idx) => {
+        let nameInp = row.querySelector(".student-name");
+        if (nameInp) {
+            nameInp.addEventListener("change", function() {
+                studentData[idx].studentName = this.value;
+                saveExamData(currentYear, currentClass, exam, studentData);
+                renderAllTables();
+            });
+        }
+        
+        let marksInps = row.querySelectorAll(".mark-input");
+        marksInps.forEach((inp, subIdx) => {
+            inp.addEventListener("change", function() {
+                let val = this.value === "" ? "" : parseFloat(this.value);
+                if (val === "" || isNaN(val)) val = "";
+                else val = Math.min(100, Math.max(0, val));
+                studentData[idx].marks[subIdx] = val;
+                saveExamData(currentYear, currentClass, exam, studentData);
+                renderAllTables();
+            });
+        });
+    });
+}
+
+// ============================================
+//  PRINT
+// ============================================
+function generatePrintHTML() {
+    const subjects = subjectsByClass[currentClass];
+    let html = '';
+    
+    html += `<div class="print-header">
+        <h2 style="margin: 0;">မဒ်ရစဟ်သအ်လီမုလ်ကုရ်အာန်</h2>
+        <h4 style="margin: 5px 0;">Madrasah Taleemul Quran</h4>
+        <p style="margin: 2px 0; font-size: 9pt;">အမှတ်(6)၊ 98လမ်း၊ လွတ်လပ်ရေးရပ်ကွက်၊ မင်္ဂလာတောင်ညွန့်မြို့နယ်</p>
+        <h5 style="margin: 5px 0;">${classNames[currentClass]} - ${currentYear} ခုနှစ် စာမေးပွဲရလဒ်</h5>
+    </div>`;
+    
+    EXAMS.forEach((exam, idx) => {
+        let studentData = getExamData(currentYear, currentClass, exam);
+        let ranks = computeRanks(studentData);
+        
+        html += `<div class="exam-results-print">
+            <div class="exam-title-print">${EXAM_NAMES[exam]} စာမေးပွဲရလဒ်</div>`;
+        html += buildPrintTable(subjects, studentData, ranks);
+        html += `</div>`;
+    });
+    
+    return html;
+}
+
+function buildPrintTable(subjects, studentData, ranks) {
+    let html = `<table class="table table-bordered">
+        <thead><tr><th>စဉ်</th><th>အမည်</th>`;
+    subjects.forEach(s => html += `<th>${s}</th>`);
+    html += `<th>စုပေါင်း</th><th>အဆင့်</th></tr></thead><tbody>`;
     
     for (let i = 0; i < ROWS; i++) {
         let stu = studentData[i];
@@ -1355,33 +2126,54 @@ function buildPrintTable(subjects, studentData, ranks, isFinal) {
             let v = parseFloat(m);
             if (!isNaN(v) && v >= 0) { total += v; count++; }
         }
-        let avg = count > 0 ? (total / count).toFixed(1) : "-";
         let rank = ranks[i] !== null ? ranks[i] : "-";
         
         html += `<tr>
             <td>${i + 1}</td>
             <td style="text-align:left; font-weight:bold;">${escapeHtml(stu.studentName) || "-"}</td>`;
         stu.marks.forEach(m => html += `<td>${m || "-"}</td>`);
-        html += `<td style="font-weight:bold;">${total > 0 ? total.toFixed(1) : "-"}</td>`;
-        if (isFinal) html += `<td style="font-weight:bold; color:#1b5e20;">${avg}</td>`;
-        html += `<td style="font-weight:bold;">${rank}</td></tr>`;
+        html += `<td style="font-weight:bold;">${total > 0 ? total.toFixed(1) : "-"}</td>
+               <td style="font-weight:bold;">${rank}</td></tr>`;
     }
     html += `</tbody></table>`;
     return html;
 }
 
 // ============================================
-//  ADMIN LOGIN
+//  ADMIN
 // ============================================
 let loginModalObj = null;
+
 function initModal() {
-    if (typeof bootstrap !== 'undefined') {
-        loginModalObj = new bootstrap.Modal(document.getElementById('loginModal'));
+    const modalEl = document.getElementById('loginModal');
+    if (typeof bootstrap !== 'undefined' && modalEl) {
+        loginModalObj = new bootstrap.Modal(modalEl);
     }
 }
 
 function showLogin() {
-    if (loginModalObj) loginModalObj.show();
+    if (loginModalObj) {
+        loginModalObj.show();
+    } else {
+        const modalEl = document.getElementById('loginModal');
+        if (modalEl) {
+            modalEl.classList.add('show');
+            modalEl.style.display = 'block';
+            modalEl.setAttribute('aria-modal', 'true');
+        }
+    }
+}
+
+function hideLogin() {
+    if (loginModalObj) {
+        loginModalObj.hide();
+    } else {
+        const modalEl = document.getElementById('loginModal');
+        if (modalEl) {
+            modalEl.classList.remove('show');
+            modalEl.style.display = 'none';
+        }
+    }
 }
 
 function checkLoginStatus() {
@@ -1393,7 +2185,7 @@ function checkLoginStatus() {
     let logoutBtn = document.getElementById("logoutBtn");
     
     if (isAdmin) {
-        statusSpan.innerHTML = "✅ Admin အကောင့်ဝင်ထားပြီး";
+        statusSpan.innerHTML = "✅ Admin";
         statusSpan.className = "badge bg-success";
         loginBtn.style.display = "none";
         logoutBtn.style.display = "inline-block";
@@ -1415,67 +2207,70 @@ function escapeHtml(str) {
 // ============================================
 //  EVENT LISTENERS
 // ============================================
-document.getElementById("yearSelect").addEventListener("change", function() {
-    currentYear = parseInt(this.value);
-    ensureYearData(currentYear);
-    renderAllTables();
-});
-
-document.getElementById("resultClassSelect").addEventListener("change", function() {
-    currentClass = this.value;
-    document.getElementById("printClassName").textContent = currentClass ? classNames[currentClass] : "";
-    document.getElementById("printYear").textContent = currentYear + " ခုနှစ်";
-    renderAllTables();
-});
-
-document.getElementById("loginBtn").addEventListener("click", showLogin);
-document.getElementById("logoutBtn").addEventListener("click", function() {
-    sessionStorage.removeItem("adminLoggedIn");
-    isAdmin = false;
-    checkLoginStatus();
-});
-
-document.getElementById("confirmLoginBtn").addEventListener("click", function() {
-    let email = document.getElementById("loginEmail").value.trim();
-    let pwd = document.getElementById("loginPassword").value;
-    if (email === "madrasahtaleemulquran98@gmail.com" && pwd === "admin123") {
-        sessionStorage.setItem("adminLoggedIn", "true");
-        isAdmin = true;
-        if (loginModalObj) loginModalObj.hide();
+document.addEventListener('DOMContentLoaded', function() {
+    initModal();
+    init();
+    
+    document.getElementById("yearSelect").addEventListener("change", function() {
+        currentYear = parseInt(this.value);
+        ensureYearData(currentYear);
+        renderAllTables();
+    });
+    
+    document.getElementById("resultClassSelect").addEventListener("change", function() {
+        currentClass = this.value;
+        document.getElementById("printClassName").textContent = currentClass ? classNames[currentClass] : "";
+        document.getElementById("printYear").textContent = currentYear;
+        renderAllTables();
+    });
+    
+    document.getElementById("loginBtn").addEventListener("click", function(e) {
+        e.preventDefault();
+        showLogin();
+    });
+    
+    document.getElementById("logoutBtn").addEventListener("click", function(e) {
+        e.preventDefault();
+        sessionStorage.removeItem("adminLoggedIn");
+        isAdmin = false;
         checkLoginStatus();
-        document.getElementById("loginError").innerHTML = "";
-    } else {
-        document.getElementById("loginError").innerHTML = "❌ Email သို့မဟုတ် Password မမှန်ပါ";
-    }
+    });
+    
+    document.getElementById("confirmLoginBtn").addEventListener("click", function(e) {
+        e.preventDefault();
+        let email = document.getElementById("loginEmail").value.trim();
+        let pwd = document.getElementById("loginPassword").value;
+        if (email === "madrasahtaleemulquran98@gmail.com" && pwd === "admin123") {
+            sessionStorage.setItem("adminLoggedIn", "true");
+            isAdmin = true;
+            hideLogin();
+            checkLoginStatus();
+            document.getElementById("loginError").innerHTML = "";
+        } else {
+            document.getElementById("loginError").innerHTML = "❌ Email သို့မဟုတ် Password မမှန်ပါ";
+        }
+    });
+    
+    document.getElementById("printResultBtn").addEventListener("click", function(e) {
+        e.preventDefault();
+        if (!currentClass) {
+            alert("အတန်းရွေးပါ!");
+            return;
+        }
+        
+        const printDiv = document.getElementById("printAllExams");
+        printDiv.innerHTML = generatePrintHTML();
+        printDiv.classList.remove("d-none");
+        
+        const originalTitle = document.title;
+        document.title = `စာမေးပွဲရလဒ် - ${classNames[currentClass]} - ${currentYear}`;
+        
+        window.print();
+        
+        document.title = originalTitle;
+        printDiv.classList.add("d-none");
+    });
 });
-
-document.getElementById("printResultBtn").addEventListener("click", function() {
-    if (!currentClass) {
-        alert("အတန်းရွေးပါ!");
-        return;
-    }
-    
-    // print view ထုတ်
-    const printDiv = document.getElementById("printAllExams");
-    printDiv.innerHTML = generatePrintHTML();
-    printDiv.classList.remove("d-none");
-    
-    const originalTitle = document.title;
-    document.title = `စာမေးပွဲရလဒ် - ${classNames[currentClass]} - ${currentYear}`;
-    
-    // print
-    window.print();
-    
-    // ပြန်ထား
-    document.title = originalTitle;
-    printDiv.classList.add("d-none");
-});
-
-// ============================================
-//  START
-// ============================================
-initModal();
-init();
 </script>
 </body>
 </html>
