@@ -1559,3 +1559,939 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 </body>
 </html>
+<!DOCTYPE html>
+<html lang="my">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>မဒ်ရစဟ်သအ်လီမုလ်ကုရ်အာန် - စာမေးပွဲရလဒ်</title>
+    <style>
+        :root{--bs-blue:#0d6efd;--bs-green:#198754;--bs-red:#dc3545;--bs-yellow:#ffc107;--bs-cyan:#0dcaf0;--bs-white:#fff;--bs-gray:#6c757d;--bs-gray-dark:#343a40;--bs-gray-100:#f8f9fa;--bs-gray-200:#e9ecef;--bs-gray-300:#dee2e6;--bs-gray-400:#ced4da;--bs-gray-500:#adb5bd;--bs-gray-600:#6c757d;--bs-gray-700:#495057;--bs-gray-800:#343a40;--bs-gray-900:#212529;--bs-primary:#0d6efd;--bs-secondary:#6c757d;--bs-success:#198754;--bs-info:#0dcaf0;--bs-warning:#ffc107;--bs-danger:#dc3545;--bs-light:#f8f9fa;--bs-dark:#212529;--bs-primary-rgb:13,110,253;--bs-secondary-rgb:108,117,125;--bs-success-rgb:25,135,84;--bs-info-rgb:13,202,240;--bs-warning-rgb:255,193,7;--bs-danger-rgb:220,53,69;--bs-light-rgb:248,249,250;--bs-dark-rgb:33,37,41;--bs-body-font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;--bs-body-font-size:1rem;--bs-body-font-weight:400;--bs-body-line-height:1.5;--bs-body-color:#212529;--bs-body-bg:#fff;--bs-border-width:1px;--bs-border-style:solid;--bs-border-color:#dee2e6;--bs-border-radius:0.375rem;--bs-border-radius-sm:0.25rem;--bs-border-radius-lg:0.5rem;--bs-border-radius-xl:1rem;--bs-border-radius-pill:50rem;--bs-box-shadow:0 0.5rem 1rem rgba(0,0,0,0.15);--bs-box-shadow-sm:0 0.125rem 0.25rem rgba(0,0,0,0.075);--bs-box-shadow-lg:0 1rem 3rem rgba(0,0,0,0.175);--bs-focus-ring-width:0.25rem;--bs-focus-ring-opacity:0.25;--bs-focus-ring-color:rgba(13,110,253,0.25)}
+        *,::after,::before{box-sizing:border-box}body{margin:0;font-family:var(--bs-body-font-family);font-size:var(--bs-body-font-size);font-weight:var(--bs-body-font-weight);line-height:var(--bs-body-line-height);color:var(--bs-body-color);background-color:var(--bs-body-bg);-webkit-text-size-adjust:100%}h1,h2,h3,h4,h5,h6{margin-top:0;margin-bottom:.5rem;font-weight:500;line-height:1.2}p{margin-top:0;margin-bottom:1rem}ol,ul{padding-left:2rem;margin-top:0;margin-bottom:1rem}a{color:#0d6efd;text-decoration:underline}a:hover{color:#0a58ca}img,svg{vertical-align:middle}table{border-collapse:collapse}label{display:inline-block}button{border-radius:0}button:focus:not(:focus-visible){outline:0}input,button,select,textarea{margin:0;font-family:inherit;font-size:inherit;line-height:inherit}button,select{text-transform:none}[role="button"]{cursor:pointer}select{word-wrap:normal}textarea{resize:vertical}
+        .container,.container-fluid{width:100%;padding-right:0.75rem;padding-left:0.75rem;margin-right:auto;margin-left:auto}@media(min-width:576px){.container{max-width:540px}}@media(min-width:768px){.container{max-width:720px}}@media(min-width:992px){.container{max-width:960px}}@media(min-width:1200px){.container{max-width:1140px}}@media(min-width:1400px){.container{max-width:1320px}}
+        .row{display:flex;flex-wrap:wrap;margin-right:-0.75rem;margin-left:-0.75rem}.row>*{flex-shrink:0;width:100%;max-width:100%;padding-right:0.75rem;padding-left:0.75rem}
+        .col{flex:1 0 0%}.col-auto{flex:0 0 auto;width:auto}.col-1{flex:0 0 auto;width:8.333333%}.col-2{flex:0 0 auto;width:16.666667%}.col-3{flex:0 0 auto;width:25%}.col-4{flex:0 0 auto;width:33.333333%}.col-5{flex:0 0 auto;width:41.666667%}.col-6{flex:0 0 auto;width:50%}.col-7{flex:0 0 auto;width:58.333333%}.col-8{flex:0 0 auto;width:66.666667%}.col-9{flex:0 0 auto;width:75%}.col-10{flex:0 0 auto;width:83.333333%}.col-11{flex:0 0 auto;width:91.666667%}.col-12{flex:0 0 auto;width:100%}
+        .d-flex{display:flex!important}.d-inline-flex{display:inline-flex!important}.d-block{display:block!important}.d-inline-block{display:inline-block!important}.d-none{display:none!important}
+        .flex-wrap{flex-wrap:wrap!important}.justify-content-start{justify-content:flex-start!important}.justify-content-end{justify-content:flex-end!important}.justify-content-center{justify-content:center!important}.justify-content-between{justify-content:space-between!important}.align-items-start{align-items:flex-start!important}.align-items-end{align-items:flex-end!important}.align-items-center{align-items:center!important}.align-items-baseline{align-items:baseline!important}.gap-1{gap:.25rem!important}.gap-2{gap:.5rem!important}.gap-3{gap:1rem!important}
+        .m-0{margin:0!important}.m-1{margin:.25rem!important}.m-2{margin:.5rem!important}.m-3{margin:1rem!important}.m-4{margin:1.5rem!important}.m-5{margin:3rem!important}.mx-auto{margin-right:auto!important;margin-left:auto!important}.my-0{margin-top:0!important;margin-bottom:0!important}.my-1{margin-top:.25rem!important;margin-bottom:.25rem!important}.my-2{margin-top:.5rem!important;margin-bottom:.5rem!important}.my-3{margin-top:1rem!important;margin-bottom:1rem!important}.my-4{margin-top:1.5rem!important;margin-bottom:1.5rem!important}.mt-0{margin-top:0!important}.mt-1{margin-top:.25rem!important}.mt-2{margin-top:.5rem!important}.mt-3{margin-top:1rem!important}.mt-4{margin-top:1.5rem!important}.mt-5{margin-top:3rem!important}.mb-0{margin-bottom:0!important}.mb-1{margin-bottom:.25rem!important}.mb-2{margin-bottom:.5rem!important}.mb-3{margin-bottom:1rem!important}.mb-4{margin-bottom:1.5rem!important}.mb-5{margin-bottom:3rem!important}.me-1{margin-right:.25rem!important}.me-2{margin-right:.5rem!important}.ms-1{margin-left:.25rem!important}.ms-2{margin-left:.5rem!important}.p-0{padding:0!important}.p-1{padding:.25rem!important}.p-2{padding:.5rem!important}.p-3{padding:1rem!important}.p-4{padding:1.5rem!important}.p-5{padding:3rem!important}.px-0{padding-right:0!important;padding-left:0!important}.px-1{padding-right:.25rem!important;padding-left:.25rem!important}.px-2{padding-right:.5rem!important;padding-left:.5rem!important}.px-3{padding-right:1rem!important;padding-left:1rem!important}.px-4{padding-right:1.5rem!important;padding-left:1.5rem!important}.py-0{padding-top:0!important;padding-bottom:0!important}.py-1{padding-top:.25rem!important;padding-bottom:.25rem!important}.py-2{padding-top:.5rem!important;padding-bottom:.5rem!important}.py-3{padding-top:1rem!important;padding-bottom:1rem!important}.py-4{padding-top:1.5rem!important;padding-bottom:1.5rem!important}.pt-0{padding-top:0!important}.pt-1{padding-top:.25rem!important}.pt-2{padding-top:.5rem!important}.pt-3{padding-top:1rem!important}.pt-4{padding-top:1.5rem!important}.pb-0{padding-bottom:0!important}.pb-1{padding-bottom:.25rem!important}.pb-2{padding-bottom:.5rem!important}.pb-3{padding-bottom:1rem!important}.pb-4{padding-bottom:1.5rem!important}
+        .text-center{text-align:center!important}.text-start{text-align:left!important}.text-end{text-align:right!important}.fw-bold{font-weight:700!important}.fw-bolder{font-weight:bolder!important}.fw-semibold{font-weight:600!important}.fw-normal{font-weight:400!important}.fst-italic{font-style:italic!important}
+        .text-primary{color:rgba(13,110,253,1)!important}.text-secondary{color:rgba(108,117,125,1)!important}.text-success{color:rgba(25,135,84,1)!important}.text-danger{color:rgba(220,53,69,1)!important}.text-warning{color:rgba(255,193,7,1)!important}.text-info{color:rgba(13,202,240,1)!important}.text-light{color:rgba(248,249,250,1)!important}.text-dark{color:rgba(33,37,41,1)!important}.text-white{color:rgba(255,255,255,1)!important}.text-muted{color:var(--bs-secondary-color)!important}
+        .bg-primary{background-color:rgba(13,110,253,1)!important}.bg-secondary{background-color:rgba(108,117,125,1)!important}.bg-success{background-color:rgba(25,135,84,1)!important}.bg-danger{background-color:rgba(220,53,69,1)!important}.bg-warning{background-color:rgba(255,193,7,1)!important}.bg-info{background-color:rgba(13,202,240,1)!important}.bg-light{background-color:rgba(248,249,250,1)!important}.bg-dark{background-color:rgba(33,37,41,1)!important}.bg-white{background-color:rgba(255,255,255,1)!important}.bg-transparent{background-color:transparent!important}
+        .rounded{border-radius:0.375rem!important}.rounded-0{border-radius:0!important}.rounded-1{border-radius:0.25rem!important}.rounded-2{border-radius:0.375rem!important}.rounded-3{border-radius:0.5rem!important}.rounded-circle{border-radius:50%!important}.rounded-pill{border-radius:50rem!important}
+        .border{border:1px solid #dee2e6!important}.border-0{border:0!important}.border-top{border-top:1px solid #dee2e6!important}.border-bottom{border-bottom:1px solid #dee2e6!important}.border-start{border-left:1px solid #dee2e6!important}
+        .w-25{width:25%!important}.w-50{width:50%!important}.w-75{width:75%!important}.w-100{width:100%!important}.w-auto{width:auto!important}
+        .sticky-top{position:sticky;top:0;z-index:1020}
+        .overflow-auto{overflow:auto!important}.overflow-hidden{overflow:hidden!important}
+        .shadow{box-shadow:0 0.5rem 1rem rgba(0,0,0,0.15)!important}.shadow-sm{box-shadow:0 0.125rem 0.25rem rgba(0,0,0,0.075)!important}.shadow-lg{box-shadow:0 1rem 3rem rgba(0,0,0,0.175)!important}.shadow-none{box-shadow:none!important}
+        .visible{visibility:visible!important}.invisible{visibility:hidden!important}
+        .z-0{z-index:0!important}.z-1{z-index:1!important}.z-2{z-index:2!important}.z-3{z-index:3!important}
+        .btn{display:inline-block;padding:0.375rem 0.75rem;font-size:1rem;font-weight:400;line-height:1.5;text-align:center;text-decoration:none;vertical-align:middle;cursor:pointer;border:1px solid transparent;border-radius:0.375rem;transition:color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out}
+        .btn:hover{text-decoration:none}.btn:focus-visible{outline:0;box-shadow:0 0 0 0.25rem rgba(13,110,253,0.25)}.btn:disabled,.btn.disabled{pointer-events:none;opacity:.65}
+        .btn-primary{color:#fff;background-color:#0d6efd;border-color:#0d6efd}.btn-primary:hover{color:#fff;background-color:#0b5ed7;border-color:#0a58ca}.btn-primary:focus-visible{box-shadow:0 0 0 0.25rem rgba(49,132,253,0.5)}
+        .btn-secondary{color:#fff;background-color:#6c757d;border-color:#6c757d}.btn-secondary:hover{color:#fff;background-color:#5c636a;border-color:#565e64}
+        .btn-success{color:#fff;background-color:#198754;border-color:#198754}.btn-success:hover{color:#fff;background-color:#157347;border-color:#146c43}.btn-success:focus-visible{box-shadow:0 0 0 0.25rem rgba(60,153,110,0.5)}
+        .btn-danger{color:#fff;background-color:#dc3545;border-color:#dc3545}.btn-danger:hover{color:#fff;background-color:#bb2d3b;border-color:#b02a37}.btn-danger:focus-visible{box-shadow:0 0 0 0.25rem rgba(225,83,97,0.5)}
+        .btn-warning{color:#000;background-color:#ffc107;border-color:#ffc107}.btn-warning:hover{color:#000;background-color:#ffca2c;border-color:#ffc720}
+        .btn-info{color:#000;background-color:#0dcaf0;border-color:#0dcaf0}.btn-info:hover{color:#000;background-color:#31d2f2;border-color:#25cff2}
+        .btn-light{color:#000;background-color:#f8f9fa;border-color:#f8f9fa}.btn-light:hover{color:#000;background-color:#d3d4d5;border-color:#c6c7c8}
+        .btn-dark{color:#fff;background-color:#212529;border-color:#212529}.btn-dark:hover{color:#fff;background-color:#1c1f23;border-color:#1a1d20}
+        .btn-sm{padding:0.25rem 0.5rem;font-size:0.875rem;border-radius:0.25rem}
+        .btn-lg{padding:0.5rem 1rem;font-size:1.25rem;border-radius:0.5rem}
+        .btn-outline-success{color:#198754;border-color:#198754}.btn-outline-success:hover{color:#fff;background-color:#198754;border-color:#198754}
+        .form-control{display:block;width:100%;padding:0.375rem 0.75rem;font-size:1rem;font-weight:400;line-height:1.5;color:#212529;background-color:#fff;border:1px solid #dee2e6;border-radius:0.375rem;transition:border-color .15s ease-in-out,box-shadow .15s ease-in-out}
+        .form-control:focus{color:#212529;background-color:#fff;border-color:#86b7fe;outline:0;box-shadow:0 0 0 0.25rem rgba(13,110,253,0.25)}
+        .form-control::placeholder{color:#6c757d;opacity:1}.form-control:disabled{background-color:#e9ecef;opacity:1}
+        .form-control-sm{min-height:calc(1.5em + 0.5rem + 2px);padding:0.25rem 0.5rem;font-size:0.875rem;border-radius:0.25rem}
+        .form-control-lg{min-height:calc(1.5em + 1rem + 2px);padding:0.5rem 1rem;font-size:1.25rem;border-radius:0.5rem}
+        textarea.form-control{min-height:calc(1.5em + 0.75rem + 2px)}
+        .form-select{display:block;width:100%;padding:0.375rem 2.25rem 0.375rem 0.75rem;font-size:1rem;font-weight:400;line-height:1.5;color:#212529;background-color:#fff;background-image:url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e");background-repeat:no-repeat;background-position:right 0.75rem center;background-size:16px 12px;border:1px solid #dee2e6;border-radius:0.375rem;transition:border-color .15s ease-in-out,box-shadow .15s ease-in-out;-webkit-appearance:none;-moz-appearance:none;appearance:none}
+        .form-select:focus{border-color:#86b7fe;outline:0;box-shadow:0 0 0 0.25rem rgba(13,110,253,0.25)}.form-select:disabled{background-color:#e9ecef}.form-select-sm{padding-top:0.25rem;padding-bottom:0.25rem;padding-left:0.5rem;font-size:0.875rem;border-radius:0.25rem}.form-select-lg{padding-top:0.5rem;padding-bottom:0.5rem;padding-left:1rem;font-size:1.25rem;border-radius:0.5rem}
+        .alert{position:relative;padding:1rem;margin-bottom:1rem;border:1px solid transparent;border-radius:0.375rem}.alert-heading{color:inherit}.alert-link{font-weight:700}
+        .alert-primary{color:#084298;background-color:#cfe2ff;border-color:#b6d4fe}.alert-secondary{color:#41464b;background-color:#e2e3e5;border-color:#d3d6d8}.alert-success{color:#0f5132;background-color:#d1e7dd;border-color:#badbcc}.alert-info{color:#055160;background-color:#cff4fc;border-color:#b6effb}.alert-warning{color:#664d03;background-color:#fff3cd;border-color:#ffecb5}.alert-danger{color:#842029;background-color:#f8d7da;border-color:#f5c2c7}.alert-light{color:#636464;background-color:#fefefe;border-color:#fdfdfe}.alert-dark{color:#141619;background-color:#d3d3d4;border-color:#bcbebf}
+        .badge{display:inline-block;padding:0.35em 0.65em;font-size:0.75em;font-weight:700;line-height:1;color:#fff;text-align:center;white-space:nowrap;vertical-align:baseline;border-radius:0.375rem}.badge:empty{display:none}
+        .table{width:100%;margin-bottom:1rem;vertical-align:top;border-color:#dee2e6}.table>:not(caption)>*>*{padding:0.5rem;border-bottom-width:1px}.table>thead{vertical-align:bottom}.table-bordered>:not(caption)>*{border-width:1px 0}.table-bordered>:not(caption)>*>*{border-width:0 1px}.table-responsive{overflow-x:auto;-webkit-overflow-scrolling:touch}
+        .modal{position:fixed;top:0;left:0;z-index:1055;display:none;width:100%;height:100%;overflow-x:hidden;overflow-y:auto;outline:0}.modal-dialog{position:relative;width:auto;margin:0.5rem;pointer-events:none}.modal.fade .modal-dialog{transition:transform 0.3s ease-out;transform:translate(0,-50px)}.modal.show .modal-dialog{transform:none}.modal-dialog-centered{display:flex;align-items:center;min-height:calc(100% - 1rem)}.modal-content{position:relative;display:flex;flex-direction:column;width:100%;pointer-events:auto;background-color:#fff;border:1px solid rgba(0,0,0,0.175);border-radius:0.5rem;outline:0}.modal-backdrop{position:fixed;top:0;left:0;z-index:1050;width:100vw;height:100vh;background-color:#000}.modal-backdrop.fade{opacity:0}.modal-backdrop.show{opacity:0.5}.modal-header{display:flex;flex-shrink:0;align-items:center;justify-content:space-between;padding:1rem;border-bottom:1px solid #dee2e6;border-top-left-radius:calc(0.5rem - 1px);border-top-right-radius:calc(0.5rem - 1px)}.modal-header .btn-close{padding:0.5rem;margin:-0.5rem -0.5rem -0.5rem auto}.modal-title{margin-bottom:0;line-height:1.5}.modal-body{position:relative;flex:1 1 auto;padding:1rem}.modal-footer{display:flex;flex-shrink:0;flex-wrap:wrap;align-items:center;justify-content:flex-end;padding:0.75rem;border-top:1px solid #dee2e6;border-bottom-right-radius:calc(0.5rem - 1px);border-bottom-left-radius:calc(0.5rem - 1px)}.modal-footer>*{margin:0.25rem}@media(min-width:576px){.modal-dialog{max-width:500px;margin:1.75rem auto}.modal-dialog-centered{min-height:calc(100% - 3.5rem)}.modal-sm{max-width:300px}}@media(min-width:992px){.modal-lg,.modal-xl{max-width:800px}}@media(min-width:1200px){.modal-xl{max-width:1140px}}
+        .fade{transition:opacity .15s linear}.fade:not(.show){opacity:0}.collapse:not(.show){display:none}.collapsing{height:0;overflow:hidden;transition:height .35s ease}
+        .nav{display:flex;flex-wrap:wrap;padding-left:0;margin-bottom:0;list-style:none}.nav-link{display:block;padding:0.5rem 1rem;color:#0d6efd;text-decoration:none;transition:color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out}.nav-link:hover{color:#0a58ca}.nav-link.disabled{color:#6c757d;pointer-events:none;cursor:default}.nav-tabs{border-bottom:1px solid #dee2e6}.nav-tabs .nav-link{margin-bottom:-1px;border:1px solid transparent;border-top-left-radius:0.375rem;border-top-right-radius:0.375rem}.nav-tabs .nav-link:hover{border-color:#e9ecef #e9ecef #dee2e6}.nav-tabs .nav-link.active{color:#495057;background-color:#fff;border-color:#dee2e6 #dee2e6 #fff}.tab-content>.tab-pane{display:none}.tab-content>.active{display:block}
+        .navbar{position:relative;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;padding:0.5rem 1rem}.navbar>.container,.navbar>.container-fluid{display:flex;flex-wrap:inherit;align-items:center;justify-content:space-between}.navbar-brand{padding-top:0.3125rem;padding-bottom:0.3125rem;margin-right:1rem;font-size:1.25rem;text-decoration:none;white-space:nowrap}.navbar-nav{display:flex;flex-direction:column;padding-left:0;margin-bottom:0;list-style:none}.navbar-nav .nav-link{padding-right:0;padding-left:0}.navbar-collapse{flex-basis:100%;flex-grow:1;align-items:center}.navbar-toggler{padding:0.25rem 0.75rem;font-size:1.25rem;line-height:1;background-color:transparent;border:1px solid transparent;border-radius:0.375rem;transition:box-shadow .15s ease-in-out}.navbar-toggler:hover{text-decoration:none}.navbar-toggler:focus-visible{text-decoration:none;outline:0;box-shadow:0 0 0 0.25rem}@media(min-width:992px){.navbar-expand-lg{flex-wrap:nowrap;justify-content:flex-start}.navbar-expand-lg .navbar-nav{flex-direction:row}.navbar-expand-lg .navbar-nav .nav-link{padding-right:0.5rem;padding-left:0.5rem}.navbar-expand-lg .navbar-collapse{display:flex!important;flex-basis:auto}.navbar-expand-lg .navbar-toggler{display:none}}.navbar-dark .navbar-brand{color:#fff}.navbar-dark .navbar-brand:hover{color:#fff}.navbar-dark .navbar-nav .nav-link{color:rgba(255,255,255,0.55)}.navbar-dark .navbar-nav .nav-link:hover{color:rgba(255,255,255,0.75)}.navbar-dark .navbar-nav .nav-link.active{color:#fff}.navbar-dark .navbar-toggler{color:rgba(255,255,255,0.55);border-color:rgba(255,255,255,0.1)}
+        .btn-close{box-sizing:content-box;width:1em;height:1em;padding:0.25em;color:#000;background:transparent url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23000'%3e%3cpath d='M.293.293a1 1 0 0 1 1.414 0L8 6.586 14.293.293a1 1 0 1 1 1.414 1.414L9.414 8l6.293 6.293a1 1 0 0 1-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 0 1-1.414-1.414L6.586 8 .293 1.707a1 1 0 0 1 0-1.414z'/%3e%3c/svg%3e") center/1em auto no-repeat;border:0;border-radius:0.375rem;opacity:0.5}.btn-close:hover{color:#000;text-decoration:none;opacity:0.75}.btn-close:focus-visible{outline:0;box-shadow:0 0 0 0.25rem rgba(13,110,253,0.25);opacity:1}.btn-close-white{filter:invert(1) grayscale(100%) brightness(200%)}
+
+        /* ===== Custom Madrasah Styles ===== */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Padauk', 'Noto Sans Myanmar', 'Myanmar Text', 'Myanmar Sangam MN', sans-serif;
+            background: #fef8e7;
+            color: #2c2b28;
+            line-height: 1.6;
+            padding: 18px;
+        }
+        .main-content { padding: 2rem 1.8rem; }
+        .section-card {
+            background: rgba(255, 255, 245, 0.96);
+            border-radius: 2rem;
+            padding: 2rem 1.8rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(212, 175, 55, 0.4);
+        }
+        .navbar { 
+            background: #1e4620 !important; 
+            border-bottom: 2px solid #d4af37; 
+            border-radius: 60px; 
+            margin-bottom: 1rem; 
+        }
+        .navbar-brand { color: #fff !important; text-decoration: none !important; }
+        .btn-primary { 
+            background: #2c5f2d; 
+            border: none; 
+            border-radius: 3rem; 
+            padding: 0.7rem 2rem; 
+            font-weight: 600; 
+            color: white;
+        }
+        .btn-primary:hover { background: #1e4620; }
+        .exam-tab {
+            border-radius: 2rem 2rem 0 0;
+            font-weight: bold;
+            border: 2px solid #2c5f2d;
+            border-bottom: none;
+            padding: 10px 25px;
+            margin-right: 5px;
+            cursor: pointer;
+            background: #e8f5e9;
+            color: #2c5f2d;
+            font-family: inherit;
+        }
+        .exam-tab.active {
+            background: #2c5f2d !important;
+            color: white !important;
+        }
+        .table th { 
+            background: #2c5f2d !important; 
+            color: white; 
+            text-align: center;
+            vertical-align: middle;
+            font-size: 0.85rem;
+            padding: 5px 4px;
+        }
+        .table td {
+            text-align: center;
+            vertical-align: middle;
+            padding: 4px 6px;
+        }
+        .table th:nth-child(2), .table td:nth-child(2) { 
+            min-width: 200px; 
+            text-align: left;
+        }
+        .table input.mark-input { 
+            width: 55px; 
+            text-align: center; 
+            font-size: 0.85rem;
+            padding: 2px;
+        }
+        .table input.student-name {
+            font-size: 0.9rem;
+            width: 100%;
+        }
+        .rank-cell { 
+            font-weight: bold; 
+            text-align: center; 
+        }
+        .total-cell {
+            font-weight: bold;
+            background: #fff8e1;
+        }
+        .exam-badge {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            font-weight: bold;
+            margin-left: 5px;
+        }
+        .badge-first { background: #ffd700; color: #000; }
+        .badge-second { background: #c0c0c0; color: #000; }
+        .badge-third { background: #cd7f32; color: #fff; }
+        .print-header { display: none; }
+        .print-only { display: none; }
+        .tab-content > .tab-pane { display: none; }
+        .tab-content > .tab-pane.active { display: block; }
+        .nav-tabs { border-bottom: none; padding-left: 0; }
+        .nav-item { list-style: none; }
+
+        @media (max-width: 768px) {
+            body { padding: 8px; }
+            .main-content { padding: 1rem; }
+            .table input.mark-input { width: 45px; font-size: 0.75rem; }
+            .table th:nth-child(2), .table td:nth-child(2) { min-width: 120px; }
+            .exam-tab { padding: 8px 15px; font-size: 0.85rem; }
+        }
+
+        @media print {
+            * {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+                background: transparent !important;
+                box-shadow: none !important;
+            }
+            .no-print, .navbar, .admin-bar, .btn, .modal, .nav-tabs, .exam-tab:not(.active) {
+                display: none !important;
+            }
+            body {
+                background-color: white !important;
+                color: black !important;
+                padding: 0 !important;
+                margin: 0 !important;
+            }
+            .section-card, #results {
+                background: white !important;
+                padding: 0 !important;
+                margin: 0 !important;
+                width: 100% !important;
+                border: none !important;
+                border-radius: 0 !important;
+                box-shadow: none !important;
+            }
+            @page {
+                size: A4 landscape;
+                margin: 5mm;
+            }
+            .print-header {
+                display: block !important;
+                margin-bottom: 5px !important;
+                text-align: center;
+                border-bottom: 2px solid #000;
+                padding-bottom: 8px;
+            }
+            .print-only {
+                display: inline-block !important;
+            }
+            .no-print-input {
+                display: none !important;
+            }
+            .tab-content > .tab-pane {
+                display: block !important;
+            }
+            .exam-results-print {
+                page-break-after: always;
+            }
+            .exam-results-print:last-child {
+                page-break-after: auto;
+            }
+            .table {
+                font-size: 6.5pt !important;
+                width: 100% !important;
+                border-collapse: collapse !important;
+                table-layout: fixed !important;
+                margin-top: 5px !important;
+                margin-bottom: 10px !important;
+            }
+            .table th, .table td {
+                border: 1px solid black !important;
+                padding: 1px 2px !important;
+                color: black !important;
+                background: white !important;
+                line-height: 1.6 !important;
+            }
+            .table thead th {
+                background-color: #ddd !important;
+                font-weight: bold !important;
+                color: black !important;
+            }
+            .table th:nth-child(1), .table td:nth-child(1) { width: 20px !important; }
+            .table th:nth-child(2), .table td:nth-child(2) { width: 110px !important; text-align: left !important; }
+            .table th:last-child, .table td:last-child { width: 28px !important; }
+            .table th:nth-last-child(2), .table td:nth-last-child(2) { width: 38px !important; }
+            .student-name-text {
+                font-weight: bold !important;
+                font-size: 7.5pt !important;
+            }
+            .exam-title-print {
+                font-size: 10pt !important;
+                font-weight: bold !important;
+                text-align: center !important;
+                margin: 6px 0 !important;
+                text-decoration: underline;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="main-content">
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top no-print rounded-pill">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#"><span style="margin-right:8px;">🕌</span> မဒ်ရစဟ်သအ်လီမုလ်ကုရ်အာန်</a>
+        </div>
+    </nav>
+
+    <section id="results" class="section-card">
+        <div class="print-header">
+            <h2 style="margin: 0;">မဒ်ရစဟ်သအ်လီမုလ်ကုရ်အာန်</h2>
+            <h4 style="margin: 5px 0;">Madrasah Taleemul Quran</h4>
+            <p style="margin: 2px 0; font-size: 9pt;">အမှတ်(6)၊ 98လမ်း၊ လွတ်လပ်ရေးရပ်ကွက်၊ မင်္ဂလာတောင်ညွန့်မြို့နယ်</p>
+            <h5 style="margin: 5px 0;">
+                <span id="printClassName"></span> - <span id="printYear"></span> ခုနှစ် စာမေးပွဲရလဒ်
+            </h5>
+        </div>
+
+        <h3 class="text-center mb-4 no-print" style="color:#1e4620;">
+            <span style="margin-right:8px;">🏆</span> စာမေးပွဲရလဒ်ကြေငြာစာ
+        </h3>
+
+        <!-- Admin Bar -->
+        <div class="admin-bar no-print d-flex flex-wrap justify-content-between gap-3 mb-3">
+            <div class="d-flex gap-3 flex-wrap align-items-end">
+                <div style="max-width:180px;">
+                    <label class="fw-bold small">📅 ခုနှစ်</label>
+                    <select id="yearSelect" class="form-select form-select-sm"></select>
+                </div>
+                <div style="max-width:180px;">
+                    <label class="fw-bold small">🏫 အတန်း</label>
+                    <select id="resultClassSelect" class="form-select form-select-sm">
+                        <option value="">-- ရွေးပါ --</option>
+                    </select>
+                </div>
+            </div>
+            <div class="d-flex align-items-end gap-2">
+                <span id="loginStatus" class="badge bg-secondary">🔒 Admin မဝင်ရသေး</span>
+                <button id="loginBtn" class="btn btn-success btn-sm"><span style="margin-right:4px;">🔓</span> Login</button>
+                <button id="logoutBtn" class="btn btn-danger btn-sm" style="display:none;"><span style="margin-right:4px;">🚪</span> Logout</button>
+                <button id="printResultBtn" class="btn btn-primary btn-sm"><span style="margin-right:4px;">🖨️</span> Print</button>
+            </div>
+        </div>
+
+        <!-- Exam Tabs -->
+        <ul class="nav nav-tabs no-print mb-3" id="examTabs">
+            <li class="nav-item" role="presentation">
+                <button class="exam-tab active" id="tab-first" onclick="switchTab('first')">
+                    သုံးလပတ် <span class="exam-badge badge-first">1st</span>
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="exam-tab" id="tab-second" onclick="switchTab('second')">
+                    ခြောက်လပတ် <span class="exam-badge badge-second">2nd</span>
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="exam-tab" id="tab-third" onclick="switchTab('third')">
+                    နှစ်ပတ်လည် <span class="exam-badge badge-third">3rd</span>
+                </button>
+            </li>
+        </ul>
+
+        <!-- Tab Contents -->
+        <div class="tab-content" id="examTabContent">
+            <div class="tab-pane active" id="first-exam">
+                <div id="firstExamContainer" class="table-responsive">
+                    <div class="alert alert-info text-center">အတန်းရွေးပါ။</div>
+                </div>
+            </div>
+            <div class="tab-pane" id="second-exam">
+                <div id="secondExamContainer" class="table-responsive">
+                    <div class="alert alert-info text-center">အတန်းရွေးပါ။</div>
+                </div>
+            </div>
+            <div class="tab-pane" id="third-exam">
+                <div id="thirdExamContainer" class="table-responsive">
+                    <div class="alert alert-info text-center">အတန်းရွေးပါ။</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Print View -->
+        <div id="printAllExams" class="d-none"></div>
+    </section>
+
+    <footer class="no-print text-center mt-4">
+        <span style="margin-right:8px;">🕌</span> မဒ်ရစဟ်သအ်လီမုလ်ကုရ်အာန်<br>
+        © <span id="footerYear"></span>
+    </footer>
+</div>
+
+<!-- Login Modal -->
+<div class="modal fade" id="loginModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header bg-success text-white">
+                <h5 class="modal-title"><span style="margin-right:6px;">🔑</span> Admin Login</h5>
+                <button type="button" class="btn-close btn-close-white" onclick="hideLogin()" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <input type="email" id="loginEmail" class="form-control mb-2" placeholder="Email" value="madrasahtaleemulquran98@gmail.com">
+                <input type="password" id="loginPassword" class="form-control mb-2" placeholder="Password">
+                <div id="loginError" class="text-danger small"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" onclick="hideLogin()">ပိတ်</button>
+                <button type="button" id="confirmLoginBtn" class="btn btn-success">ဝင်ရောက်</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+// ============================================
+//  DATA & CONFIG
+// ============================================
+const EXAMS = ['first', 'second', 'third'];
+const EXAM_NAMES = { first: 'သုံးလပတ်', second: 'ခြောက်လပတ်', third: 'နှစ်ပတ်လည်' };
+const ROWS = 20;
+
+const subjectsByClass = {
+    1: ["ယစ္စရ်နလ် ကုရ်အာန်", "စူရဟ်အလွတ်ကျက်ခြင်း", "မစ္စနူးန် ဒိုအာ", "ဟဒီးဆ်တော်", "ကုရ်အာနီ ဒိုအာ", "ဂုဏ်တော်များ", "ကလိမဟ်", "အလ်မုဖရ်ရဒါးသ်"],
+    2: ["ယစ္စရ်နလ် ကုရ်အာန်", "ဂုဏ်တော်", "စူရဟ်အလွတ်ကျက်မှတ်ခြင်း", "ကလိမဟ်", "ဟဒီးဆ်တော်", "အူရ်ဒူ ကာအေဒဟ်", "မစ္စနှုးန် ဒိုအာ", "အလ်မွဖ်ဖရ်ရဒါးသ်", "ကုရ်အာနီ ဒိုအာ"],
+    3: ["ယစ္စရ်နလ် ကုရ်အာန်", "စူရဟ်အလွတ်ကျက်မှတ်ခြင်း", "ဟဒီးဆ်တော်", "မစ္စနှုးန် ဒိုအာ", "ကုရ်အာနီ ဒိုအာ", "ဂုဏ်တော်", "ကလိမဟ်", "အူရ်ဒူ ကာအေဒဟ်", "အလ်မွဖ်ဖရ်ရဒါးသ်"],
+    4: ["ကုရ်အာန်", "စူရဟ်အလွတ်ကျက်မှတ်ခြင်း", "သဂ်ျဝီးဒ်", "ဟဒီးဆ်တော်", "မစ္စနူးန်ဒိုအာ", "ကုရ်အာနီဒိုအာ", "ဂုဏ်တော်", "ကလိမဟ်", "အုရ်ဒူပဟ်လီ", "အလ်မုဖရ်ရဒါးသ်"],
+    5: ["ကုရ်အာန်", "စူရဟ်အလွတ်ကျက်မှတ်ခြင်း", "သဂ်ျဝီးဒ်", "အစ္စလာမ့်အခြေပြ(အတွဲ၁)", "သအ်လီမုလ်အစ္စလာမ်(အတွဲ၁)", "အစ္စလာမီးအာဒါးဘ်(အတွဲ၁)", "ကျွန်ုပ်တို့၏မြတ်နဗီ", "အုရ်ဒူ ပဟ်လီ", "သအ်လီမုလ်အစ္စလာမ်(အတွဲ၁)အုရ်ဒူ", "အလ်မုဖရ်ရဒါးသ်"],
+    6: ["ကုရ်အာန်", "စူရဟ်အလွတ်ကျက်မှတ်ခြင်း", "သဂျ်ဝီးဒ်", "အစ္စလာမ့်အခြေပြ အတွဲ 2", "သအ်လီမုလ်အစ္စလာမ် အတွဲ 2", "အစ္စလာမီအားဒါဘ် အတွဲ 2", "ကျွန်ုပ်တို့မြတ်ရစူလ်", "အခြေခံသမိုင်း", "မစာအေလေနမားဇ်", "အုရ်ဒူ ဒူစရီး", "သအ်လီမုလ်အစ္စလာမ် အုရ်ဒူ", "အလ်မုဖရ်ရဒါးသ်"],
+    7: ["ကုရ်အာန်", "စူရဟ်အလွတ်ကျက်မှတ်ခြင်း", "သဂ်ျဝီးဒ်", "အခြေပြ အတွဲ3", "သအ်လီမုလ်အစ္စလာမ် အတွဲ3", "အစ္စလာမီ့အကာအီးဒ်", "တမန်တော်မြတ်၏အတ္ထုပ္ပတ္တိ", "နဗီတမန်တော်များအတ္ထုပ္ပတ္တိ", "ဟမာရေးအီမာန်", "ဟမာရေး နဗီ", "သအ်လီမုလ်အစ္စလာမ် အတွဲ3 အုရ်ဒူ", "အုရ်ဒူ သီစရီး"],
+    8: ["ကုရ်အာန်", "စူရဟ်အလွတ်ကျက်မှတ်ခြင်း", "သဂ်ျဝီးဒ်", "အစ္စလာမ့်အခြေပြ အတွဲ4", "သအ်လီမုလ်အစ္စလာမ် အတွဲ4", "တမန်တော်မြတ်အတ္ထုပ္ပတ္တိ", "နဗီတမန်တော်များအကြောင်း", "ကုရ်အာန်ရှင်းလင်းချက်", "ဟာမာရေးရစူလ်", "သအ်လီမုလ်အစ္စလာမ် 4 အုရ်ဒူ", "အစ္စလာမီ့အကာအီးဒ် အုရ်ဒူ", "မစာအေလေနမားဇ် အုရ်ဒူ", "ဒူရူစွလ်လုဂါးသ်", "အုရ်ဒူ ကြောဝ်ထီး"]
+};
+
+const classNames = {
+    1: "မူကြိုတန်း", 2: "သူငယ်တန်းလေး", 3: "သူငယ်တန်းကြီး",
+    4: "ပထမတန်းလေး", 5: "ပထမတန်းကြီး", 6: "ဒုတိယတန်း",
+    7: "တတိယတန်း", 8: "စတုတ္ထတန်း"
+};
+
+const studentNamesByClass = {
+    1: [
+        "မုဟမ္မဒ် မုဆ်သဖာ – ဟဘိဘုလ္လာဟ်",
+        "ရှာ ဝလီယလ္လာဟ် – အဗ္ဒုရ် ရရှိဒ်",
+        "အဟ်ဆာန် – နီစာရ်အဟ်မဒ်",
+        "ဂျူနိဒ် – အဟ်မဒ်",
+        "ဆအိဒ် – ရှမ်ရှီးရ်",
+        "ဘရကတ်အလီ – ရှမ်စွဒ္ဒီးန်",
+        "အဗ္ဒု လ်ခါလိဒ် – အဗ္ဒု ရ်ရဇာ့ခ်",
+        "အဗ်ဒွဆ်ဆုဘဟန် – ဂျမလုဒ္ဒိန်",
+        "အုမရ် – အဗ်ဒုလ်လာဟ်",
+        "ကဗ်ရှားဟ် ဘီ – ဟနိဖ်",
+        "ဆူဖိယာ ဘီ – အဗ္ဒုရှ်ရှူကိုရ်",
+        "အာဖိယာ ဘီ – အဟ်မဒ်",
+        "အိုင်နဟ် – ရဟ်မသွလ္လာဟ်",
+        "ဆူဖိယာ – အဗ္ဒုလ္လာဟ်",
+        "အာအိရှာ ဘီ – အဗ္ဒုလ္လာဟ်",
+        "ဆူဖိယာ ဘီ – အဗ္ဒု ရ်ရဇာ့ခ်",
+        "ရုဘိနာ ဘီ – ယာစိးန်",
+        "ဝဟိဒဟ် – ဟဖီဇွလ္လာဟ်",
+        "အာအိရှာ ဘီ – အဗ်ဒွရ်ရဟီးမ်",
+        "နစီမဟ်ဘီ – အဗ်ဒုလ်လာဟ်"
+    ],
+    2: [
+        "မဟာမဒ် အုစ်မန် — မုဟမ္မဒ် ဘိလာလ်",
+        "အဗ္ဒုရ်ရရှိဒ် — မုဟမ္မဒ် အလီ",
+        "ရိုင်ဟန် — အဗ္ဒုရရဟမန်",
+        "ဖာရုခ် — အဟ်မဒ်",
+        "မုဆ်တဖာ — ဟဘီဘုလ္လဟ်",
+        "ဇိုင်ဒ် — မုဟမ္မဒ် စအိဒ်",
+        "ဆုမိယ ဟ်ဘီ — အဗ္ဒုလ္လာဟ်",
+        "ဟုမိုင်ရဟ် ဘီ — ဟဘီဘုလ္လဟ်",
+        "စာအ်ဒ်ီယ ဟ်ဟီ — အဗ္ဒုလ်ဟမိဒ်",
+        "ရိုမာနဟ် — ယာစီးန်",
+        "ဇိုင်နပ် ဘီ — မုဟမ္မဒ်",
+        "ဖိုအီဇဟ် — ရှမိမ်",
+        "ဂျုဝိုင်ရီယဟ် ဘီ — အဗ္ဒုရ်ှရှကုရ်",
+        "အဆွဂရ် — ရှမ်ရှိရ်",
+        "အဘူဘကရ် — ရှမ်စဒ္ဒိန်"
+    ],
+    3: [
+        "အဇဟ်ရ် – အခ်ထာ",
+        "ဆလာဟွဒ္ဒိန် – မဟာမဒ် အယ်လိယာ့ခ်",
+        "မုဆ်သဖာ – ရှေ့ခ် မဟာမဒ်",
+        "တာဟိရဟ် ဘီ – ရဖိက်",
+        "ရှဗနမ် – ဖိုင်ဆလ်",
+        "ရိဟာနာ – ဆိုလိမန်",
+        "ရိရှ်မဟ် – ဆိုလိမန်",
+        "ဖာတိမဟ် – ဆိုလိမန်",
+        "ယာဆမိန် ဘီ – အဗ္ဒုရ် ရဇာ့ခ်",
+        "ဆဖိယာ ဘီ – ဟဆန်",
+        "ဖရဇာနာ – ရဖိက်",
+        "ဆဖိယာ ဘီ – အဟ်မဒ်",
+        "ဆာဂျိဒဟ် ဘီ – အဗ်ဒွလ်ကာဒီရ်",
+        "အိုဝိုယ်စ် – နူးရ်မုဟမ္မဒ်"
+    ],
+    4: [
+        "ဟိရှမ် – အယ်လိယာ့စ်",
+        "ဆဖဝန် – အလီ",
+        "ဆိုဖိယန် – မဟ်မုဒ်",
+        "မုဟမ္မဒ် – အဟ်မဒ်",
+        "မုအာဇ် – အဗ္ဒုရ်ရဇာ့ခ်",
+        "ဟမိဒဟ် – ရှာ မုဟမ္မဒ်",
+        "ရိရှမဟ် ဘီ – အဗ္ဒုလ်အဇိဇ်",
+        "ခိုရရှီဒဟ် – ရှဘိရ်",
+        "အွမ်မေ ဆလမဟ် – ရမဇာန် အလီ",
+        "ဖောင်ဇိယာ – ဂျမညလုဒ္ဒိန်"
+    ],
+    5: [
+        "ဆအဒ် – ဆအိဒ်",
+        "ယူဆုဖ် – ဟာရှင်မ်",
+        "အိရ်ဖန် – အယ်လိယာ့စ်",
+        "တာဟိရဟ် – အလီ",
+        "ရိစဟ် ဘိဂမ် – အာရိဖ်",
+        "ဟိုမိုင်ရဟ် – ဖာရုခ်",
+        "ဖိရိုဇဟ် – ရှာ မုဟမ္မဒ်",
+        "အိုင်မန် – ဆိုလိုင်မန်",
+        "အနတ်စ် – အဗ္ဒုလ် ဝါဟိဒ်",
+        "ဆအ်ဒ်ီယဟ် – ဟဆန်",
+        "ဟီဒါယဟ် – အဗ္ဒုရ် ရဟိမ်"
+    ],
+    6: [
+        "ဆုဟိုင်လ် – အယ်လိယာ့စ်",
+        "ဂျမိလ် – အဗ္ဒုရ်ရဟ်မန်",
+        "အာမီရ် ခန် – အဗ္ဒု ရ်ရဟိမ်",
+        "အဟ်မဒ် – ဟဘိဘုလ္လာဟ်",
+        "ရုမာနာဘီ – အဇိဇ်",
+        "ဟိုမိုင်ရဟ် ဘီ – ဟာရှမ်",
+        "ဆအ်ဒိယာ ဘီ – ဇုဘိုင်ရ်"
+    ],
+    7: [
+        "ဆူလ်သွာန် – ဆိုလိုင်မန်",
+        "ရုကီယာ – ရှရီဖ်",
+        "စမရဟ် ဘီ – ရှေ့ခ် မုဟမ္မဒ်",
+        "အာအိရှာ ဘီ – ဟနိဖ်",
+        "မာဂျိဒဟ် ဘီ – နိဆာရ် အဟ်မဒ်",
+        "ဖရ်ဟာနာ ဘီ – ဟာရုန်"
+    ],
+    8: [
+        "ဖရ်ဟန် – အဗ္ဒုရ်ရဟ်မန်",
+        "ဘရကတ် – ရဖိက်",
+        "ဆုဟိုင်လ် – အဘူဘကရ်",
+        "အီရ်ဖန် – အလီ",
+        "ဘိလာလ် – ရှရီးဖ်",
+        "အဘူ ဟမ်ဇဟ် – အာရိဖ်",
+        "ဆဖိယာ ဘီ – ဆအိဒ်",
+        "အဖဇလ် – အိဗ်ဒရ်ရဟိမ်"
+    ]
+};
+
+// ============================================
+//  STATE
+// ============================================
+let isAdmin = false;
+let currentClass = "";
+let currentYear = new Date().getFullYear();
+let allData = {};
+let currentTab = 'first';
+
+// ============================================
+//  INIT
+// ============================================
+function init() {
+    const yearSelect = document.getElementById("yearSelect");
+    const currentY = new Date().getFullYear();
+    for (let y = currentY - 5; y <= currentY + 1; y++) {
+        const opt = document.createElement("option");
+        opt.value = y;
+        opt.textContent = y + " ခုနှစ်";
+        if (y === currentY) opt.selected = true;
+        yearSelect.appendChild(opt);
+    }
+    document.getElementById("footerYear").textContent = currentY;
+
+    const resSelect = document.getElementById("resultClassSelect");
+    for (let id in classNames) {
+        let opt = document.createElement("option");
+        opt.value = id;
+        opt.textContent = classNames[id];
+        resSelect.appendChild(opt);
+    }
+
+    loadAllData();
+    checkLoginStatus();
+}
+
+// ============================================
+//  DATA MANAGEMENT
+// ============================================
+function loadAllData() {
+    const saved = localStorage.getItem("examResultsData_v3");
+    if (saved) {
+        try {
+            allData = JSON.parse(saved);
+        } catch(e) {
+            allData = {};
+        }
+    }
+    ensureYearData(currentYear);
+}
+
+function ensureYearData(year) {
+    if (!allData[year]) allData[year] = {};
+    for (let c = 1; c <= 8; c++) {
+        if (!allData[year][c]) {
+            allData[year][c] = {};
+            const subsLen = subjectsByClass[c].length;
+            const nameList = studentNamesByClass[c] || [];
+
+            EXAMS.forEach(exam => {
+                let studentData = [];
+                for (let i = 0; i < ROWS; i++) {
+                    studentData.push({
+                        studentName: (i < nameList.length) ? nameList[i] : "",
+                        marks: new Array(subsLen).fill("")
+                    });
+                }
+                allData[year][c][exam] = studentData;
+            });
+        }
+    }
+    saveAllData();
+}
+
+function saveAllData() {
+    try {
+        localStorage.setItem("examResultsData_v3", JSON.stringify(allData));
+    } catch(e) {
+        console.warn("localStorage save failed:", e);
+    }
+}
+
+function getExamData(year, classId, exam) {
+    ensureYearData(year);
+    return allData[year][classId][exam];
+}
+
+function saveExamData(year, classId, exam, data) {
+    allData[year][classId][exam] = data;
+    saveAllData();
+}
+
+// ============================================
+//  RANK
+// ============================================
+function computeRanks(studentData) {
+    let withTotals = studentData.map((stu, idx) => {
+        let total = 0;
+        let count = 0;
+        for (let m of stu.marks) {
+            let v = parseFloat(m);
+            if (!isNaN(v) && v >= 0 && v <= 100) {
+                total += v;
+                count++;
+            }
+        }
+        return { idx, total: count > 0 ? total : -1 };
+    });
+
+    withTotals.sort((a, b) => b.total - a.total);
+    let ranks = new Array(studentData.length).fill(null);
+    let currentRank = 1;
+
+    for (let i = 0; i < withTotals.length; i++) {
+        if (withTotals[i].total < 0) break;
+        if (i > 0 && withTotals[i].total === withTotals[i - 1].total) {
+            ranks[withTotals[i].idx] = currentRank;
+        } else {
+            currentRank = i + 1;
+            ranks[withTotals[i].idx] = currentRank;
+        }
+    }
+    return ranks;
+}
+
+// ============================================
+//  TAB SWITCHING
+// ============================================
+function switchTab(exam) {
+    currentTab = exam;
+
+    document.querySelectorAll('.exam-tab').forEach(btn => btn.classList.remove('active'));
+    document.getElementById('tab-' + exam).classList.add('active');
+
+    document.querySelectorAll('.tab-pane').forEach(pane => pane.classList.remove('active'));
+    document.getElementById(exam + '-exam').classList.add('active');
+}
+
+// ============================================
+//  RENDER TABLE
+// ============================================
+function renderAllTables() {
+    if (!currentClass) {
+        document.getElementById("firstExamContainer").innerHTML = '<div class="alert alert-info text-center">အတန်းရွေးပါ။</div>';
+        document.getElementById("secondExamContainer").innerHTML = '<div class="alert alert-info text-center">အတန်းရွေးပါ။</div>';
+        document.getElementById("thirdExamContainer").innerHTML = '<div class="alert alert-info text-center">အတန်းရွေးပါ။</div>';
+        return;
+    }
+
+    EXAMS.forEach(exam => {
+        renderExamTable(exam);
+    });
+}
+
+function renderExamTable(exam) {
+    const container = document.getElementById(exam + "ExamContainer");
+    const subjects = subjectsByClass[currentClass];
+    let studentData = getExamData(currentYear, currentClass, exam);
+    let ranks = computeRanks(studentData);
+
+    let html = buildTableHTML(subjects, studentData, ranks, exam);
+    container.innerHTML = html;
+
+    if (isAdmin) attachExamEvents(exam);
+}
+
+function buildTableHTML(subjects, studentData, ranks, exam) {
+    let disabledAttr = isAdmin ? '' : 'disabled';
+    let examLabel = EXAM_NAMES[exam];
+
+    let html = '<h5 class="no-print text-center mb-3" style="color:#1e4620;">' + examLabel + ' စာမေးပွဲရလဒ်</h5>';
+    html += '<table class="table table-bordered align-middle" id="table-' + exam + '"><thead class="table-success"><tr><th>စဉ်</th><th>ကျောင်းသားအမည်</th>';
+    subjects.forEach(function(s) { html += '<th>' + escapeHtml(s) + '</th>'; });
+    html += '<th>စုစုပေါင်း</th><th>အဆင့်</th></tr></thead><tbody>';
+
+    for (let i = 0; i < ROWS; i++) {
+        let stu = studentData[i];
+        let marks = stu.marks;
+        let total = 0;
+        let count = 0;
+        for (let m of marks) {
+            let v = parseFloat(m);
+            if (!isNaN(v) && v >= 0 && v <= 100) {
+                total += v;
+                count++;
+            }
+        }
+        let rank = ranks[i] !== null ? ranks[i] : "-";
+        let sName = escapeHtml(stu.studentName);
+
+        html += '<tr><td class="text-center">' + (i + 1) + '</td>';
+        html += '<td><span class="print-only student-name-text">' + (sName || "-") + '</span>';
+        html += '<input type="text" class="form-control form-control-sm student-name no-print-input" value="' + sName + '" data-row="' + i + '" ' + disabledAttr + '></td>';
+
+        for (let s = 0; s < subjects.length; s++) {
+            let val = marks[s] !== undefined ? marks[s] : "";
+            html += '<td class="text-center"><span class="print-only">' + val + '</span>';
+            html += '<input type="number" class="form-control form-control-sm mark-input no-print-input" value="' + val + '" min="0" max="100" step="0.1" data-row="' + i + '" data-sub="' + s + '" ' + disabledAttr + '></td>';
+        }
+
+        html += '<td class="total-cell fw-bold text-center">' + (total > 0 ? total.toFixed(1) : "-") + '</td>';
+        html += '<td class="rank-cell fw-bold text-center">' + rank + '</td></tr>';
+    }
+    html += '</tbody></table>';
+    return html;
+}
+
+// ============================================
+//  EVENTS
+// ============================================
+function attachExamEvents(exam) {
+    const table = document.getElementById("table-" + exam);
+    if (!table) return;
+
+    const rows = table.querySelectorAll("tbody tr");
+    let studentData = getExamData(currentYear, currentClass, exam);
+
+    rows.forEach(function(row, idx) {
+        let nameInp = row.querySelector(".student-name");
+        if (nameInp) {
+            nameInp.addEventListener("change", function() {
+                studentData[idx].studentName = this.value;
+                saveExamData(currentYear, currentClass, exam, studentData);
+                renderAllTables();
+            });
+        }
+
+        let marksInps = row.querySelectorAll(".mark-input");
+        marksInps.forEach(function(inp, subIdx) {
+            inp.addEventListener("change", function() {
+                let val = this.value === "" ? "" : parseFloat(this.value);
+                if (val === "" || isNaN(val)) val = "";
+                else val = Math.min(100, Math.max(0, val));
+                studentData[idx].marks[subIdx] = val;
+                saveExamData(currentYear, currentClass, exam, studentData);
+                renderAllTables();
+            });
+        });
+    });
+}
+
+// ============================================
+//  PRINT
+// ============================================
+function generatePrintHTML() {
+    const subjects = subjectsByClass[currentClass];
+    let html = '';
+
+    html += '<div class="print-header">';
+    html += '<h2 style="margin: 0;">မဒ်ရစဟ်သအ်လီမုလ်ကုရ်အာန်</h2>';
+    html += '<h4 style="margin: 5px 0;">Madrasah Taleemul Quran</h4>';
+    html += '<p style="margin: 2px 0; font-size: 9pt;">အမှတ်(6)၊ 98လမ်း၊ လွတ်လပ်ရေးရပ်ကွက်၊ မင်္ဂလာတောင်ညွန့်မြို့နယ်</p>';
+    html += '<h5 style="margin: 5px 0;">' + classNames[currentClass] + ' - ' + currentYear + ' ခုနှစ် စာမေးပွဲရလဒ်</h5>';
+    html += '</div>';
+
+    EXAMS.forEach(function(exam, idx) {
+        let studentData = getExamData(currentYear, currentClass, exam);
+        let ranks = computeRanks(studentData);
+
+        html += '<div class="exam-results-print">';
+        html += '<div class="exam-title-print">' + EXAM_NAMES[exam] + ' စာမေးပွဲရလဒ်</div>';
+        html += buildPrintTable(subjects, studentData, ranks);
+        html += '</div>';
+    });
+
+    return html;
+}
+
+function buildPrintTable(subjects, studentData, ranks) {
+    let html = '<table class="table table-bordered"><thead><tr><th>စဉ်</th><th>အမည်</th>';
+    subjects.forEach(function(s) { html += '<th>' + escapeHtml(s) + '</th>'; });
+    html += '<th>စုပေါင်း</th><th>အဆင့်</th></tr></thead><tbody>';
+
+    for (let i = 0; i < ROWS; i++) {
+        let stu = studentData[i];
+        let total = 0, count = 0;
+        for (let m of stu.marks) {
+            let v = parseFloat(m);
+            if (!isNaN(v) && v >= 0) { total += v; count++; }
+        }
+        let rank = ranks[i] !== null ? ranks[i] : "-";
+
+        html += '<tr><td>' + (i + 1) + '</td>';
+        html += '<td style="text-align:left; font-weight:bold;">' + (escapeHtml(stu.studentName) || "-") + '</td>';
+        stu.marks.forEach(function(m) { html += '<td>' + (m || "-") + '</td>'; });
+        html += '<td style="font-weight:bold;">' + (total > 0 ? total.toFixed(1) : "-") + '</td>';
+        html += '<td style="font-weight:bold;">' + rank + '</td></tr>';
+    }
+    html += '</tbody></table>';
+    return html;
+}
+
+// ============================================
+//  ADMIN & MODAL (No Bootstrap JS dependency)
+// ============================================
+function showLogin() {
+    const modal = document.getElementById('loginModal');
+    if (modal) {
+        modal.style.display = 'block';
+        modal.classList.add('show');
+        modal.setAttribute('aria-modal', 'true');
+        document.body.style.overflow = 'hidden';
+
+        let backdrop = document.querySelector('.modal-backdrop');
+        if (!backdrop) {
+            backdrop = document.createElement('div');
+            backdrop.className = 'modal-backdrop fade show';
+            document.body.appendChild(backdrop);
+        }
+    }
+}
+
+function hideLogin() {
+    const modal = document.getElementById('loginModal');
+    if (modal) {
+        modal.style.display = 'none';
+        modal.classList.remove('show');
+        modal.removeAttribute('aria-modal');
+        document.body.style.overflow = '';
+
+        const backdrop = document.querySelector('.modal-backdrop');
+        if (backdrop) backdrop.remove();
+    }
+}
+
+function checkLoginStatus() {
+    let logged = sessionStorage.getItem("adminLoggedIn");
+    isAdmin = (logged === "true");
+
+    let statusSpan = document.getElementById("loginStatus");
+    let loginBtn = document.getElementById("loginBtn");
+    let logoutBtn = document.getElementById("logoutBtn");
+
+    if (isAdmin) {
+        statusSpan.innerHTML = "✅ Admin";
+        statusSpan.className = "badge bg-success";
+        loginBtn.style.display = "none";
+        logoutBtn.style.display = "inline-block";
+    } else {
+        statusSpan.innerHTML = "🔒 Admin မဝင်ရသေး";
+        statusSpan.className = "badge bg-secondary";
+        loginBtn.style.display = "inline-block";
+        logoutBtn.style.display = "none";
+    }
+
+    renderAllTables();
+}
+
+function escapeHtml(str) {
+    if (!str) return "";
+    return str.replace(/[&<>]/g, function(m) { return ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' }[m]); });
+}
+
+// ============================================
+//  EVENT LISTENERS
+// ============================================
+document.addEventListener('DOMContentLoaded', function() {
+    init();
+
+    document.getElementById("yearSelect").addEventListener("change", function() {
+        currentYear = parseInt(this.value);
+        ensureYearData(currentYear);
+        renderAllTables();
+    });
+
+    document.getElementById("resultClassSelect").addEventListener("change", function() {
+        currentClass = this.value;
+        document.getElementById("printClassName").textContent = currentClass ? classNames[currentClass] : "";
+        document.getElementById("printYear").textContent = currentYear;
+        renderAllTables();
+    });
+
+    document.getElementById("loginBtn").addEventListener("click", function(e) {
+        e.preventDefault();
+        showLogin();
+    });
+
+    document.getElementById("logoutBtn").addEventListener("click", function(e) {
+        e.preventDefault();
+        sessionStorage.removeItem("adminLoggedIn");
+        isAdmin = false;
+        checkLoginStatus();
+    });
+
+    document.getElementById("confirmLoginBtn").addEventListener("click", function(e) {
+        e.preventDefault();
+        let email = document.getElementById("loginEmail").value.trim();
+        let pwd = document.getElementById("loginPassword").value;
+        if (email === "madrasahtaleemulquran98@gmail.com" && pwd === "admin123") {
+            sessionStorage.setItem("adminLoggedIn", "true");
+            isAdmin = true;
+            hideLogin();
+            checkLoginStatus();
+            document.getElementById("loginError").innerHTML = "";
+        } else {
+            document.getElementById("loginError").innerHTML = "❌ Email သို့မဟုတ် Password မမှန်ပါ";
+        }
+    });
+
+    document.getElementById("printResultBtn").addEventListener("click", function(e) {
+        e.preventDefault();
+        if (!currentClass) {
+            alert("အတန်းရွေးပါ!");
+            return;
+        }
+
+        const printDiv = document.getElementById("printAllExams");
+        printDiv.innerHTML = generatePrintHTML();
+        printDiv.classList.remove("d-none");
+
+        const originalTitle = document.title;
+        document.title = "စာမေးပွဲရလဒ် - " + classNames[currentClass] + " - " + currentYear;
+
+        window.print();
+
+        document.title = originalTitle;
+        printDiv.classList.add("d-none");
+    });
+
+    document.getElementById('loginModal').addEventListener('click', function(e) {
+        if (e.target === this) hideLogin();
+    });
+
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') hideLogin();
+    });
+});
+</script>
+</body>
+</html>
